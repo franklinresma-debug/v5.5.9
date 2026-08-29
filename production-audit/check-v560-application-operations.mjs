@@ -10,7 +10,8 @@ const scripts = [
   'check-application-sla-alerts.mjs',
   'check-application-sla-admin.mjs',
   'check-application-bulk-triage.mjs',
-  'check-application-export-readiness.mjs'
+  'check-application-export-readiness.mjs',
+  'check-v560-release-markers.mjs'
 ];
 
 let failed = 0;

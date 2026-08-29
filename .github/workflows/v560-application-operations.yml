@@ -38,7 +38,9 @@ jobs:
         run: git diff --check HEAD^
 
       - name: Validate administrator JavaScript syntax
-        run: node --check deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/admin/dashboard.js
+        run: |
+          node --check deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/admin/dashboard.js
+          node --check production-audit/verify-v560-deployment.mjs
 
       - name: Run v5.6 contract suite
         run: node production-audit/check-v560-application-operations.mjs
