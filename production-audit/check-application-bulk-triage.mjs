@@ -5,6 +5,8 @@ import process from 'node:process';
 const root = process.cwd();
 const packageRoot = path.join(root, 'deployment-package', 'NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated');
 const controller = fs.readFileSync(path.join(packageRoot, 'payload', 'api', 'app', 'Http', 'Controllers', 'Api', 'MembershipAdministrationController.php'), 'utf8');
+const dashboard = fs.readFileSync(path.join(packageRoot, 'payload', 'admin', 'dashboard.js'), 'utf8');
+const html = fs.readFileSync(path.join(packageRoot, 'payload', 'admin', 'index.html'), 'utf8');
 const routes = fs.readFileSync(path.join(root, 'production-audit', 'api.php'), 'utf8');
 const installer = fs.readFileSync(path.join(packageRoot, 'install_v552_base.sh'), 'utf8');
 
@@ -24,7 +26,15 @@ const checks = [
   ['Each successful record is audited', controller.includes("'membership.bulk_triage.updated'")],
   ['Audit state is limited to triage fields', controller.includes('$afterState') && !controller.includes('array_merge((array) $after')],
   ['Route uses POST', routes.includes("Route::post('/nurselink/admin/membership-administration/bulk-triage'")],
-  ['Installer includes the route', installer.includes("membership-administration/bulk-triage")]
+  ['Installer includes the route', installer.includes("membership-administration/bulk-triage")],
+  ['Queue exposes concurrency timestamp', controller.includes("'updated_at' =>")],
+  ['Selection controls are administrator gated', dashboard.includes("['admin', 'super_admin'].includes(roleKey())")],
+  ['UI enforces the fifty-record bound', dashboard.includes("applicationBulkSelection.size >= 50")],
+  ['UI retains snapshots across pages', dashboard.includes('applicationBulkSnapshots = new Map()')],
+  ['UI requires explicit change toggles', html.includes('applicationBulkPriorityEnabled') && html.includes('applicationBulkReviewerEnabled') && html.includes('applicationBulkDueEnabled')],
+  ['UI provides separate preview and apply steps', dashboard.includes("applicationBulkRequest('preview')") && dashboard.includes("mode: 'apply'")],
+  ['UI cannot apply without a preview', dashboard.includes('if (!applicationBulkPreviewRequest) return;')],
+  ['UI clears selection after apply', dashboard.includes('applicationBulkSelection.clear();')]
 ];
 
 const failures = checks.filter(([, passed]) => !passed);

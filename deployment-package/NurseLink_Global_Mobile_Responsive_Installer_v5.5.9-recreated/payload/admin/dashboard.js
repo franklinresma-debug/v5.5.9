@@ -38,6 +38,9 @@
   let applicationSavedViewsLoading = null;
   let applicationUrlSavedView = '';
   let applicationUrlViewApplied = false;
+  const applicationBulkSelection = new Set();
+  const applicationBulkSnapshots = new Map();
+  let applicationBulkPreviewRequest = null;
 
   const subtitles = {
     dashboard: 'Operational workflows across membership, workforce, programs and platform health.',
@@ -986,7 +989,7 @@
 
     return `
       <tr data-application-row="${esc(row.membership_id)}">
-        <td class="nl550-check-cell"><input type="checkbox" disabled aria-label="Select application ${esc(row.application_reference || row.membership_id)}"></td>
+        <td class="nl550-check-cell"><input type="checkbox" data-select-application="${esc(row.membership_id)}" ${applicationBulkSelection.has(Number(row.membership_id)) ? 'checked' : ''} ${['admin', 'super_admin'].includes(roleKey()) ? '' : 'disabled'} aria-label="Select application ${esc(row.application_reference || row.membership_id)}"></td>
         <td>
           <button type="button" class="nl550-applicant-button" data-application="${esc(row.membership_id)}">
             <span class="nl550-avatar">${esc(initials)}</span>
@@ -1140,7 +1143,7 @@
       <table class="nl550-applications-table">
         <thead>
           <tr>
-            <th class="nl550-check-cell"><input type="checkbox" disabled aria-label="Select all applications"></th>
+            <th class="nl550-check-cell"><input id="selectVisibleApplications" type="checkbox" ${['admin', 'super_admin'].includes(roleKey()) ? '' : 'disabled'} aria-label="Select visible applications"></th>
             <th>Applicant</th>
             <th>Application ID</th>
             <th>Organization</th>
@@ -1168,6 +1171,48 @@
           )
         );
       });
+
+    el.querySelectorAll('[data-select-application]').forEach(input => {
+      input.addEventListener('change', () => {
+        const id = Number(input.dataset.selectApplication);
+        if (input.checked && applicationBulkSelection.size >= 50) {
+          input.checked = false;
+          notice('Bulk triage is limited to 50 applications.', 'danger');
+          return;
+        }
+        if (input.checked) {
+          applicationBulkSelection.add(id);
+          const row = applicationRows.find(item => Number(item.membership_id) === id);
+          if (row) applicationBulkSnapshots.set(id, row);
+        } else {
+          applicationBulkSelection.delete(id);
+          applicationBulkSnapshots.delete(id);
+        }
+        renderApplicationBulkSelection();
+      });
+    });
+
+    $('selectVisibleApplications')?.addEventListener('change', event => {
+      const visibleInputs = Array.from(el.querySelectorAll('[data-select-application]'));
+      if (event.target.checked && applicationBulkSelection.size + visibleInputs.filter(input => !input.checked).length > 50) {
+        event.target.checked = false;
+        notice('Selecting this page would exceed the 50-application limit.', 'danger');
+        return;
+      }
+      visibleInputs.forEach(input => {
+        input.checked = event.target.checked;
+        const id = Number(input.dataset.selectApplication);
+        if (event.target.checked) {
+          applicationBulkSelection.add(id);
+          const row = applicationRows.find(item => Number(item.membership_id) === id);
+          if (row) applicationBulkSnapshots.set(id, row);
+        } else {
+          applicationBulkSelection.delete(id);
+          applicationBulkSnapshots.delete(id);
+        }
+      });
+      renderApplicationBulkSelection();
+    });
 
     renderApplicationPagination(
       applicationPaginationData
@@ -1892,6 +1937,109 @@
     }
   }
 
+  function renderApplicationBulkSelection() {
+    const section = $('applicationBulkTriage');
+    if (!section || !['admin', 'super_admin'].includes(roleKey())) return;
+    section.hidden = applicationBulkSelection.size === 0;
+    $('applicationBulkSelected').textContent = `${applicationBulkSelection.size} application${applicationBulkSelection.size === 1 ? '' : 's'} selected`;
+    applicationBulkPreviewRequest = null;
+    if ($('applicationBulkPreview')) $('applicationBulkPreview').hidden = true;
+  }
+
+  function renderApplicationBulkReviewers() {
+    const select = $('applicationBulkReviewer');
+    if (!select) return;
+    select.innerHTML = [
+      '<option value="">Unassigned</option>',
+      ...applicationStaffRows
+        .filter(row => row.active && ['reviewer', 'admin', 'super_admin'].includes(row.role))
+        .map(row => `<option value="${esc(row.id)}">${esc(row.name || row.email)}</option>`)
+    ].join('');
+  }
+
+  function applicationBulkRequest(mode) {
+    const changes = {};
+    if ($('applicationBulkPriorityEnabled').checked) changes.priority = $('applicationBulkPriority').value;
+    if ($('applicationBulkReviewerEnabled').checked) changes.assigned_reviewer_user_id = $('applicationBulkReviewer').value || null;
+    if ($('applicationBulkDueEnabled').checked) changes.review_due_at = $('applicationBulkDue').value || null;
+
+    return {
+      mode,
+      items: Array.from(applicationBulkSelection).map(id => ({
+        membership_id: id,
+        expected_updated_at: applicationBulkSnapshots.get(id)?.updated_at || ''
+      })),
+      changes,
+      reason: $('applicationBulkReason').value.trim()
+    };
+  }
+
+  function renderApplicationBulkPreview(data = {}) {
+    const el = $('applicationBulkPreview');
+    if (!el) return;
+    const rows = Array.isArray(data.results) ? data.results : [];
+    el.hidden = false;
+    el.innerHTML = `
+      <strong>Preview: ${esc(data.successful || 0)} ready, ${esc(data.failed || 0)} failed</strong>
+      <div class="nl560-bulk-preview-list">
+        ${rows.map(row => `<div class="nl560-bulk-preview-row" data-status="${esc(row.status)}"><span>Application ${esc(row.membership_id)}</span><span>${esc(row.status === 'failed' ? row.message : 'Ready')}</span></div>`).join('')}
+      </div>
+      <button id="applyApplicationBulkTriage" type="button" ${Number(data.successful || 0) === 0 ? 'disabled' : ''}>Apply Previewed Changes</button>
+    `;
+    $('applyApplicationBulkTriage')?.addEventListener('click', applyApplicationBulkTriage);
+  }
+
+  async function previewApplicationBulkTriage(event) {
+    event.preventDefault();
+    const requestBody = applicationBulkRequest('preview');
+    if (!Object.keys(requestBody.changes).length) {
+      notice('Select at least one bulk triage change.', 'danger');
+      return;
+    }
+    if (requestBody.items.some(item => !item.expected_updated_at)) {
+      notice('Refresh the queue and reselect applications before previewing.', 'danger');
+      return;
+    }
+
+    try {
+      const payload = await request('/api/nurselink/admin/membership-administration/bulk-triage', {method: 'POST', body: JSON.stringify(requestBody)});
+      applicationBulkPreviewRequest = requestBody;
+      renderApplicationBulkPreview(payload?.data || {});
+    } catch (error) {
+      notice(error.message || 'Unable to preview bulk triage.', 'danger');
+    }
+  }
+
+  async function applyApplicationBulkTriage() {
+    if (!applicationBulkPreviewRequest) return;
+    const button = $('applyApplicationBulkTriage');
+    if (button) button.disabled = true;
+
+    try {
+      const body = {...applicationBulkPreviewRequest, mode: 'apply'};
+      const payload = await request('/api/nurselink/admin/membership-administration/bulk-triage', {method: 'POST', body: JSON.stringify(body)});
+      const data = payload?.data || {};
+      notice(`Bulk triage complete: ${Number(data.successful || 0)} updated, ${Number(data.failed || 0)} failed.`, data.failed ? 'danger' : 'good');
+      applicationBulkSelection.clear();
+      applicationBulkSnapshots.clear();
+      applicationBulkPreviewRequest = null;
+      $('applicationBulkReason').value = '';
+      renderApplicationBulkSelection();
+      await loadApplications();
+    } catch (error) {
+      notice(error.message || 'Unable to apply bulk triage.', 'danger');
+      if (button) button.disabled = false;
+    }
+  }
+
+  function clearApplicationBulkSelection() {
+    applicationBulkSelection.clear();
+    applicationBulkSnapshots.clear();
+    applicationBulkPreviewRequest = null;
+    renderApplicationBulkSelection();
+    renderApplicationTable();
+  }
+
   async function loadApplications() {
     const el = $('applicationsArea');
     el.innerHTML =
@@ -1966,6 +2114,8 @@
         Array.isArray(applicationCommandData.staff)
           ? applicationCommandData.staff
           : [];
+
+      renderApplicationBulkReviewers();
 
       renderApplicationWorkload(
         applicationStaffRows
@@ -2989,6 +3139,8 @@
     $('refreshApplicationSlaAlerts')?.addEventListener('click', loadApplicationSlaAlerts);
     $('applicationSlaAlertStatus')?.addEventListener('change', loadApplicationSlaAlerts);
     $('applicationSlaAlertState')?.addEventListener('change', loadApplicationSlaAlerts);
+    $('applicationBulkTriageForm')?.addEventListener('submit', previewApplicationBulkTriage);
+    $('clearApplicationBulkSelection')?.addEventListener('click', clearApplicationBulkSelection);
 
     renderApplicationSavedViews();
 

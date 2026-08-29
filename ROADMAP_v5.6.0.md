@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **75%** — `[███████████████░░░░░]`
+Overall: **80%** — `[████████████████░░░░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -13,8 +13,8 @@ Overall: **75%** — `[███████████████░░░░
 | Governed SLA policy | Complete | commit `a3362a4` |
 | Idempotent SLA evaluation and deduplicated alerts | Complete | Alert ledger and evaluator service |
 | Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
-| Governed bulk triage | In progress | Safety API complete; selection and preview UI next |
-| Controlled exports and readiness signals | Planned | Phase 4 |
+| Governed bulk triage | Complete | Bounded API, preview/apply UI, concurrency and audit controls |
+| Controlled exports and readiness signals | In progress | Next implementation increment |
 | Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
 
 ## Release objective
@@ -65,7 +65,7 @@ Acceptance criteria:
 
 ## Phase 3 — Governed bulk triage
 
-Status: **Planned.**
+Status: **Complete in the v5.6 development branch; staging validation pending.**
 
 1. Enable selection only for actions authorized for the current role.
 2. Support bounded bulk changes to assignment, priority, and review due date.
@@ -98,4 +98,4 @@ Status: **Planned.**
 
 ## Current implementation increment
 
-Implement governed bulk triage for bounded assignment, priority, and due-date changes. Add preview, per-record authorization and concurrency checks, explicit partial-failure reporting, correlation IDs, and per-application audit records. Final approval, decline, and standing changes must remain individual actions.
+Implement controlled export history, CSV formula-injection protection, data minimization, and explainable application readiness signals. Readiness must remain advisory and must never make an automated membership decision.

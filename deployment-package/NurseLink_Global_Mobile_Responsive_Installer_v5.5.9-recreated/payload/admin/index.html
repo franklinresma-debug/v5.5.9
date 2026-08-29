@@ -287,6 +287,18 @@
           <button id="refreshApplications" class="nl550-filter-action" type="button">Refresh</button>
         </div>
 
+        <section id="applicationBulkTriage" class="nl560-bulk-card" hidden>
+          <div class="nl560-bulk-heading"><div><strong>Bulk Triage</strong><small id="applicationBulkSelected">0 applications selected</small></div><button id="clearApplicationBulkSelection" type="button">Clear Selection</button></div>
+          <form id="applicationBulkTriageForm" class="nl560-bulk-form">
+            <label><span><input id="applicationBulkPriorityEnabled" type="checkbox"> Change Priority</span><select id="applicationBulkPriority"><option value="urgent">Urgent</option><option value="high">High</option><option value="normal">Normal</option><option value="low">Low</option></select></label>
+            <label><span><input id="applicationBulkReviewerEnabled" type="checkbox"> Change Reviewer</span><select id="applicationBulkReviewer"><option value="">Unassigned</option></select></label>
+            <label><span><input id="applicationBulkDueEnabled" type="checkbox"> Change Due Date</span><input id="applicationBulkDue" type="datetime-local"></label>
+            <label class="nl560-bulk-reason"><span>Reason</span><input id="applicationBulkReason" type="text" minlength="5" maxlength="500" placeholder="Required operational reason" required></label>
+            <button id="previewApplicationBulkTriage" class="nl550-primary-action" type="submit">Preview Changes</button>
+          </form>
+          <div id="applicationBulkPreview" class="nl560-bulk-preview" hidden></div>
+        </section>
+
         <div id="applicationsArea" class="nl550-table-wrap">
           <div class="nl-admin-loading">Loading applications…</div>
         </div>
