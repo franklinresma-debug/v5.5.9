@@ -2,7 +2,7 @@ import process from 'node:process';
 
 const appOrigin = new URL(process.argv[2] || 'https://app.amsertech.com');
 const apiOrigin = new URL(process.argv[3] || 'https://api.amsertech.com');
-const expectedRelease = '5.6.0-rc.1';
+const expectedRelease = '5.6.0-rc.2';
 
 const checks = [];
 
@@ -35,7 +35,7 @@ try {
   record('RC release marker', admin.body.includes(`data-nurselink-release="${expectedRelease}"`), expectedRelease);
   record('SLA markup', admin.body.includes('applicationSlaSection'), 'applicationSlaSection');
   record('Bulk-triage markup', admin.body.includes('applicationBulkTriage'), 'applicationBulkTriage');
-  record('Fresh dashboard cache key', admin.body.includes('dashboard.js?nlv=5600rc1'), 'nlv=5600rc1');
+  record('Fresh dashboard cache key', admin.body.includes('dashboard.js?nlv=5600rc2'), 'nlv=5600rc2');
 
   const dashboard = await read('/admin/dashboard.js', appOrigin);
   record('Administrator JavaScript', dashboard.response.ok, `HTTP ${dashboard.response.status}; ${dashboard.body.length} bytes`);

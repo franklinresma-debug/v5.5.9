@@ -8,10 +8,10 @@ const installer = fs.readFileSync(path.join(packageRoot, 'install.sh'), 'utf8');
 const verifier = fs.readFileSync(path.join(root, 'production-audit', 'verify-v560-deployment.mjs'), 'utf8');
 
 const checks = [
-  ['Admin page exposes the RC marker', html.includes('data-nurselink-release="5.6.0-rc.1"')],
-  ['Dashboard uses the RC cache key', html.includes('dashboard.js?nlv=5600rc1')],
-  ['Consolidated CSS uses the RC cache key', html.includes('admin-consolidated.css?nlv=5600rc1')],
-  ['Installer identifies the RC', installer.includes('NurseLink v5.6.0-rc.1 cumulative installer')],
+  ['Admin page exposes the RC marker', html.includes('data-nurselink-release="5.6.0-rc.2"')],
+  ['Dashboard uses the RC cache key', html.includes('dashboard.js?nlv=5600rc2')],
+  ['Consolidated CSS uses the RC cache key', html.includes('admin-consolidated.css?nlv=5600rc2')],
+  ['Installer identifies the RC', installer.includes('NurseLink v5.6.0-rc.2 cumulative installer')],
   ['Verifier bypasses caches', verifier.includes("searchParams.set('nl_verify'")],
   ['Verifier checks all v5.6 feature markers', ['saved-views', 'sla-policy', 'sla-alerts', 'bulk-triage', 'export-history'].every(marker => verifier.includes(marker))]
 ];

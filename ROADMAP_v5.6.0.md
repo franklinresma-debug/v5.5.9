@@ -15,7 +15,7 @@ Overall: **95%** — `[███████████████████
 | Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
 | Governed bulk triage | Complete | Bounded API, preview/apply UI, concurrency and audit controls |
 | Controlled exports and readiness signals | Complete | Minimized CSV, export history, advisory readiness |
-| Staging UAT and v5.6.0 release candidate | Blocked on deployment correction | CI and PHP syntax pass; 2026-08-29 live-path probe found the prior admin bundle, not v5.6.0-rc.1 |
+| Staging UAT and v5.6.0 release candidate | Blocked on deployment correction | CI and PHP syntax pass; `v5.6.0-rc.2` adds deterministic release markers after the live-path probe found a prior admin bundle |
 
 ## Release objective
 
@@ -98,6 +98,6 @@ Status: **Complete in the v5.6 development branch; staging validation pending.**
 
 ## Current implementation increment
 
-Correct the deployment target so `v5.6.0-rc.1` assets and API routes are served from the intended staging environment. Then run Laravel feature tests, apply migrations `045000`-`047000`, exercise administrator UAT with synthetic applications, verify rollback, and produce a sanitized recovery baseline before promotion.
+Deploy `v5.6.0-rc.2` so its assets and API routes are served from the intended staging environment. Then run Laravel feature tests, apply migrations `045000`-`047000`, exercise administrator UAT with synthetic applications, verify rollback, and produce a sanitized recovery baseline before promotion.
 
 The 2026-08-29 read-only live-path probe is recorded in `V5.6.0_POST_DEPLOYMENT_VALIDATION.md`.
