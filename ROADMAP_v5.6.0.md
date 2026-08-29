@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **80%** — `[████████████████░░░░]`
+Overall: **90%** — `[██████████████████░░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -14,8 +14,8 @@ Overall: **80%** — `[████████████████░░░
 | Idempotent SLA evaluation and deduplicated alerts | Complete | Alert ledger and evaluator service |
 | Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
 | Governed bulk triage | Complete | Bounded API, preview/apply UI, concurrency and audit controls |
-| Controlled exports and readiness signals | In progress | Next implementation increment |
-| Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
+| Controlled exports and readiness signals | Complete | Minimized CSV, export history, advisory readiness |
+| Staging UAT and v5.6.0 release candidate | In progress | Local contract suite complete; PHP/staging gates next |
 
 ## Release objective
 
@@ -81,7 +81,7 @@ Acceptance criteria:
 
 ## Phase 4 — Controlled exports and readiness signals
 
-Status: **Planned.**
+Status: **Complete in the v5.6 development branch; staging validation pending.**
 
 1. Add permission-gated exports with an export audit history.
 2. Protect CSV output from formula injection and minimize exported personal data.
@@ -98,4 +98,4 @@ Status: **Planned.**
 
 ## Current implementation increment
 
-Implement controlled export history, CSV formula-injection protection, data minimization, and explainable application readiness signals. Readiness must remain advisory and must never make an automated membership decision.
+Prepare the v5.6.0 release candidate: run PHP syntax and Laravel feature tests in a development environment, apply migrations to staging, exercise administrator UAT with synthetic applications, verify rollback, and produce a sanitized recovery baseline before promotion.

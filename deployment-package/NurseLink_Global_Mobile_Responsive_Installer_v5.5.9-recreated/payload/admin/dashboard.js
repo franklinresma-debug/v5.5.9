@@ -1011,7 +1011,7 @@
         <td>
           <div class="nl550-stage-cell">
             <strong>${esc(stage.label || 'Review')}</strong>
-            <small>${stage.step ? `Step ${esc(stage.step)} of ${esc(stage.steps_total || 4)}` : 'Workflow stage'}</small>
+            <small>${stage.step ? `Step ${esc(stage.step)} of ${esc(stage.steps_total || 4)}` : 'Workflow stage'} · Readiness ${esc(row.readiness?.score ?? 0)}%</small>
           </div>
         </td>
         <td>
@@ -1739,6 +1739,12 @@
 
     try {
       const params = applicationQueryParams();
+      params.delete('page');
+      params.delete('per_page');
+      const includeContact = window.confirm(
+        'Include applicant names and email addresses? Choose Cancel for the minimized operational export.'
+      );
+      if (includeContact) params.set('include_contact', '1');
       const response = await fetch(
         `${API}/api/nurselink/admin/membership-administration/export?${params}`,
         {

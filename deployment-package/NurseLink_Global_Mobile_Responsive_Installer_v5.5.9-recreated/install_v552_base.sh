@@ -1413,6 +1413,7 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::get('/nurselink/admin/membership-administration/queue', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'queue']);
     Route::get('/nurselink/admin/membership-administration/staff', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'staff']);
     Route::get('/nurselink/admin/membership-administration/export', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'export']);
+    Route::get('/nurselink/admin/membership-administration/export-history', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'exportHistory']);
     Route::put('/nurselink/admin/membership-administration/{membershipId}/assignment', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'assignReview']);
     Route::get('/nurselink/admin/membership-administration/activity', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'activity']);
     Route::get('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'savedViews']);

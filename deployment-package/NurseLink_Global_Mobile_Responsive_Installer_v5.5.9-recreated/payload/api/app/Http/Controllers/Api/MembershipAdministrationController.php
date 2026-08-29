@@ -705,6 +705,12 @@ class MembershipAdministrationController extends Controller
                         $access['is_admin'],
                     'can_final_decide' =>
                         $access['is_admin'],
+                    'readiness' =>
+                        $this->applicationReadiness(
+                            $user,
+                            $latestEmployment[$userId] ?? null,
+                            (string) $row->status
+                        ),
                 ];
             }
         );
@@ -1479,6 +1485,11 @@ class MembershipAdministrationController extends Controller
             'Administrator access is required to export membership applications.'
         );
 
+        $exportOptions = $request->validate([
+            'include_contact' => ['nullable', 'boolean'],
+        ]);
+        $includeContact = (bool) ($exportOptions['include_contact'] ?? false);
+
         $queueResponse =
             $this->queue(
                 $request
@@ -1507,13 +1518,12 @@ class MembershipAdministrationController extends Controller
                 'organization',
             ]);
 
+        $exportId = (string) Str::uuid();
         $this->audit(
             $request,
             'membership.application_queue_exported',
             'membership_export',
-            now()->format(
-                'YmdHis'
-            ),
+            $exportId,
             null,
             [
                 'row_count' =>
@@ -1522,6 +1532,8 @@ class MembershipAdministrationController extends Controller
                     ),
                 'filters' =>
                     $filters,
+                'include_contact' =>
+                    $includeContact,
             ]
         );
 
@@ -1534,7 +1546,8 @@ class MembershipAdministrationController extends Controller
 
         return response()->streamDownload(
             function () use (
-                $rows
+                $rows,
+                $includeContact
             ): void {
                 $handle =
                     fopen(
@@ -1548,21 +1561,26 @@ class MembershipAdministrationController extends Controller
                     return;
                 }
 
+                $headers = [
+                    'Application ID',
+                    'Organization',
+                    'Submitted',
+                    'Status',
+                    'Review Stage',
+                    'Priority',
+                    'Assigned Reviewer',
+                    'Review Due',
+                    'Age Days',
+                    'Readiness Score',
+                    'Missing Signals',
+                ];
+                if ($includeContact) {
+                    array_splice($headers, 1, 0, ['Applicant', 'Email']);
+                }
+
                 fputcsv(
                     $handle,
-                    [
-                        'Application ID',
-                        'Applicant',
-                        'Email',
-                        'Organization',
-                        'Submitted',
-                        'Status',
-                        'Review Stage',
-                        'Priority',
-                        'Assigned Reviewer',
-                        'Review Due',
-                        'Age Days',
-                    ]
+                    $headers
                 );
 
                 foreach (
@@ -1587,24 +1605,10 @@ class MembershipAdministrationController extends Controller
                         ]
                         ?? [];
 
-                    fputcsv(
-                        $handle,
-                        [
+                    $cells = [
                             $this->csvCell(
                                 $row[
                                     'application_reference'
-                                ]
-                                ?? ''
-                            ),
-                            $this->csvCell(
-                                $row[
-                                    'name'
-                                ]
-                                ?? ''
-                            ),
-                            $this->csvCell(
-                                $row[
-                                    'email'
                                 ]
                                 ?? ''
                             ),
@@ -1654,10 +1658,18 @@ class MembershipAdministrationController extends Controller
                                 $row[
                                     'age_days'
                                 ]
-                                ?? 0
+                                    ?? 0
                             ),
-                        ]
-                    );
+                            (int) ($row['readiness']['score'] ?? 0),
+                            $this->csvCell(implode('; ', $row['readiness']['missing'] ?? [])),
+                        ];
+                    if ($includeContact) {
+                        array_splice($cells, 1, 0, [
+                            $this->csvCell($row['name'] ?? ''),
+                            $this->csvCell($row['email'] ?? ''),
+                        ]);
+                    }
+                    fputcsv($handle, $cells);
                 }
 
                 fclose(
@@ -1674,6 +1686,32 @@ class MembershipAdministrationController extends Controller
                     'nosniff',
             ]
         );
+    }
+
+    public function exportHistory(Request $request): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to view export history.');
+
+        if (! Schema::hasTable('nurselink_review_audit')) {
+            return response()->json(['data' => []]);
+        }
+
+        $rows = DB::table('nurselink_review_audit')
+            ->where('target_type', 'membership_export')
+            ->where('action', 'membership.application_queue_exported')
+            ->orderByDesc('id')
+            ->limit(100)
+            ->get()
+            ->map(fn (object $row): array => [
+                'export_id' => (string) $row->target_id,
+                'actor_user_id' => (string) $row->reviewer_user_id,
+                'details' => json_decode((string) $row->after_state, true) ?: [],
+                'created_at' => $row->created_at,
+            ])
+            ->values();
+
+        return response()->json(['data' => $rows]);
     }
 
     public function activity(
@@ -1816,6 +1854,27 @@ class MembershipAdministrationController extends Controller
         }
 
         return $text;
+    }
+
+    private function applicationReadiness(array $user, ?array $employment, string $status): array
+    {
+        $checks = [
+            'Applicant name' => trim((string) ($user['name'] ?? '')) !== '',
+            'Contact email' => trim((string) ($user['email'] ?? '')) !== '',
+            'Employment context' => trim((string) ($employment['employer_name'] ?? '')) !== '',
+            'Submitted workflow state' => in_array($status, self::PENDING_STATUSES, true)
+                || in_array($status, ['approved', 'declined'], true),
+        ];
+        $missing = array_keys(array_filter($checks, fn (bool $ready): bool => ! $ready));
+        $score = (int) round(((count($checks) - count($missing)) / count($checks)) * 100);
+
+        return [
+            'score' => $score,
+            'ready' => $missing === [],
+            'missing' => $missing,
+            'advisory_only' => true,
+            'note' => 'Readiness is an explainable completeness aid and does not make a membership decision.',
+        ];
     }
 
     private function reviewStage(
