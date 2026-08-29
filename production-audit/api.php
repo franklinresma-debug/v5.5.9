@@ -817,6 +817,7 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::post('/nurselink/admin/membership-administration/sla-evaluate', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'evaluateSla'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::get('/nurselink/admin/membership-administration/sla-alerts', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaAlerts'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::post('/nurselink/admin/membership-administration/sla-alerts/{alertId}/acknowledge', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'acknowledgeSlaAlert'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
+    Route::post('/nurselink/admin/membership-administration/bulk-triage', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'bulkTriage'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 

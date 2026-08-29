@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **70%** — `[██████████████░░░░░░]`
+Overall: **75%** — `[███████████████░░░░░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -13,7 +13,7 @@ Overall: **70%** — `[██████████████░░░░░
 | Governed SLA policy | Complete | commit `a3362a4` |
 | Idempotent SLA evaluation and deduplicated alerts | Complete | Alert ledger and evaluator service |
 | Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
-| Governed bulk triage | In progress | Next implementation increment |
+| Governed bulk triage | In progress | Safety API complete; selection and preview UI next |
 | Controlled exports and readiness signals | Planned | Phase 4 |
 | Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
 

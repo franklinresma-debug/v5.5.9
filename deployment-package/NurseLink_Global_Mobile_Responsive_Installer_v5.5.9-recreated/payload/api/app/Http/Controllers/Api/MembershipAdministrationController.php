@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class MembershipAdministrationController extends Controller
@@ -645,6 +646,9 @@ class MembershipAdministrationController extends Controller
                     'last_admin_action_at' =>
                         $row->last_admin_action_at
                         ?? null,
+                    'updated_at' =>
+                        $row->updated_at
+                        ?? null,
                     'age_days' =>
                         $ageDays,
                     'overdue' =>
@@ -1171,6 +1175,140 @@ class MembershipAdministrationController extends Controller
         $this->audit($request, 'application.sla_alert.acknowledged', 'application_sla_alert', (string) $alertId, $before, $after);
 
         return response()->json(['message' => 'SLA alert acknowledged.']);
+    }
+
+    public function bulkTriage(Request $request): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required for bulk triage.');
+
+        $data = $request->validate([
+            'mode' => ['required', Rule::in(['preview', 'apply'])],
+            'items' => ['required', 'array', 'min:1', 'max:50'],
+            'items.*.membership_id' => ['required', 'integer', 'distinct', 'min:1'],
+            'items.*.expected_updated_at' => ['required', 'date'],
+            'changes' => ['required', 'array'],
+            'changes.priority' => ['sometimes', Rule::in(['low', 'normal', 'high', 'urgent'])],
+            'changes.assigned_reviewer_user_id' => ['sometimes', 'nullable', 'string', 'max:191'],
+            'changes.review_due_at' => ['sometimes', 'nullable', 'date'],
+            'reason' => ['required', 'string', 'min:5', 'max:500'],
+        ]);
+
+        $allowedChanges = array_intersect_key(
+            $data['changes'],
+            array_flip(['priority', 'assigned_reviewer_user_id', 'review_due_at'])
+        );
+        abort_if($allowedChanges === [], 422, 'Select at least one supported bulk triage change.');
+
+        if (array_key_exists('assigned_reviewer_user_id', $allowedChanges)) {
+            $reviewerId = trim((string) ($allowedChanges['assigned_reviewer_user_id'] ?? ''));
+            abort_if(
+                $reviewerId !== '' && ! $this->isActivePrivilegedReviewer($reviewerId),
+                422,
+                'The selected reviewer does not have active privileged review access.'
+            );
+            $allowedChanges['assigned_reviewer_user_id'] = $reviewerId !== '' ? $reviewerId : null;
+        }
+
+        $correlationId = (string) Str::uuid();
+        $results = [];
+
+        foreach ($data['items'] as $item) {
+            $membershipId = (int) $item['membership_id'];
+            $row = DB::table('nurselink_memberships')->where('id', $membershipId)->first();
+
+            if (! $row) {
+                $results[] = $this->bulkTriageFailure($membershipId, 'not_found', 'Membership application not found.');
+                continue;
+            }
+
+            if (! in_array((string) $row->status, self::PENDING_STATUSES, true)) {
+                $results[] = $this->bulkTriageFailure($membershipId, 'not_pending', 'Only pending applications can be bulk triaged.');
+                continue;
+            }
+
+            $expected = \Carbon\Carbon::parse($item['expected_updated_at'])->utc()->format('Y-m-d H:i:s');
+            $actual = \Carbon\Carbon::parse($row->updated_at)->utc()->format('Y-m-d H:i:s');
+            if (! hash_equals($actual, $expected)) {
+                $results[] = $this->bulkTriageFailure($membershipId, 'conflict', 'Application changed after selection. Refresh and preview again.');
+                continue;
+            }
+
+            $updates = [];
+            if (array_key_exists('priority', $allowedChanges)) {
+                $updates['review_priority'] = $allowedChanges['priority'];
+            }
+            if (array_key_exists('assigned_reviewer_user_id', $allowedChanges)) {
+                $updates['assigned_reviewer_user_id'] = $allowedChanges['assigned_reviewer_user_id'];
+            }
+            if (array_key_exists('review_due_at', $allowedChanges)) {
+                $updates['review_due_at'] = $allowedChanges['review_due_at']
+                    ? \Carbon\Carbon::parse($allowedChanges['review_due_at'])->utc()
+                    : null;
+            }
+
+            $before = [
+                'review_priority' => $row->review_priority ?? 'normal',
+                'assigned_reviewer_user_id' => $row->assigned_reviewer_user_id ?? null,
+                'review_due_at' => $row->review_due_at ?? null,
+                'updated_at' => $row->updated_at,
+            ];
+
+            if ($data['mode'] === 'preview') {
+                $results[] = [
+                    'membership_id' => $membershipId,
+                    'status' => 'ready',
+                    'before' => $before,
+                    'proposed' => array_merge($before, $updates),
+                ];
+                continue;
+            }
+
+            $updates['last_admin_action_at'] = now();
+            $updates['updated_at'] = now();
+            $changed = DB::table('nurselink_memberships')
+                ->where('id', $membershipId)
+                ->where('updated_at', $row->updated_at)
+                ->whereIn('status', self::PENDING_STATUSES)
+                ->update($updates);
+
+            if ($changed !== 1) {
+                $results[] = $this->bulkTriageFailure($membershipId, 'conflict', 'Application changed during bulk triage.');
+                continue;
+            }
+
+            $after = DB::table('nurselink_memberships')->where('id', $membershipId)->first();
+            $afterState = [
+                'review_priority' => $after->review_priority ?? 'normal',
+                'assigned_reviewer_user_id' => $after->assigned_reviewer_user_id ?? null,
+                'review_due_at' => $after->review_due_at ?? null,
+                'updated_at' => $after->updated_at,
+                'correlation_id' => $correlationId,
+            ];
+            $this->audit(
+                $request,
+                'membership.bulk_triage.updated',
+                'nurselink_membership',
+                (string) $membershipId,
+                array_merge($before, ['correlation_id' => $correlationId, 'reason' => $data['reason']]),
+                $afterState
+            );
+            $results[] = ['membership_id' => $membershipId, 'status' => 'updated'];
+        }
+
+        $successful = count(array_filter($results, fn (array $row): bool => in_array($row['status'], ['ready', 'updated'], true)));
+
+        return response()->json([
+            'data' => [
+                'mode' => $data['mode'],
+                'correlation_id' => $correlationId,
+                'requested' => count($data['items']),
+                'successful' => $successful,
+                'failed' => count($results) - $successful,
+                'results' => $results,
+            ],
+            'message' => $data['mode'] === 'preview' ? 'Bulk triage preview completed.' : 'Bulk triage completed.',
+        ]);
     }
 
     public function assignReview(
@@ -2312,6 +2450,16 @@ class MembershipAdministrationController extends Controller
             503,
             'Saved application views are not available until the v5.6 migration is complete.'
         );
+    }
+
+    private function bulkTriageFailure(int $membershipId, string $code, string $message): array
+    {
+        return [
+            'membership_id' => $membershipId,
+            'status' => 'failed',
+            'code' => $code,
+            'message' => $message,
+        ];
     }
 
     private function requireSlaPolicyTable(): void
