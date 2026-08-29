@@ -1,0 +1,124 @@
+NurseLink v5.2.0 Validation
+============================
+
+[PASS] Bash syntax: install.sh
+[PASS] Bash syntax: rollback.sh
+[PASS] Bash syntax: cleanup_old_installers.sh
+[PASS] Cleanup helper Python 3.6 grammar
+[PASS] Unsupported future annotations absent
+[PASS] JavaScript syntax: nurselink-portal-config.js
+[PASS] JavaScript syntax: nurselink-admin-login.js
+[PASS] JavaScript syntax: nurselink-admin-dashboard.js
+[PASS] JavaScript syntax: nurselink-mobile.js
+[PASS] JavaScript syntax: nurselink-membership-administration.js
+[PASS] JavaScript syntax: nurselink-membership-onboarding-admin.js
+[PASS] JavaScript syntax: nurselink-membership-welcome.js
+[PASS] PHP syntax: AdminPortalController.php
+[PASS] PHP syntax: AdminMembershipCommandController.php
+[PASS] PHP syntax: MembershipAdministrationController.php
+[PASS] PHP syntax: MembershipOnboardingController.php
+[PASS] PHP syntax: AdminMembershipLifecycleController.php
+[PASS] PHP syntax: AdminMemberRegistryController.php
+[PASS] PHP syntax: ProductionReadinessController.php
+[PASS] PHP syntax: nurselink_ops_check.php
+[PASS] PHP syntax: nurselink_smoke_test.php
+[PASS] Embedded Python 3.6: PYPYCOMPAT481
+[PASS] Embedded Python 3.6: PYPRE473
+[PASS] Embedded Python 3.6: PY
+[PASS] Embedded Python 3.6: PYGOALPRIV502
+[PASS] Embedded Python 3.6: PYENROLLPRIV503
+[PASS] Embedded Python 3.6: PYOUTCOMEPRIV504
+[PASS] Embedded Python 3.6: PYSUPPORTPRIV505
+[PASS] Embedded Python 3.6: PYMEMADMIN510
+[PASS] Embedded Python 3.6: PYONBOARD511
+[PASS] Embedded Python 3.6: PYNOTIF425
+[PASS] Embedded Python 3.6: PYUAT422
+[PASS] Embedded Python 3.6: PYREL341
+[PASS] Embedded Python 3.6: PYCONSIST341
+[PASS] Embedded Python 3.6: PYCACHE325
+[PASS] Embedded Python 3.6: PYSEC330
+[PASS] Embedded Python 3.6: PYVALIDATOR327
+[PASS] Embedded Python 3.6: PYSPA
+[PASS] Embedded Python 3.6: PYORDER
+[PASS] Embedded Python 3.6: PYV324
+[PASS] Embedded Python 3.6: PYHT
+[PASS] Embedded Python 3.6: PYLIVECACHE325
+[PASS] Embedded Python 3.6: PYSECINSTALL330
+[PASS] Embedded Python 3.6: PYSMOKE342
+[PASS] Embedded Python 3.6: PYROLE427
+[PASS] Embedded Python 3.6: PYPORTAL451
+[PASS] Embedded Python 3.6: PYNOTIF424
+[PASS] Embedded Python 3.6: PYNOTIF426
+[PASS] Embedded Python 3.6: PYDASH431
+[PASS] Embedded Python 3.6: PYAUTH423
+[PASS] Embedded Python 3.6: PYTEST453
+[PASS] Embedded Python 3.6: PYLIFE460
+[PASS] Embedded Python 3.6: PYRENEW470
+[PASS] Embedded Python 3.6: PYEVENT473
+[PASS] Embedded Python 3.6: PYCHAPTER473
+[PASS] Embedded Python 3.6: PYMENTOR473
+[PASS] Embedded Python 3.6: PYCLEAN473
+[PASS] Embedded Python 3.6: PYENGAGE480
+[PASS] Embedded Python 3.6: PYBENEFIT482
+[PASS] Embedded Python 3.6: PYBENEFIT483
+[PASS] Embedded Python 3.6: PYBENEFIT484
+[PASS] Embedded Python 3.6: PYENGAGE490
+[PASS] Embedded Python 3.6: PYENTERPRISE500
+[PASS] Embedded Python 3.6: PYENTERPRISE501
+[PASS] Embedded Python 3.6: PYHOTFIX502
+[PASS] Embedded Python 3.6: PYENROLL503
+[PASS] Embedded Python 3.6: PYOUTCOME504
+[PASS] Embedded Python 3.6: PYSUPPORT505
+[PASS] Embedded Python 3.6: PYMEMADMINREG510
+[PASS] Embedded Python 3.6: PYONBOARDREG511
+[PASS] Embedded Python 3.6: PYREDIRECT512
+[PASS] Embedded Python 3.6: PYPORTAL520
+[PASS] 40 cumulative API route blocks with marker parity
+[PASS] Release version 5.2.0
+[PASS] Cumulative backup prefix v520
+[PASS] Member login centralized
+[PASS] Member portal centralized
+[PASS] Administrator login centralized
+[PASS] Administrator portal centralized
+[PASS] Admin membership panel
+[PASS] Admin onboarding panel
+[PASS] Admin member registry panel
+[PASS] Admin access panel
+[PASS] Admin programs panel
+[PASS] Admin enterprise panel
+[PASS] Admin operations panel
+[PASS] Membership review consolidated
+[PASS] Onboarding consolidated
+[PASS] Member registry consolidated
+[PASS] Lifecycle consolidated
+[PASS] Role management consolidated
+[PASS] Administrator login no standalone allowlist
+[PASS] Administrator login returns to portal
+[PASS] Member dashboard membership panel
+[PASS] Member login Administrator choice
+[PASS] Member onboarding API integrated
+[PASS] Portal config copied
+[PASS] Consolidated CSS copied
+[PASS] v5.2.0 consolidation cache policy
+[PASS] v5.1.0 membership validators retained
+[PASS] v5.1.1 onboarding validators retained
+[PASS] v5.1.2 redirect validator retained
+[PASS] v5.2.0 portal validator
+[PASS] No artisan tinker dependency
+[PASS] Cleanup ordering
+[PASS] Compatibility redirect: Membership Command
+[PASS] Compatibility redirect: Membership Administration
+[PASS] Compatibility redirect: Membership Onboarding
+[PASS] Compatibility redirect: Member Registry
+[PASS] Compatibility redirect: Member Welcome
+[PASS] Regression guard executes: PYMEMADMINREG510
+[PASS] Regression guard executes: PYONBOARDREG511
+[PASS] Regression guard executes: PYREDIRECT512
+[PASS] Regression guard executes: PYPORTAL520
+[PASS] Cleanup simulation executes
+[PASS] Historical installers removed
+[PASS] Current v5.2.0 retained
+[PASS] Protected hosting paths retained
+
+[PASS] 40 cumulative API route blocks
+[PASS] 55 embedded Python installer guards compatible with Python 3.6

@@ -1,0 +1,39 @@
+NurseLink Project Progress Summary — v5.5.2
+===============================================
+
+MEMBERSHIP ADMINISTRATION
+-------------------------
+Established:
+- application submission
+- review assignment
+- Reviewer workflow
+- information-request workflow
+- ready-for-approval workflow
+- Administrator approval/decline
+- member standing
+- onboarding
+- Member Registry
+- application command center
+
+NEW IN v5.5.2
+-------------
+- quick triage queue views
+- saved Administrator filter views
+- reviewer workload balancing indicators
+- workload-aware routing suggestion
+- Administrator-only controlled application CSV export
+- export audit event
+- CSV formula-injection protection
+- server-side review-stage filter
+
+PRIMARY ADMINISTRATOR URL
+-------------------------
+https://app.amsertech.com/admin/#applications
+
+NEXT RECOMMENDED v5.5.x WORK
+----------------------------
+- safe bulk triage for assignment/priority/due-date changes
+- SLA alert thresholds and queue notifications
+- workload-aware reviewer assignment assistance
+- controlled export history
+- application readiness / completeness signals

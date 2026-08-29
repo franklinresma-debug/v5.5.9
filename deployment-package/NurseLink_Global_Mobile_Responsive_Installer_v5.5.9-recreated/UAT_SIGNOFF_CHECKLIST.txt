@@ -1,0 +1,30 @@
+NurseLink v3.3.0 Production Sign-Off Checklist
+=============================================
+
+[ ] Production Readiness has no critical blocker
+[ ] Applicant registration/login
+[ ] Six-step application journey
+[ ] Pending applicant Credential Registry
+[ ] Applicant cannot self-verify credential
+[ ] Reviewer Center
+[ ] Membership approval
+[ ] Digital Member ID photo + QR
+[ ] Pre-approval member-only API blocking
+[ ] Portfolio/Career/Learning/Jobs after approval
+[ ] Job application workflow
+[ ] Partner Portal privacy/scope
+[ ] Messaging/interview workflow
+[ ] Analytics
+[ ] Public profile privacy
+[ ] Invalid verification privacy
+[ ] Mobile/tablet responsiveness
+[ ] Security headers
+[ ] Session login rate limit
+[ ] Laravel logging writable
+[ ] Disk headroom acceptable
+[ ] Recent rollback backup
+[ ] Restore drill on staging/backup copy
+[ ] No recurring unresolved 5xx
+[ ] No browser request storm
+[ ] UAT report exported
+[ ] Final production sign-off

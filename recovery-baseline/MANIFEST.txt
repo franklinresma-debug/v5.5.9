@@ -1,0 +1,13 @@
+NurseLink Production Recovery Baseline
+Created UTC: 2026-08-27T06:46:21+00:00
+Host: srv251098078
+Purpose: sanitized current-production source and built-asset recovery baseline
+Database: stored separately in the protected VPS backup area
+Secrets and user data: intentionally excluded
+
+Runtime versions
+PHP 8.4.24 (cli) (built: Jul 30 2026 15:23:13) (NTS)
+v22.23.2
+10.9.8
+nginx version: nginx/1.24.0 (Ubuntu)
+mariadb  Ver 15.1 Distrib 10.11.14-MariaDB, for debian-linux-gnu (x86_64) using  EditLine wrapper

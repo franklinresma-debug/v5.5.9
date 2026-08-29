@@ -1,0 +1,95 @@
+NurseLink v5.2.0 CONSOLIDATION NOTE
+-----------------------------------
+The primary Administrator UI is now:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+The legacy URL described in this guide remains available only as a
+compatibility redirect into the appropriate consolidated portal section.
+
+NurseLink v5.2.0 Member Registry Guide
+=======================================
+
+The Member Registry is the approved-member administration workspace.
+
+WHO CAN ACCESS
+--------------
+Administrator
+Super Administrator
+
+Reviewer-only accounts are denied.
+
+SEPARATE ADMIN SESSION
+----------------------
+A normal applicant/member session is not sufficient.
+
+Use:
+https://app.amsertech.com/nurselink-admin-login.html
+
+REGISTRY SEARCH
+---------------
+Search:
+- member name
+- email
+- NurseLink member number
+
+Filters:
+- credential state
+  - All
+  - Verified / Clear
+  - Needs Attention
+- public profile
+  - All
+  - Enabled
+  - Disabled
+
+MEMBER DETAIL
+-------------
+The detail pane shows:
+- approved member name/email
+- permanent member number
+- approval date
+- profile-photo presence
+- membership verification link
+- public profile link when enabled
+- credentials without credential numbers
+- employment summary
+- learning / CPD summary
+- membership audit action summary
+
+CSV EXPORT
+----------
+Export CSV exports the currently filtered approved-member rows.
+
+Fields:
+- Member Name
+- Email
+- Member Number
+- Approved At
+- Credentials Total
+- Credentials Verified
+- Credentials Attention
+- Employment Records
+- Learning Records
+- Public Profile Enabled
+
+PRIVACY
+-------
+Not exposed:
+- credential numbers
+- home address
+- phone
+- uploaded evidence/documents
+- reviewer notes
+- private portfolio content
+
+WHY READ-ONLY FIRST
+-------------------
+Membership approval already controls member-only access throughout NurseLink.
+
+Before adding suspension/reactivation or other lifecycle states, the system
+needs a stable registry and governance view. v5.2.0 therefore introduces no
+membership-state write endpoint.
+
+A future lifecycle release can build on this registry with explicit policy,
+audit and member-access handling rather than overloading the existing
+Approved membership status.

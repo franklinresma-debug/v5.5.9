@@ -1,0 +1,48 @@
+NurseLink v5.1.2 — Protected Navigation & Administrator Session Hotfix
+=======================================================================
+
+SYMPTOM
+-------
+Opening newly added protected membership pages could appear to send the user
+back to Dashboard.
+
+ROOT CAUSES
+-----------
+1. The Member Welcome Center treated HTTP 403 (logged in but not eligible for
+   that member-only page) the same as HTTP 401 (not authenticated). It sent
+   an already-authenticated user to /login, where the normal app then returned
+   the authenticated session to Dashboard.
+
+2. Administrator pages relied on an exact query-string return path and the
+   Administrator Login JavaScript could remain cached across releases. A stale
+   login script did not know about a newly added Administrator page and fell
+   back to the Administrator Dashboard.
+
+FIX
+---
+- HTTP 401/419 continues to send a user to the appropriate sign-in page.
+- HTTP 403 on the Membership Welcome Center now stays on the page and displays
+  the eligibility/standing message instead of producing a login/dashboard loop.
+- Administrator pages now distinguish "separate Administrator sign-in required"
+  from other 403 authorization errors.
+- The requested Administrator page is saved in sessionStorage before login.
+- Administrator Login restores the requested page after successful privileged
+  sign-in.
+- Return destinations are same-origin and explicitly allowlisted.
+- Administrator and membership protected JS/CSS references use ?nlv=512.
+- Redirect-critical protected assets now use no-cache/no-store headers.
+- Membership Administration and Membership Onboarding Administrator pages keep
+  the user on-page for real permission errors rather than bouncing repeatedly.
+
+NO FEATURE LOSS
+---------------
+v5.1.2 is cumulative and retains:
+- v5.1.0 Membership Administration Suite
+- v5.1.1 Membership Welcome Center and Onboarding Administration
+- all earlier NurseLink member, Administrator and enterprise functionality
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.1.2
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

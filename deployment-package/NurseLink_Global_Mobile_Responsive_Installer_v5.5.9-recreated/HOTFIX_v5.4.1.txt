@@ -1,0 +1,60 @@
+NurseLink v5.4.1 — Administrator Session Gate & Login Simplification
+======================================================================
+
+FIX 1 — NO PROTECTED-DASHBOARD FLASH
+------------------------------------
+Before v5.4.1, /admin/ could briefly render the Administration Operations
+Center shell while the browser was still checking the privileged session.
+
+v5.4.1 starts the Administrator page in a locked session-pending state.
+
+Before server confirmation, the browser displays only:
+"Verifying Administrator access"
+
+The Operations Center shell remains hidden.
+
+Only after:
+GET /api/nurselink/admin/session
+
+returns an authorized privileged NurseLink session does the browser reveal the
+Administration Operations Center.
+
+If the session is missing or invalid, the protected dashboard is never shown
+and the browser redirects to:
+/admin/login.html
+
+FIX 2 — SIMPLIFIED ADMINISTRATOR LOGIN FOOTER
+----------------------------------------------
+The Administrator sign-in card now ends with exactly one link immediately
+below the main sign-in button:
+
+Member / Applicant Sign In
+
+Removed from that footer:
+- NurseLink Home
+- extra access footnote beneath the link
+
+The left-side Protected Staff Access explanation remains.
+
+MEMBER LOGIN
+------------
+The normal Member / Applicant login design remains visually unchanged.
+
+PRIMARY ADMIN URLS
+------------------
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+FAST ADMIN DEPLOY
+-----------------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.4.1
+chmod +x repair_admin_portal.sh
+./repair_admin_portal.sh
+
+FULL CUMULATIVE INSTALL
+-----------------------
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh

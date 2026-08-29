@@ -1,0 +1,55 @@
+NurseLink Administration Operations Center Guide — v5.3.0
+=============================================================
+
+Administrator Login:
+https://app.amsertech.com/nurselink-admin-login.html
+
+Administration Operations Center:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+Dashboard
+  Cross-platform operational metrics and attention queues.
+
+Members
+  Approved-member registry, standing and post-approval onboarding.
+
+Applications
+  Membership review, reviewer assignment and approval workflow.
+
+Verification
+  Professional credential review and verification notes.
+
+Organizations
+  Institutional and employer/recruitment partner administration.
+
+Programs
+  Chapters, benefits, engagement and enterprise programs.
+
+Employment & Opportunities
+  Workforce opportunities and member job-application review.
+
+Training & Events
+  Events, attendance/program management and credential compliance.
+
+Communications
+  Targeted in-app member notifications with controlled audit metadata.
+
+Reports & Analytics
+  Institutional/platform aggregate reporting.
+
+Support Cases
+  Case ownership, status, priority and resolution workflows.
+
+Audit Logs
+  Normalized administrative events; raw database snapshots are not shown.
+
+System Health
+  Release, required tables, storage and readiness.
+
+Settings
+  Portal governance and privileged staff access.
+
+Maintenance rule:
+New Administrator capabilities should be added as governed workflows inside
+these operational domains whenever practical. Do not make raw database editing
+the normal Administration interface.

@@ -1,0 +1,34 @@
+/* NurseLink v5.5.9.1 — deterministic Smart Registration layout */
+html.nurselink-route-smart-registration .main-area > .page {
+  display: block !important;
+  width: 100% !important;
+  max-width: 1500px !important;
+  margin-inline: auto !important;
+}
+
+html.nurselink-route-smart-registration .main-area > .page > .page-header,
+html.nurselink-route-smart-registration .main-area > .page > .nurselink-credential-registry,
+html.nurselink-route-smart-registration .main-area > .page > .content-grid,
+html.nurselink-route-smart-registration .main-area > .page > .panel {
+  width: 100% !important;
+  max-width: none !important;
+  grid-column: 1 / -1 !important;
+}
+
+html.nurselink-route-smart-registration .main-area > .page > .content-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+}
+
+html.nurselink-route-smart-registration .main-area > .page > .content-grid > * {
+  min-width: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  html.nurselink-route-smart-registration .main-area > .page > .content-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+

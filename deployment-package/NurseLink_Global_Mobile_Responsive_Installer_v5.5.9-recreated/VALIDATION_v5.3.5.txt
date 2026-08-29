@@ -1,0 +1,31 @@
+NurseLink v5.3.5 Hotfix Validation
+====================================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] 68 embedded installer Python guards parse under Python 3.6
+[PASS] exact-literal standalone package preflight executes
+[PASS] standalone routing regression guard executes
+[PASS] Administrator Login exact Apache END rule present
+[PASS] Administrator Dashboard exact Apache END rule present
+[PASS] Administrator JS/config/CSS bypass directives present
+[PASS] static file/directory END bypass directives present
+[PASS] over-escaped Administrator routing grep commands removed
+[PASS] every direct copied public/src grep validation passes against payload
+[PASS] Administration Operations Center JavaScript regression
+[PASS] Administrator Login JavaScript regression
+[PASS] centralized Portal Configuration JavaScript regression
+[PASS] Administrator SPA rescue JavaScript regression
+[PASS] NurseLink mobile runtime JavaScript regression
+[PASS] Administration Operations Center PHP regression
+[PASS] Production Readiness / Operations / Smoke PHP regression
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] v5.3.4 centralized launcher regression retained
+[PASS] v5.3.3 pre-React bootstrap regression retained
+[PASS] v5.3.2 SPA rescue regression retained
+[PASS] v5.3.1 routing regression retained
+[PASS] deterministic two-stage cleanup simulation
+[PASS] current v5.3.5 installer retained
+[PASS] protected hosting/source/production paths retained
+[PASS] no artisan tinker dependency

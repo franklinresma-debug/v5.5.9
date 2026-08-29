@@ -1,0 +1,86 @@
+NurseLink v5.4.0 — Administration Operations Milestone
+===========================================================
+
+PRIMARY ADMINISTRATOR URLS
+--------------------------
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+MILESTONE SCOPE
+---------------
+v5.4.0 builds on the stable physical /admin/ delivery and the v5.3.8 light-blue
+Administrator theme.
+
+The Administrator Dashboard now adds an operational membership-processing
+summary designed for daily use rather than database-style administration.
+
+MEMBERSHIP PROCESSING PROGRESS
+------------------------------
+The Dashboard now summarizes:
+- Submitted applications
+- Under Review
+- Needs Information
+- Ready for Approval
+- Approved memberships
+- Active standing
+- Pending / in-progress onboarding
+- Completed onboarding
+- Review aging at 8+ days
+- Review aging at 15+ days
+- Inactive / suspended membership standing
+
+ACTION QUEUES
+-------------
+The existing queue view remains and surfaces:
+- Ready for Approval
+- Overdue Reviews
+- Unassigned Reviews
+- Open Support Cases
+- Pending Credential Verification
+- Pending Organizations
+
+RECENT ADMINISTRATIVE ACTIVITY
+------------------------------
+The Dashboard now shows the latest normalized NurseLink audit events using the
+existing privacy-safe Administration Operations Center audit API.
+
+Raw database before/after snapshots are not displayed.
+
+ADMINISTRATOR FOLLOW-UP
+-----------------------
+The Dashboard derives reminders from current workflow state:
+- Final membership decisions
+- Overdue membership reviews
+- Unassigned membership reviews
+- Overdue onboarding
+- Pending credential verification
+- Open support cases
+
+No background job is required for this summary.
+
+MEMBER LOGIN
+------------
+The Member public login visual design remains unchanged.
+
+ADMINISTRATOR THEME
+-------------------
+The v5.3.8 light-blue Administrator palette is retained.
+
+DELIVERY
+--------
+The physical /admin/ direct-delivery architecture from v5.3.7 remains the
+primary Administrator delivery model.
+
+FAST ADMIN DEPLOY
+-----------------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.4.0
+chmod +x repair_admin_portal.sh
+./repair_admin_portal.sh
+
+FULL CUMULATIVE INSTALL
+-----------------------
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh

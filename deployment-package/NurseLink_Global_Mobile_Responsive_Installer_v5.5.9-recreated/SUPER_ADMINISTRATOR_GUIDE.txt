@@ -1,0 +1,94 @@
+NurseLink v5.5.2 Super Administrator Identity Guide
+==================================================
+
+PURPOSE
+-------
+v5.5.2 creates a clear visual and server-confirmed distinction between:
+
+- Super Administrator
+- Administrator
+- Reviewer
+- other NurseLink users
+
+The Super Administrator badge is NOT inferred from page text or browser state.
+The browser displays it only after the authenticated NurseLink API confirms
+that the current account has Super Administrator identity.
+
+WHAT A SUPER ADMINISTRATOR SEES
+-------------------------------
+Main NurseLink application:
+- purple/gold SUPER ADMINISTRATOR top-bar badge
+- "Privileged session" label
+- highlighted user chip
+- Super Administrator Session banner on the Admin dashboard
+
+Standalone administrative tools:
+- Production UAT & Readiness
+- Institutional Analytics
+- Operations Center
+
+These pages display a purple/gold:
+SUPER ADMINISTRATOR
+Server-confirmed privileged session
+
+REGISTRY
+--------
+Dedicated table:
+nurselink_super_admin_access
+
+Protected identity API:
+GET /api/nurselink/session-identity
+
+The API returns the current authenticated user's role tier. It does not expose
+the Super Administrator registry publicly.
+
+GRANT YOUR LOGIN ACCOUNT
+------------------------
+After installing v5.5.2, run:
+
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.5.2
+
+php super_admin_access.php   /home/frankresma/nurselink-api   grant YOUR_LOGIN_EMAIL   "Primary NurseLink Super Administrator"
+
+You may use the user's UUID instead of email.
+
+The grant utility also ensures that the same user retains normal NurseLink
+administrator access in nurselink_reviewer_access.
+
+LIST SUPER ADMINISTRATORS
+-------------------------
+php super_admin_access.php   /home/frankresma/nurselink-api   list
+
+REVOKE SUPER ADMINISTRATOR IDENTITY
+-----------------------------------
+php super_admin_access.php   /home/frankresma/nurselink-api   revoke YOUR_LOGIN_EMAIL
+
+Revoking Super Administrator identity does NOT automatically remove the user's
+existing reviewer/admin access.
+
+AFTER GRANT
+-----------
+Refresh the NurseLink browser page.
+
+The top bar should show:
+SUPER ADMINISTRATOR
+Privileged session
+
+Open:
+https://app.amsertech.com/admin
+
+The Admin dashboard should also display:
+SUPER ADMINISTRATOR SESSION
+
+SECURITY MODEL
+--------------
+Super Administrator identity is deliberately managed from cPanel/CLI rather
+than through a public browser self-promotion button.
+
+Regular Administrators do not receive the Super Administrator badge unless an
+explicit Super Administrator grant exists or the underlying user model already
+identifies that account as a super administrator.
+
+The distinction is visual and identity-aware while existing NurseLink
+authorization, audit logging, reviewer/admin controls and server boundaries
+remain authoritative.

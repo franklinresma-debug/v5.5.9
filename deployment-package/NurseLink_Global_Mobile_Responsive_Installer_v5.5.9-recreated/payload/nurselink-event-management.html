@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Event Management</title>
+  <link rel="stylesheet" href="/nurselink-admin-portal.css">
+  <link rel="stylesheet" href="/nurselink-event-management.css">
+</head>
+<body class="nl-admin-body">
+<div class="nl-admin-shell">
+  <aside class="nl-admin-sidebar">
+    <div class="nl-admin-sidebar-brand"><div class="nl-admin-brand-mark">NL</div><div><strong>NurseLink</strong><small>Administrator Portal</small></div></div>
+    <nav>
+      <a href="/nurselink-admin-dashboard.html">Dashboard</a>
+      <a href="/nurselink-membership-command-center.html">Membership Command Center</a>
+      <a href="/nurselink-member-registry.html">Member Registry</a>
+      <a href="/nurselink-credential-compliance.html">Credential Compliance</a>
+      <a class="active" href="/nurselink-event-management.html">Events & Programs</a>
+      <a href="/nurselink-engagement-command-center.html">Engagement Command Center</a>
+      <a href="/nurselink-super-admin-test-center.html">Super Admin Test Center</a>
+      <a href="/admin">Review Center</a>
+      <a href="/nurselink-operations-center.html">Operations Center</a>
+      <a href="/nurselink-institutional-analytics.html">Institutional Analytics</a>
+      <a href="/dashboard">Member / Applicant Portal</a>
+    </nav>
+    <button id="adminSignOut" type="button">Sign out of Admin Portal</button>
+  </aside>
+  <main class="nl-admin-main em-main">
+    <header class="nl-admin-header">
+      <div><span class="nl-admin-eyebrow">MEMBER ENGAGEMENT</span><h1>Events & Programs Management</h1><p>Create, publish and manage NurseLink member activities and registrations.</p></div>
+      <div id="adminIdentity" class="nl-admin-identity">Checking administrator session…</div>
+    </header>
+    <div id="eventAdminNotice" class="nl-admin-notice" hidden></div>
+
+    <section class="em-layout">
+      <section class="em-panel">
+        <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">CREATE / EDIT</span><h2>Event or Program</h2></div></div>
+        <form id="eventForm" class="em-form">
+          <input id="eventId" type="hidden">
+          <label class="span2"><span>Title</span><input id="eventTitle" maxlength="190" required></label>
+          <label><span>Chapter / Community</span><select id="eventChapter"><option value="">All NurseLink members</option></select></label>
+          <label><span>Type</span><select id="eventType" required><option value="webinar">Webinar</option><option value="workshop">Workshop</option><option value="conference">Conference</option><option value="orientation">Orientation</option><option value="networking">Networking</option><option value="mentoring">Mentoring</option><option value="community_service">Community Service</option><option value="program">Program</option><option value="other">Other</option></select></label>
+          <label><span>Format</span><select id="eventMode" required><option value="online">Online</option><option value="onsite">Onsite</option><option value="hybrid">Hybrid</option></select></label>
+          <label class="span2"><span>Description</span><textarea id="eventDescription" rows="4" maxlength="10000"></textarea></label>
+          <label><span>Organizer</span><input id="eventOrganizer" maxlength="190"></label>
+          <label><span>Venue</span><input id="eventVenue" maxlength="255"></label>
+          <label><span>City</span><input id="eventCity" maxlength="120"></label>
+          <label><span>Country</span><input id="eventCountry" maxlength="120"></label>
+          <label class="span2"><span>Meeting URL</span><input id="eventMeetingUrl" type="url" maxlength="512"></label>
+          <label><span>Starts</span><input id="eventStarts" type="datetime-local" required></label>
+          <label><span>Ends</span><input id="eventEnds" type="datetime-local"></label>
+          <label><span>Capacity</span><input id="eventCapacity" type="number" min="1"></label>
+          <label><span>Registration deadline</span><input id="eventDeadline" type="datetime-local"></label>
+          <label><span>Learning hours</span><input id="eventLearningHours" type="number" min="0" step=".25"></label>
+          <label><span>Self-reported CPD units</span><input id="eventCpdUnits" type="number" min="0" step=".25"></label>
+          <label><span>Status</span><select id="eventStatus"><option value="draft">Draft</option><option value="published">Published</option><option value="cancelled">Cancelled</option><option value="completed">Completed</option></select></label>
+          <label class="em-check"><input id="eventRegistrationRequired" type="checkbox" checked><span>Registration required</span></label>
+          <input id="eventMemberOnly" type="checkbox" checked hidden>
+          <div class="em-actions span2"><button type="button" id="resetEvent">Clear</button><button type="submit" class="primary">Save Event</button></div>
+        </form>
+      </section>
+
+      <section class="em-panel">
+        <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">EVENT INVENTORY</span><h2>Activities</h2></div><button id="refreshAdminEvents" type="button">Refresh</button></div>
+        <div id="eventAdminList" class="em-list"><div class="nl-admin-loading">Loading events…</div></div>
+      </section>
+    </section>
+
+    <section id="registrationPanel" class="em-panel" hidden>
+      <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">REGISTRATIONS</span><h2 id="registrationTitle">Event registrations</h2></div><button id="closeRegistrations" type="button">Close</button></div>
+      <div id="registrationList" class="em-registration-list"></div>
+    </section>
+
+    <section class="em-advisory"><strong>Governance boundary</strong><span>Learning hours and CPD units stored here are NurseLink event metadata only. Attendance or completion does not automatically establish regulator-recognized CPD credit.</span></section>
+  </main>
+</div>
+<script src="/nurselink-event-management.js" defer></script>
+</body>
+</html>

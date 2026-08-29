@@ -1,0 +1,63 @@
+NurseLink v5.0.5 Major Milestone
+=================================
+
+ENTERPRISE PLATFORM
+
+The cumulative platform now covers:
+
+PROFESSIONAL MEMBER PLATFORM
+- membership applications and lifecycle
+- member identity / Digital Member ID
+- public professional profiles
+- credentials and renewal intelligence
+- employment and OFW history
+- portfolio
+- learning
+- career intelligence
+- jobs and matching
+
+COMMUNITY & ENGAGEMENT
+- events and programs
+- chapters and communities
+- mentoring and peer support
+- member engagement timeline
+- benefits and resources
+- saved benefits
+- availability intelligence
+- de-duplicated benefit reminders
+
+ADMINISTRATION & OPERATIONS
+- separate Administrator Portal
+- Membership Command Center
+- Member Registry
+- Credential Compliance
+- Engagement Command Center
+- Operations Center
+- Production/UAT gates
+- Super Administrator Test Mode
+
+PARTNER & ENTERPRISE
+- verified partner organizations
+- partner recruitment portal
+- messaging/interviews
+- recruitment analytics
+- institutional analytics
+- enterprise cohorts
+- approved-member cohort assignment
+- member enterprise participation view
+- partner own-organization aggregate enterprise analytics
+- privacy threshold for small cohorts
+
+PRIVACY / GOVERNANCE
+- partner enterprise analytics are aggregate-only
+- fewer-than-3 cohort detailed metrics are suppressed
+- private notes/messages/documents/credential numbers remain excluded
+- enterprise cohort participation is not licensure, regulatory standing,
+  employment authority, credential verification or official CPD status
+
+INSTALLER RELIABILITY
+- deterministic two-stage old-installer cleanup
+- Namecheap Python 3.6 cleanup compatibility
+- protected hosting/source/production directory exclusions
+- rollback migration/file restoration
+- SUCCESS only after live/regression/cleanup verification

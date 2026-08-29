@@ -1,0 +1,64 @@
+NurseLink v5.5.2 — Applications Triage & Reviewer Workload
+=============================================================
+
+APPLICATIONS COMMAND CENTER
+---------------------------
+v5.5.2 extends the v5.5.0 professional Applications Command Center with
+day-to-day operational triage and reviewer workload tools.
+
+NEW
+---
+1. Quick application queue views
+   - All Pending
+   - Ready for Approval
+   - Overdue
+   - Unassigned
+   - Urgent
+   - My Queue
+
+2. Saved Administrator queue views
+   - Up to 12 named filter presets per Administrator browser profile
+   - Stored as filter preferences only
+   - No application/member records are persisted in local storage
+
+3. Reviewer Workload & Queue Balance
+   - Pending workload
+   - Urgent workload
+   - High-priority workload
+   - Overdue workload
+   - Ready-for-approval workload
+   - Operational workload score/level
+   - Lowest-current-queue-pressure suggestion
+
+Reviewer workload is an operational routing aid only. It is not an employee
+performance rating, employment decision, clinical competence measure, or
+professional credential.
+
+4. Controlled Application CSV Export
+   - Administrator / Super Administrator only
+   - Uses the current governed queue filters
+   - Audited as membership.application_queue_exported
+   - No credential numbers, private support notes, home address or phone
+   - CSV formula-injection neutralization for = + - @ leading values
+   - no-store/private response headers
+
+5. Review-stage filtering is now server-side
+   - Initial Intake
+   - Document Review
+   - Applicant Follow-up
+   - Admin Review
+   - Completed
+   - Closed
+
+CUMULATIVE
+----------
+Retains:
+- v5.5.0 Applications Command Center
+- v5.5.1 Namecheap HTTPS verifier hotfix
+- physical /admin/ delivery
+- no-flash Administrator session gate
+- light-blue Administrator theme
+- Global Search
+- role-aware workbench
+- simplified Administrator login
+- unchanged Member login visual design

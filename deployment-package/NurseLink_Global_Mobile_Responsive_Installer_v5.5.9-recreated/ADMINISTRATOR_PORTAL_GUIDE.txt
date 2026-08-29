@@ -1,0 +1,64 @@
+NurseLink Administrator Portal Guide — v5.2.0
+================================================
+
+ONE ADMINISTRATOR SIGN-IN
+-------------------------
+https://app.amsertech.com/nurselink-admin-login.html
+
+ONE PRIMARY ADMINISTRATOR PORTAL
+--------------------------------
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+The consolidated portal contains:
+- Overview
+- Membership
+- Onboarding
+- Members
+- Roles & Access
+- Programs
+- Enterprise
+- Operations
+
+ROLE MODEL
+----------
+Reviewer:
+- membership review preparation
+- allowed non-final review transitions
+- reviewer notes
+
+Administrator:
+- Reviewer capabilities
+- final membership approval/decline
+- review assignment
+- member standing
+- onboarding administration
+- Administrator-level modules
+
+Super Administrator:
+- Administrator capabilities
+- privileged role grants/changes/revocation
+- protected high-privilege self-actions
+- Super Administrator test/operations functions
+
+SAFETY
+------
+- Separate Administrator sign-in remains mandatory.
+- Normal Member sign-in does not establish an Administrator session.
+- Final membership decisions remain role-gated.
+- Ready-for-Approval remains required for final approval.
+- Self-revocation is blocked.
+- The last active Super Administrator is protected.
+- Audit logging remains authoritative.
+
+ADVANCED MODULES
+----------------
+Some specialist Program, Enterprise and Operations screens remain standalone
+advanced modules for now, but they are launched from the Administrator Portal
+and use the same privileged session. They are not separate login experiences.
+
+MEMBER PORTAL
+-------------
+Members and applicants use:
+https://app.amsertech.com/login
+then
+https://app.amsertech.com/dashboard

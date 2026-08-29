@@ -1,0 +1,10 @@
+# NURSELINK_SECURITY_HEADERS_V330_START
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always unset X-Powered-By
+</IfModule>
+# NURSELINK_SECURITY_HEADERS_V330_END

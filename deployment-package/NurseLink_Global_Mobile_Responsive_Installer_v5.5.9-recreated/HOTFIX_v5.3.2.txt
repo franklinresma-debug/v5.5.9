@@ -1,0 +1,77 @@
+NurseLink v5.3.2 — Administrator React-SPA Fallback Rescue
+============================================================
+
+OBSERVED LIVE BEHAVIOR
+----------------------
+The Namecheap-hosted URL:
+
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+can still be served as the normal React member SPA index. The member router
+then treats the Administrator URL as an unsupported/protected member route and
+redirects to /login.
+
+This behavior can persist even when the standalone Administrator HTML file is
+present in the intended live directory and even in a fresh Incognito session.
+
+V5.3.2 FIX
+----------
+v5.3.2 no longer depends solely on the hosting layer serving Administrator
+.html documents directly.
+
+A new source module is imported BEFORE the normal NurseLink React/mobile
+runtime:
+
+src/nurselink-admin-spa-rescue.js
+
+When the React SPA is incorrectly returned for either:
+
+/nurselink-admin-login.html
+/nurselink-admin-dashboard.html
+
+the rescue module:
+
+1. Detects the Administrator pathname before the normal member application
+   can initialize.
+2. Reconstructs the correct Administrator Login or Administration Operations
+   Center document in the browser.
+3. Loads the validated Administrator CSS.
+4. Loads nurselink-portal-config.js.
+5. Loads the correct Administrator login/dashboard JavaScript.
+6. Stops the member React application from continuing and overwriting the
+   Administrator interface.
+
+The existing v5.3.1 standalone Apache routing protection remains in place.
+v5.3.2 therefore supports BOTH:
+- direct standalone Administrator HTML delivery, and
+- React-SPA fallback rescue when the host rewrites the Administrator HTML URL.
+
+INSTALL-TIME VALIDATION
+-----------------------
+The installer now accepts either delivery mode.
+
+If the host returns the member SPA for an Administrator URL, installation
+continues only when:
+- the live React production bundle contains the v5.3.2 rescue marker,
+- the Administrator Login JavaScript is directly retrievable,
+- the Administration Operations Center JavaScript is directly retrievable,
+- the centralized Portal Configuration JavaScript is directly retrievable.
+
+This makes the fix independent of browser cache and removes the Administrator
+entry flow's dependency on one specific .htaccess behavior.
+
+EXPECTED FLOW
+-------------
+https://app.amsertech.com/nurselink-admin-dashboard.html
+          ↓
+Administrator Sign In, if privileged session is absent
+          ↓
+Administration Operations Center
+
+The member /login screen must not take over the Administrator URL.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.2
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

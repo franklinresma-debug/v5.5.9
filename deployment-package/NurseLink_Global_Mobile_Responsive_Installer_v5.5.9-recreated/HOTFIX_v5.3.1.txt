@@ -1,0 +1,71 @@
+NurseLink v5.3.1 — Administrator Entry Routing & Deployment Hotfix
+====================================================================
+
+REPORTED SYMPTOM
+----------------
+Opening:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+could load the normal React Member application shell and then land at:
+/login
+
+instead of opening the separate Administrator authentication / Operations
+Center flow.
+
+ROOT CAUSE
+----------
+The live Administrator HTML route was being handled by the Member SPA history
+fallback rather than reliably serving the standalone Administrator document.
+
+The v5.3.0 installer also inherited old standalone-content assertions from
+earlier Administrator UI releases. Those assertions did not match the new
+Administration Operations Center identity.
+
+HOTFIX
+------
+v5.3.1 makes Administrator entry routing deterministic:
+
+1. Exact Apache rewrite exclusions are installed for:
+   /nurselink-admin-login.html
+   /nurselink-admin-dashboard.html
+
+2. The Administrator login/dashboard JS, configuration and CSS dependencies
+   are also protected from SPA rewriting.
+
+3. Apache MultiViews is disabled for the standalone routing layer.
+
+4. After the normal Vite/dist deployment, the seven Administrator entry files
+   are force-copied directly from the validated installer payload into the
+   live document root.
+
+5. Every force-copied live file is compared byte-for-byte with the installer
+   payload.
+
+6. Live HTTP validation rejects the deployment if the Administrator Dashboard
+   contains the React Member SPA root or index asset bundle.
+
+7. Old Administrator standalone-content assertions were replaced with current
+   Administration Operations Center assertions.
+
+EXPECTED FLOW
+-------------
+Unauthenticated Administrator:
+Administrator Dashboard
+  -> Administrator Sign In
+  -> Administration Operations Center
+
+It should NOT go through the Member /login page.
+
+ADMINISTRATOR URLS
+------------------
+Sign In:
+https://app.amsertech.com/nurselink-admin-login.html
+
+Operations Center:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.1
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

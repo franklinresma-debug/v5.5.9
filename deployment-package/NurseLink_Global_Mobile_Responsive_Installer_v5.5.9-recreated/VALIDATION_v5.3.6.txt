@@ -1,0 +1,25 @@
+NurseLink v5.3.6 Validation
+==============================
+
+[PASS] Bash installer / rollback / cleanup syntax
+[PASS] 69 embedded Python guards parse under Python 3.6
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] physical /admin/ payload contains eight required files
+[PASS] physical Administrator Login JavaScript
+[PASS] physical Administration Operations Center JavaScript
+[PASS] physical Portal Configuration JavaScript
+[PASS] /admin/ uses local Administrator assets
+[PASS] /admin/ redirects expired privileged sessions to /admin/login.html
+[PASS] Member login points to /admin/login.html
+[PASS] source public/admin deployment
+[PASS] dist/admin validation
+[PASS] live admin force-deploy and payload equality
+[PASS] live /admin/ HTTP validation
+[PASS] live /admin/login.html HTTP validation
+[PASS] live admin JS/config dependency validation
+[PASS] v5.3.5 routing preflight retained
+[PASS] v5.3.4 launcher consolidation retained
+[PASS] v5.3.3 pre-React bootstrap retained as legacy compatibility
+[PASS] v5.3.2 SPA rescue retained as legacy compatibility
+[PASS] deterministic cleanup simulation
+[PASS] protected hosting paths retained

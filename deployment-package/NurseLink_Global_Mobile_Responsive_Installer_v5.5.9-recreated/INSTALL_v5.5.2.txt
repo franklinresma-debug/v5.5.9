@@ -1,0 +1,17 @@
+NurseLink v5.5.2 — Applications Triage & Reviewer Workload
+=============================================================
+
+FULL CUMULATIVE INSTALL
+-----------------------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.5.2
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh
+
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Applications Command Center:
+https://app.amsertech.com/admin/#applications
+
+Use the full installer because v5.5.2 includes Membership Administration API
+and route changes in addition to Administrator frontend changes.

@@ -1,0 +1,42 @@
+# NURSELINK_CACHE_POLICY_V263_START
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|nurselink-(public-profile|partner-portal|institutional-analytics|member-verify|production-readiness|operations-center|career-intelligence|admin-login|admin-dashboard|notifications|membership-command-center|membership-administration|membership-welcome|membership-onboarding-admin|member-registry|super-admin-test-center|credential-renewal|credential-compliance|events|event-management|chapters|chapter-management|mentoring|engagement|engagement-command-center|benefits|benefit-management|enterprise|enterprise-command-center|enterprise-partner|enterprise-goals|enterprise-goals-admin|enterprise-goals-partner|enterprise-invitations|enterprise-enrollment-admin|enterprise-enrollment-partner|enterprise-outcomes|enterprise-outcomes-admin|enterprise-outcomes-partner|enterprise-support|enterprise-support-admin|enterprise-support-partner)\.html)$">
+    Header always set Cache-Control "no-cache, no-store, must-revalidate"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+
+  <FilesMatch "\.(js|css|woff2?|ttf|otf|png|jpg|jpeg|webp|svg|ico)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+# NURSELINK_CACHE_POLICY_V263_END
+
+
+  # nurselink-protected-navigation-hotfix-v512
+  <FilesMatch "^(nurselink-(admin-login|membership-administration|membership-welcome|membership-onboarding-admin)\.(js|css)|nurselink-admin-portal\.css)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+
+  # nurselink-two-portal-consolidation-v520
+  <FilesMatch "^(nurselink-(admin-login|admin-dashboard)\.html|nurselink-(admin-login|admin-dashboard|portal-config)\.js|nurselink-(admin-portal|admin-consolidated)\.css|nurselink-(membership-command-center|membership-administration|membership-onboarding-admin|member-registry|membership-welcome)\.html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+
+  # nurselink-admin-operations-center-v530
+  <FilesMatch "^(nurselink-admin-dashboard\.(html|js)|nurselink-portal-config\.js|nurselink-admin-consolidated\.css|nurselink-admin-login\.(html|js))$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>

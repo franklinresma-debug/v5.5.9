@@ -1,0 +1,170 @@
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#10204d;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}.nl-admin-eyebrow{display:block;color:#0b72d5;font-size:10px;font-weight:900;letter-spacing:.11em}.nl-admin-brand-mark{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:#0b72d5;color:#fff;font-weight:950}.nl-admin-auth-body{min-height:100vh;background:linear-gradient(135deg,#0d3974,#0b72d5 48%,#eff7ff 48%)}.nl-admin-auth-shell{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;max-width:1450px;margin:auto}.nl-admin-auth-brand{display:flex;flex-direction:column;justify-content:center;padding:70px;color:#fff}.nl-admin-auth-brand>span{margin-top:22px;color:#d4e8ff;font-size:12px;font-weight:850;letter-spacing:.1em}.nl-admin-auth-brand h1{margin:7px 0 12px;max-width:600px;font-size:48px;line-height:1.05}.nl-admin-auth-brand>p{max-width:620px;margin:0;color:#e4f0ff;font-size:18px;line-height:1.55}.nl-admin-security-note{max-width:520px;margin-top:30px;padding:16px;border:1px solid rgba(255,255,255,.25);border-radius:14px;background:rgba(3,24,60,.16)}.nl-admin-security-note strong,.nl-admin-security-note small{display:block}.nl-admin-security-note small{margin-top:5px;color:#dcecff;line-height:1.5}.nl-admin-login-card{align-self:center;width:min(520px,calc(100% - 40px));margin:auto;padding:34px;border:1px solid #dbe5ef;border-radius:22px;background:#fff;box-shadow:0 24px 70px rgba(19,45,78,.16)}.nl-admin-login-card h2{margin:7px 0;font-size:29px}.nl-admin-login-card>p{margin:0 0 23px;color:#718095}.nl-admin-login-card form{display:grid;gap:15px}.nl-admin-login-card label span,.nl-admin-grant-form label span{display:block;margin-bottom:6px;font-size:12px;font-weight:800}.nl-admin-login-card input,.nl-admin-grant-form input,.nl-admin-grant-form select,.nl-admin-users-table select{width:100%;min-height:46px;padding:0 12px;border:1px solid #cfdbe8;border-radius:10px;background:#fff;color:#10204d;font:inherit}.nl-admin-login-card button,.nl-admin-grant-form button,.nl-admin-section-head button,.nl-admin-user-actions button,.nl-admin-sidebar button{min-height:42px;padding:0 13px;border:1px solid #ccd8e5;border-radius:9px;background:#fff;color:#173152;font:inherit;font-weight:800;cursor:pointer}.nl-admin-login-card button.primary,.nl-admin-grant-form button.primary{background:#0b72d5;border-color:#0b72d5;color:#fff}.nl-admin-login-card button:disabled,.nl-admin-user-actions button:disabled{opacity:.5;cursor:not-allowed}.nl-admin-form-status{min-height:20px;font-size:12px}.nl-admin-form-status[data-tone=error]{color:#ad2a35}.nl-admin-form-status[data-tone=success]{color:#137a4f}.nl-admin-auth-links{display:flex;gap:14px;margin-top:18px}.nl-admin-auth-links a{color:#0b72d5;font-size:12px;font-weight:750}.nl-admin-auth-footnote{display:block;margin-top:20px;padding-top:16px;border-top:1px solid #e7ecf2;color:#7a8798;line-height:1.5}.nl-admin-shell{min-height:100vh;display:grid;grid-template-columns:240px minmax(0,1fr)}.nl-admin-sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:18px 14px;background:#0d3974;color:#fff}.nl-admin-sidebar-brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px;border-bottom:1px solid rgba(255,255,255,.15)}.nl-admin-sidebar-brand strong,.nl-admin-sidebar-brand small{display:block}.nl-admin-sidebar-brand small{margin-top:3px;color:#bad4ef;font-size:10px}.nl-admin-sidebar nav{display:grid;gap:5px;margin-top:16px}.nl-admin-sidebar nav a{padding:11px 12px;border-radius:9px;color:#dbeafe;text-decoration:none;font-size:12px;font-weight:700}.nl-admin-sidebar nav a:hover,.nl-admin-sidebar nav a.active{background:rgba(255,255,255,.13);color:#fff}.nl-admin-sidebar>button{margin-top:auto;border-color:rgba(255,255,255,.25);background:transparent;color:#fff}.nl-admin-main{min-width:0;padding:26px}.nl-admin-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:17px}.nl-admin-header h1{margin:5px 0;font-size:31px}.nl-admin-header p{margin:0;color:#738197}.nl-admin-identity{min-width:240px;padding:12px 14px;border:1px solid #d9c77e;border-radius:12px;background:#fffaf0;text-align:right}.nl-admin-identity span,.nl-admin-identity strong,.nl-admin-identity small{display:block}.nl-admin-identity span{color:#5a458a;font-size:9px;font-weight:900;letter-spacing:.05em}.nl-admin-identity strong{margin-top:3px;font-size:13px}.nl-admin-identity small{margin-top:3px;color:#7e8794;font-size:10px}.nl-admin-notice{margin-bottom:14px;padding:11px 13px;border:1px solid #d9e1ea;border-radius:10px;background:#fff;color:#53647a}.nl-admin-notice[data-tone=error]{border-color:#ecc4c9;background:#fff4f5;color:#9c2832}.nl-admin-notice[data-tone=success]{border-color:#bee4d4;background:#f2fcf8;color:#146844}.nl-admin-summary{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.nl-admin-summary-card{padding:15px;border:1px solid #dce5ef;border-radius:13px;background:#fff}.nl-admin-summary-card span{display:block;color:#758399;font-size:10px;font-weight:750}.nl-admin-summary-card strong{display:block;margin-top:5px;font-size:24px}.nl-admin-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.nl-admin-tools a{padding:15px;border:1px solid #dce5ef;border-radius:13px;background:#fff;color:#10204d;text-decoration:none}.nl-admin-tools strong,.nl-admin-tools small{display:block}.nl-admin-tools small{margin-top:5px;color:#78869a;font-size:10px;line-height:1.45}.nl-admin-access{margin-top:14px;padding:18px;border:1px solid #dce5ef;border-radius:14px;background:#fff}.nl-admin-section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.nl-admin-section-head h2{margin:4px 0;font-size:20px}.nl-admin-section-head p{margin:0;color:#7a8798;font-size:12px}.nl-admin-grant-form{display:grid;grid-template-columns:2fr 1fr auto;gap:10px;align-items:end;margin-top:16px;padding:14px;border:1px solid #dce5ef;border-radius:12px;background:#f8fbfe}.nl-admin-users-area{margin-top:14px}.nl-admin-table-wrap{overflow:auto}.nl-admin-users-table{width:100%;border-collapse:collapse;font-size:12px}.nl-admin-users-table th,.nl-admin-users-table td{padding:10px 9px;border-bottom:1px solid #edf1f5;text-align:left;vertical-align:middle}.nl-admin-users-table th{color:#748197;font-size:9px;text-transform:uppercase;letter-spacing:.06em}.nl-admin-users-table td strong,.nl-admin-users-table td small.you{display:block}.nl-admin-users-table td small.you{margin-top:3px;color:#0b72d5;font-size:9px}.nl-admin-role-badge,.nl-admin-status{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850}.nl-admin-role-badge[data-role=super]{background:#f4edff;color:#4c387c}.nl-admin-role-badge[data-role=admin]{background:#e7f3ff;color:#0d5da7}.nl-admin-role-badge[data-role=reviewer]{background:#eef8f4;color:#176e51}.nl-admin-role-badge[data-role=revoked],.nl-admin-status[data-active="0"]{background:#f3f4f6;color:#7b8490}.nl-admin-status[data-active="1"]{background:#e9f8f0;color:#147148}.nl-admin-user-actions{display:flex;gap:6px;align-items:center;min-width:330px}.nl-admin-user-actions select{min-width:150px;min-height:36px}.nl-admin-user-actions button{min-height:36px}.nl-admin-user-actions button.danger{border-color:#e4bcc1;color:#a32430}.nl-admin-access-note{display:flex;gap:9px;margin-top:14px;padding:12px;border-radius:10px;background:#f5f7fa;color:#657389;font-size:10px}.nl-admin-access-note strong{color:#243b5d}.nl-admin-loading,.nl-admin-empty{padding:25px;text-align:center;color:#78869a}.nl-admin-empty{border:1px dashed #d7e0e9;border-radius:11px}.nl-admin-section-head button{min-width:80px}@media(max-width:1180px){.nl-admin-summary{grid-template-columns:repeat(3,1fr)}.nl-admin-tools{grid-template-columns:repeat(2,1fr)}}@media(max-width:800px){.nl-admin-auth-shell{grid-template-columns:1fr}.nl-admin-auth-body{background:#f3f6fa}.nl-admin-auth-brand{display:none}.nl-admin-login-card{margin:35px auto}.nl-admin-shell{display:block}.nl-admin-sidebar{position:relative;height:auto}.nl-admin-sidebar nav{grid-template-columns:repeat(2,1fr)}.nl-admin-sidebar>button{margin-top:15px}.nl-admin-main{padding:16px}.nl-admin-header{display:grid}.nl-admin-identity{text-align:left;min-width:0}.nl-admin-summary{grid-template-columns:repeat(2,1fr)}.nl-admin-grant-form{grid-template-columns:1fr}.nl-admin-user-actions{min-width:300px}}@media(max-width:520px){.nl-admin-summary,.nl-admin-tools{grid-template-columns:1fr}.nl-admin-sidebar nav{grid-template-columns:1fr}.nl-admin-auth-links{display:grid}}
+/* NURSELINK_ADMIN_LIGHT_BLUE_V538_START */
+:root{
+  --nl-admin-sky-25:#fbfdff;
+  --nl-admin-sky-50:#f5faff;
+  --nl-admin-sky-75:#eef7ff;
+  --nl-admin-sky-100:#e5f2ff;
+  --nl-admin-sky-150:#d8ebfb;
+  --nl-admin-sky-200:#cbe3f7;
+  --nl-admin-sky-300:#abd2ef;
+  --nl-admin-blue:#1673c9;
+  --nl-admin-blue-strong:#0a5fb5;
+  --nl-admin-navy:#123b66;
+  --nl-admin-muted:#63809d;
+  --nl-admin-border:#d2e4f2;
+  --nl-admin-card:#ffffff;
+}
+body.nl-admin-body{
+  background:linear-gradient(180deg,#f8fcff 0%,#f1f8ff 100%);
+  color:var(--nl-admin-navy);
+}
+.nl-admin-eyebrow{color:var(--nl-admin-blue)}
+.nl-admin-brand-mark{
+  background:linear-gradient(145deg,#2f8be0,#0b67bf);
+  color:#fff;
+  box-shadow:0 8px 22px rgba(35,119,194,.18)
+}
+.nl-admin-auth-body{
+  background:
+    radial-gradient(circle at 12% 10%,rgba(102,181,240,.18),transparent 34%),
+    linear-gradient(135deg,#eaf6ff 0%,#f8fcff 52%,#eef8ff 100%)
+}
+.nl-admin-auth-shell{background:transparent}
+.nl-admin-auth-brand{
+  color:var(--nl-admin-navy);
+  background:linear-gradient(160deg,rgba(238,248,255,.94),rgba(250,253,255,.88));
+  border-right:1px solid var(--nl-admin-border)
+}
+.nl-admin-auth-brand>span{color:var(--nl-admin-blue)}
+.nl-admin-auth-brand h1{color:#10375f}
+.nl-admin-auth-brand>p{color:#4f7191}
+.nl-admin-security-note{
+  border-color:#bddcf2;
+  background:rgba(255,255,255,.72);
+  color:#315b82;
+  box-shadow:0 12px 30px rgba(72,139,197,.08)
+}
+.nl-admin-security-note small{color:#5f7d99}
+.nl-admin-login-card{
+  border-color:#d2e5f4;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 24px 70px rgba(47,111,165,.16)
+}
+.nl-admin-login-card h2{color:#123b66}
+.nl-admin-login-card>p{color:#6f879e}
+.nl-admin-login-card input,
+.nl-admin-grant-form input,
+.nl-admin-grant-form select,
+.nl-admin-users-table select{
+  border-color:#c9deef;
+  background:#fbfdff;
+  color:#123b66
+}
+.nl-admin-login-card input:focus,
+.nl-admin-grant-form input:focus,
+.nl-admin-grant-form select:focus,
+.nl-admin-users-table select:focus{
+  outline:3px solid rgba(37,132,210,.13);
+  border-color:#72b1e3
+}
+.nl-admin-login-card button,
+.nl-admin-grant-form button,
+.nl-admin-section-head button,
+.nl-admin-user-actions button,
+.nl-admin-sidebar button{
+  border-color:#c6ddef;
+  background:#f9fcff;
+  color:#24577f
+}
+.nl-admin-login-card button.primary,
+.nl-admin-grant-form button.primary{
+  background:linear-gradient(180deg,#2384d7,#0d69bd);
+  border-color:#0d69bd;
+  color:#fff;
+  box-shadow:0 8px 18px rgba(13,105,189,.16)
+}
+.nl-admin-auth-links a{color:#0a67bc}
+.nl-admin-auth-footnote{border-top-color:#dceaf5;color:#71899f}
+.nl-admin-shell{background:#f5faff}
+.nl-admin-sidebar{
+  background:linear-gradient(180deg,#f3f9ff 0%,#eaf5ff 100%);
+  color:#17476f;
+  border-right:1px solid #cfe3f3;
+  box-shadow:6px 0 26px rgba(58,121,173,.06)
+}
+.nl-admin-sidebar-brand{border-bottom-color:#d5e7f4}
+.nl-admin-sidebar-brand strong{color:#123b66}
+.nl-admin-sidebar-brand small{color:#62819e}
+.nl-admin-sidebar nav a{color:#315f88}
+.nl-admin-sidebar nav a:hover,
+.nl-admin-sidebar nav a.active{
+  background:#dceeff;
+  color:#0a63b7
+}
+.nl-admin-sidebar>button{
+  border-color:#c8dff0;
+  background:#f9fcff;
+  color:#24577f
+}
+.nl-admin-main{
+  background:
+    radial-gradient(circle at 95% 0%,rgba(141,202,244,.10),transparent 26%),
+    #f7fbff
+}
+.nl-admin-header p{color:#6f869d}
+.nl-admin-identity{
+  border-color:#c8e1f4;
+  background:#f2f9ff;
+  box-shadow:0 8px 20px rgba(69,129,179,.07)
+}
+.nl-admin-identity span{color:#1673c9}
+.nl-admin-identity small{color:#71899d}
+.nl-admin-notice{
+  border-color:#d1e4f2;
+  background:#f9fcff;
+  color:#4f6d88
+}
+.nl-admin-summary-card,
+.nl-admin-tools a,
+.nl-admin-access{
+  border-color:#d6e6f2;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(62,121,169,.045)
+}
+.nl-admin-grant-form{border-color:#d8e8f3;background:#f5faff}
+.nl-admin-users-table th{color:#6b849b}
+.nl-admin-users-table th,
+.nl-admin-users-table td{border-bottom-color:#e5eff6}
+.nl-admin-access-note{background:#eef7ff;color:#5f7890}
+.nl-admin-empty{border-color:#cbdfee;color:#6c879f}
+@media(max-width:800px){
+  .nl-admin-auth-body{background:#f1f8ff}
+  .nl-admin-sidebar{
+    background:linear-gradient(180deg,#f3f9ff,#eaf5ff);
+    border-bottom:1px solid #cfe3f3
+  }
+}
+/* NURSELINK_ADMIN_LIGHT_BLUE_V538_END */
+/* NURSELINK_ADMIN_LOGIN_SINGLE_MEMBER_LINK_V541_START */
+.nl-admin-auth-links-single{
+  display:flex;
+  justify-content:center;
+  margin-top:14px;
+  text-align:center
+}
+.nl-admin-auth-links-single a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:32px;
+  padding:3px 8px;
+  color:#0a67bc;
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none
+}
+.nl-admin-auth-links-single a:hover{
+  text-decoration:underline
+}
+/* NURSELINK_ADMIN_LOGIN_SINGLE_MEMBER_LINK_V541_END */

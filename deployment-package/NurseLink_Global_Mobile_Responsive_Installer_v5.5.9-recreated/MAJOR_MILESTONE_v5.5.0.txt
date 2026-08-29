@@ -1,0 +1,124 @@
+NurseLink v5.5.0 — Applications Command Center Major Milestone
+================================================================
+
+PRIMARY ADMINISTRATOR URLS
+--------------------------
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/#applications
+
+MAJOR MILESTONE
+---------------
+v5.5.0 converts the Membership Applications workspace from a compact
+review list into a professional Administration Applications Command Center.
+
+The design follows the approved light-blue Operations Center direction and
+keeps administrators inside the single /admin/ portal.
+
+APPLICATIONS COMMAND CENTER
+---------------------------
+The Applications workspace now contains:
+
+1. Role-aware Administrator workbench
+2. Eight operational KPI cards
+3. Membership processing progress cards
+4. Professional filter toolbar
+5. Dense applications table
+6. Review-stage presentation
+7. Reviewer ownership presentation
+8. SLA / review-due visualization
+9. Client-side pagination
+10. Rows-per-page controls
+11. Slide-over application review drawer
+12. Current/latest employment organization summary
+13. Stable application reference code presentation
+14. Responsive desktop / tablet / mobile behavior
+
+APPLICATION TABLE
+-----------------
+Columns:
+- Applicant
+- Application ID
+- Organization / latest employer
+- Submitted date
+- Status
+- Review Stage
+- Assigned To
+- SLA
+- Actions
+
+APPLICATION FILTERS
+-------------------
+- Search
+- Status
+- Review Stage
+- Assigned reviewer state
+- Priority
+- Organization
+- Overdue only
+- Reset / refresh
+
+MEMBERSHIP ADMINISTRATION API ENHANCEMENT
+-----------------------------------------
+The existing governed Membership Administration queue now additionally
+presents:
+- application_reference
+- submitted_at
+- review_stage
+- latest_employment
+
+It also supports an optional organization filter and expands governed search
+to application reference and latest employer.
+
+No raw database administration is exposed.
+
+REVIEW STAGES
+-------------
+Submitted            -> Initial Intake
+Under Review          -> Document Review
+Needs Information     -> Applicant Follow-up
+Ready for Approval    -> Admin Review
+Approved              -> Completed
+Declined              -> Closed
+
+SLA
+---
+The interface derives review-time status from the existing review_due_at
+workflow field:
+- healthy
+- approaching due date
+- one day or less
+- overdue
+- no due date
+
+The UI does not invent deadlines where no due date is stored.
+
+PRIVACY
+-------
+The command table does not render:
+- credential numbers
+- raw audit before/after state
+- private support notes
+- home address
+- phone numbers
+
+Detailed application review remains inside the governed review drawer and
+existing role-protected APIs.
+
+CUMULATIVE PROTECTIONS RETAINED
+-------------------------------
+- separate Member and Administrator sign-ins
+- physical /admin/ delivery
+- server-confirmed Administrator session gate
+- no protected-dashboard flash
+- light-blue Administrator theme
+- one Member / Applicant link on Administrator login
+- Administrator Global Search
+- role-aware workbench
+- Support Case filters
+- membership processing progress
+- two-stage cleanup
+- Python 3.6 installer compatibility
+- Member login visual isolation

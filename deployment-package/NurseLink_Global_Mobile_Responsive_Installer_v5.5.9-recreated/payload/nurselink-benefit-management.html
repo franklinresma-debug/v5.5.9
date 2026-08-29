@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>NurseLink Benefit Management</title>
+<link rel="stylesheet" href="/nurselink-admin-portal.css"><link rel="stylesheet" href="/nurselink-benefit-management.css">
+</head>
+<body class="nl-admin-body"><div class="nl-admin-shell">
+<aside class="nl-admin-sidebar"><div class="nl-admin-sidebar-brand"><div class="nl-admin-brand-mark">NL</div><div><strong>NurseLink</strong><small>Administrator Portal</small></div></div>
+<nav><a href="/nurselink-admin-dashboard.html">Dashboard</a><a href="/nurselink-membership-command-center.html">Membership Command Center</a><a href="/nurselink-member-registry.html">Member Registry</a><a href="/nurselink-credential-compliance.html">Credential Compliance</a><a href="/nurselink-event-management.html">Events & Programs</a><a href="/nurselink-chapter-management.html">Chapters & Communities</a><a href="/nurselink-engagement-command-center.html">Engagement Command Center</a><a class="active" href="/nurselink-benefit-management.html">Benefits & Resources</a><a href="/nurselink-super-admin-test-center.html">Super Admin Test Center</a><a href="/admin">Review Center</a><a href="/nurselink-operations-center.html">Operations Center</a><a href="/nurselink-institutional-analytics.html">Institutional Analytics</a><a href="/dashboard">Member / Applicant Portal</a></nav>
+<button id="adminSignOut" type="button">Sign out of Admin Portal</button></aside>
+<main class="nl-admin-main bm-main">
+<header class="nl-admin-header"><div><span class="nl-admin-eyebrow">MEMBER SUPPORT</span><h1>Benefits & Resources Management</h1><p>Create member resources and manage NurseLink benefit requests without exposing unrelated private member data.</p></div><div id="adminIdentity" class="nl-admin-identity">Checking administrator session…</div></header>
+<div id="benefitAdminNotice" class="nl-admin-notice" hidden></div>
+<section id="benefitAdminSummary" class="bm-summary"><div class="nl-admin-loading">Loading benefit analytics…</div></section>
+<section class="bm-layout">
+<section class="bm-panel"><div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">CREATE / EDIT</span><h2>Benefit or Resource</h2></div></div>
+<form id="benefitForm" class="bm-form">
+<input id="benefitId" type="hidden">
+<label class="span2"><span>Title</span><input id="benefitTitle" maxlength="190" required></label>
+<label><span>Category</span><select id="benefitCategory" required><option value="resource">Resource</option><option value="wellness">Wellness</option><option value="education">Education</option><option value="career">Career</option><option value="financial">Financial</option><option value="community">Community</option><option value="partner_offer">Partner Offer</option><option value="other">Other</option></select></label>
+<label><span>Status</span><select id="benefitStatus"><option value="draft">Draft</option><option value="published">Published</option><option value="inactive">Inactive</option></select></label>
+<label class="span2"><span>Provider / source</span><input id="benefitProvider" maxlength="190"></label>
+<label class="span2"><span>Description</span><textarea id="benefitDescription" rows="4" maxlength="10000"></textarea></label>
+<label class="span2"><span>Eligibility note</span><textarea id="benefitEligibility" rows="3" maxlength="5000"></textarea></label>
+<label class="span2"><span>Terms & conditions</span><textarea id="benefitTerms" rows="3" maxlength="10000"></textarea></label>
+<label class="span2"><span>External resource URL</span><input id="benefitUrl" type="url" maxlength="512"></label>
+<label><span>Starts</span><input id="benefitStarts" type="datetime-local"></label>
+<label><span>Ends</span><input id="benefitEnds" type="datetime-local"></label>
+<label><span>Max active requests</span><input id="benefitMax" type="number" min="1"></label>
+<label class="bm-check"><input id="benefitRequiresRequest" type="checkbox"><span>NurseLink request required</span></label>
+<div class="bm-actions span2"><button id="resetBenefit" type="button">Clear</button><button class="primary" type="submit">Save Benefit</button></div>
+</form></section>
+<section class="bm-panel"><div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">DIRECTORY</span><h2>Benefits & Resources</h2></div><div class="bm-head-actions"><button id="generateBenefitReminders" type="button">Generate Reminders</button><button id="refreshBenefitsAdmin" type="button">Refresh</button></div></div><div id="benefitAdminList" class="bm-list"><div class="nl-admin-loading">Loading benefits…</div></div></section>
+</section>
+<section id="benefitRequestsPanel" class="bm-panel" hidden><div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">MEMBER REQUESTS</span><h2 id="benefitRequestsTitle">Benefit requests</h2></div><button id="closeBenefitRequests" type="button">Close</button></div><div id="benefitRequests" class="bm-requests"></div></section>
+<section class="bm-advisory"><strong>Governance boundary</strong><span>NurseLink benefit listings do not guarantee provider eligibility or imply endorsement. Administrators should record only information necessary to manage the benefit request.</span></section>
+</main></div><script src="/nurselink-benefit-management.js" defer></script></body></html>

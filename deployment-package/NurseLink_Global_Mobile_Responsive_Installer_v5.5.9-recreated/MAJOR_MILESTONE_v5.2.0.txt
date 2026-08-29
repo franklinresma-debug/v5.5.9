@@ -1,0 +1,131 @@
+NurseLink v5.2.0 Major Milestone — Portal Consolidation & Maintainability
+=========================================================================
+
+OBJECTIVE
+---------
+Reduce the number of primary entry points and duplicated membership/admin UI
+surfaces without discarding the working NurseLink backend, audit controls,
+membership rules, or advanced program modules.
+
+PRIMARY ENTRY POINTS
+--------------------
+MEMBERS / APPLICANTS
+Sign in:
+https://app.amsertech.com/login
+
+Portal:
+https://app.amsertech.com/dashboard
+
+ADMINISTRATORS / REVIEWERS / SUPER ADMINISTRATORS
+Sign in:
+https://app.amsertech.com/nurselink-admin-login.html
+
+Portal:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+There are now two primary sign-in experiences only: Member/Applicant and
+Administrator.
+
+CONSOLIDATED ADMINISTRATOR PORTAL
+---------------------------------
+The Administrator Portal contains one persistent navigation with:
+
+- Overview
+- Membership
+- Onboarding
+- Members
+- Roles & Access
+- Programs
+- Enterprise
+- Operations
+
+Core membership workflows now run directly inside the Administrator Portal:
+- pending membership review queue
+- reviewer assignment
+- priority and due-date management
+- membership review transitions
+- final approval / decline using existing role gates
+- post-approval onboarding management
+- member registry and membership standing
+- Reviewer / Administrator / Super Administrator access management
+
+Advanced program, enterprise and operations modules remain available behind
+the same Administrator session. They are no longer presented as separate
+sign-in destinations.
+
+CONSOLIDATED MEMBER PORTAL
+--------------------------
+The existing React /dashboard remains the Member Portal.
+
+For Approved NurseLink members, v5.2.0 adds Membership & Activation directly
+to the dashboard:
+- member number and standing
+- onboarding status
+- activation score
+- orientation completion
+- professional profile readiness
+- credential readiness
+- portfolio readiness
+- NurseLink digital member identity readiness
+
+The normal /login page also exposes the single Administrator sign-in choice,
+rather than directing staff through feature-specific links.
+
+BACKWARD COMPATIBILITY
+----------------------
+Existing bookmarks continue to work, but key membership URLs are now
+compatibility redirects:
+
+/nurselink-membership-command-center.html
+  -> /nurselink-admin-dashboard.html#membership
+
+/nurselink-membership-administration.html
+  -> /nurselink-admin-dashboard.html#membership
+
+/nurselink-membership-onboarding-admin.html
+  -> /nurselink-admin-dashboard.html#onboarding
+
+/nurselink-member-registry.html
+  -> /nurselink-admin-dashboard.html#members
+
+/nurselink-membership-welcome.html
+  -> /dashboard#membership
+
+This preserves old links while removing those pages as primary maintained
+workspaces.
+
+MAINTAINABILITY
+---------------
+New shared configuration:
+nurselink-portal-config.js
+
+New consolidated Administrator styles:
+nurselink-admin-consolidated.css
+
+The central configuration owns:
+- Member login / portal entry
+- Administrator login / portal entry
+- Administrator section definitions
+- compatibility redirects
+- advanced Administrator module grouping
+
+SECURITY
+--------
+Existing security boundaries remain authoritative:
+- separate elevated Administrator session
+- Reviewer vs Administrator vs Super Administrator capabilities
+- Ready-for-Approval gate
+- final approval/decline Administrator gate
+- Super Administrator-only privileged role management
+- self-revocation protection
+- last-Super-Administrator protection
+- membership lifecycle audit trail
+- onboarding privacy boundaries
+
+No government, PRC, regulatory or official CPD authority is claimed.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.2.0
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

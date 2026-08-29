@@ -1,0 +1,11 @@
+NurseLink v5.5.9 live cycle test
+1. Create a fresh verified potential-member account.
+2. Open /smart-registration.html?smartstep=1.
+3. Upload evidence and confirm extraction or graceful missing-field fallback.
+4. Complete required fields and submit: Draft -> Submitted.
+5. Confirm it appears in Administrator review only after submission.
+6. Reviewer inspects private evidence and requests Needs Information.
+7. Applicant updates and resubmits without duplicate membership.
+8. Progress to Ready for Approval and Approved using the existing Membership Command Center.
+9. Confirm member number/core activation/onboarding.
+10. Check Membership Cycle Health and reconcile only derived post-approval state if required.

@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Administration Operations Center</title>
+  <link rel="stylesheet" href="./admin-portal.css?nlv=552">
+  <link rel="stylesheet" href="./admin-consolidated.css?nlv=552">
+  <style id="nurselink-admin-session-gate-v541">
+    body.nl-admin-session-pending .nl-admin-shell{display:none!important}
+    body.nl-admin-session-ready #adminSessionGate{display:none!important}
+  </style>
+</head>
+<body class="nl-admin-body nl-admin-session-pending">
+<div id="adminSessionGate" class="nl541-session-gate" role="status" aria-live="polite">
+  <div class="nl541-session-gate-card">
+    <div class="nl541-session-gate-brand">NL</div>
+    <span>ADMINISTRATION OPERATIONS CENTER</span>
+    <h1>Verifying Administrator access</h1>
+    <p id="adminSessionGateMessage">Checking your privileged NurseLink session…</p>
+    <div class="nl541-session-spinner" aria-hidden="true"></div>
+  </div>
+</div>
+<div class="nl-admin-shell nl530-shell">
+  <aside class="nl-admin-sidebar nl530-sidebar">
+    <div class="nl-admin-sidebar-brand nl530-brand">
+      <div class="nl-admin-brand-mark">NL</div>
+      <div><strong>NurseLink</strong><small>Administration Operations Center</small></div>
+    </div>
+
+    <nav id="operationsMenu" class="nl530-menu" aria-label="Administration Operations Center">
+      <a href="#dashboard" data-tab="dashboard"><b>⌂</b><span>Dashboard</span></a>
+      <a href="#members" data-tab="members"><b>◎</b><span>Members</span></a>
+      <a href="#applications" data-tab="applications"><b>▤</b><span>Applications</span></a>
+      <a href="#verification" data-tab="verification"><b>✓</b><span>Verification</span></a>
+      <a href="#organizations" data-tab="organizations"><b>▦</b><span>Organizations</span></a>
+      <a href="#programs" data-tab="programs"><b>◇</b><span>Programs</span></a>
+      <a href="#employment" data-tab="employment"><b>↗</b><span>Employment &amp; Opportunities</span></a>
+      <a href="#training" data-tab="training"><b>▣</b><span>Training &amp; Events</span></a>
+      <a href="#communications" data-tab="communications"><b>✉</b><span>Communications</span></a>
+      <a href="#reports" data-tab="reports"><b>▥</b><span>Reports &amp; Analytics</span></a>
+      <a href="#support" data-tab="support"><b>?</b><span>Support Cases</span></a>
+      <a href="#audit" data-tab="audit"><b>≡</b><span>Audit Logs</span></a>
+      <a href="#health" data-tab="health"><b>●</b><span>System Health</span></a>
+      <a href="#settings" data-tab="settings"><b>⚙</b><span>Settings</span></a>
+    </nav>
+
+    <div class="nl530-sidebar-footer">
+      <a href="/dashboard">Member Portal</a>
+      <button id="adminSignOut" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="nl-admin-main nl530-main">
+    <header class="nl530-topbar">
+      <div>
+        <span class="nl-admin-eyebrow">ADMINISTRATION OPERATIONS CENTER</span>
+        <h1 id="operationsTitle">Dashboard</h1>
+        <p id="operationsSubtitle">Operational workflows across membership, workforce, programs and platform health.</p>
+      </div>
+      <div class="nl542-top-tools">
+        <div class="nl542-global-search">
+          <label for="adminGlobalSearch" class="sr-only">Search NurseLink administration</label>
+          <span class="nl542-search-icon" aria-hidden="true">⌕</span>
+          <input id="adminGlobalSearch" type="search" autocomplete="off" placeholder="Search members, applications, support cases…" aria-controls="adminGlobalSearchPanel">
+          <kbd>Ctrl K</kbd>
+        </div>
+        <div id="adminIdentity" class="nl-admin-identity">Checking Administrator session…</div>
+      </div>
+    </header>
+
+    <div id="operationsNotice" class="nl-admin-notice" hidden></div>
+    <div id="adminGlobalSearchPanel" class="nl542-search-panel" hidden>
+      <div class="nl542-search-panel-head">
+        <div><span>GLOBAL SEARCH</span><strong id="adminGlobalSearchTitle">Search NurseLink administration</strong></div>
+        <button id="adminGlobalSearchClose" type="button" aria-label="Close global search">×</button>
+      </div>
+      <div id="adminGlobalSearchResults" class="nl542-search-results">
+        <div class="nl530-empty">Type at least 2 characters to search.</div>
+      </div>
+    </div>
+
+    <section class="nl530-panel" data-panel="dashboard">
+      <section id="adminRoleWorkbench" class="nl542-role-workbench">
+        <div class="nl-admin-loading">Preparing your Administrator workbench…</div>
+      </section>
+      <div id="dashboardMetrics" class="nl530-metrics"><div class="nl-admin-loading">Loading operational metrics…</div></div>
+
+      <section class="nl540-progress-card">
+        <div class="nl530-card-head">
+          <div>
+            <span>MEMBERSHIP PHASE</span>
+            <h2>Membership Processing Progress</h2>
+            <p>A single operational view of application review, approval, standing and post-approval activation.</p>
+          </div>
+          <a class="nl540-inline-link" href="#applications">Open Applications</a>
+        </div>
+        <div id="membershipProgress" class="nl540-progress-grid"><div class="nl-admin-loading">Loading membership progress…</div></div>
+      </section>
+
+      <div class="nl540-grid-main">
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>ATTENTION</span><h2>Operational Queues</h2><p>Items that require Administrator or Reviewer action.</p></div></div>
+          <div id="dashboardQueues" class="nl530-list"><div class="nl-admin-loading">Loading queues…</div></div>
+        </section>
+
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>RECENT</span><h2>Administrative Activity</h2><p>Latest normalized audit events across NurseLink operations.</p></div><a class="nl540-inline-link" href="#audit">Audit Logs</a></div>
+          <div id="dashboardRecentActivity" class="nl530-list"><div class="nl-admin-loading">Loading recent activity…</div></div>
+        </section>
+      </div>
+
+      <div class="nl530-grid-2">
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>REMINDERS</span><h2>Administrator Follow-up</h2><p>Derived from current operational queues; no background job is required.</p></div></div>
+          <div id="dashboardReminders" class="nl530-list"><div class="nl-admin-loading">Loading reminders…</div></div>
+        </section>
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>PLATFORM</span><h2>Administration Model</h2></div></div>
+          <div class="nl530-principles">
+            <div><strong>Workflow-first</strong><span>Administrators act through NurseLink services and controlled APIs—not raw database records.</span></div>
+            <div><strong>Role-aware</strong><span>Reviewer, Administrator and Super Administrator boundaries remain enforced server-side.</span></div>
+            <div><strong>Auditable</strong><span>Membership, verification, support and communications actions leave an operational audit trail.</span></div>
+            <div><strong>Scalable</strong><span>Membership, workforce, organizations, programs and analytics share one administration shell.</span></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="members" hidden>
+      <div class="nl530-toolbar">
+        <div><label><span>Search</span><input id="memberSearch" placeholder="Name, email or member number"></label><label><span>Standing</span><select id="memberStanding"><option value="all">All</option><option value="active">Active</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option></select></label></div>
+        <div class="nl530-row-actions">
+          <button id="exportMembersCsv" type="button">Export CSV</button>
+          <button id="refreshMembers" type="button">Refresh</button>
+        </div>
+      </div>
+      <div id="membersArea" class="nl530-list"><div class="nl-admin-loading">Loading members…</div></div>
+      <section class="nl530-card nl530-module-spaced">
+        <div class="nl530-card-head"><div><span>POST-APPROVAL</span><h2>Member Onboarding</h2><p>Welcome, activation and follow-up remain part of the Members workflow.</p></div><button id="refreshMemberOnboarding" type="button">Refresh</button></div>
+        <div id="memberOnboardingArea" class="nl530-list"><div class="nl-admin-loading">Loading onboarding…</div></div>
+      </section>
+    </section>
+
+    <section class="nl530-panel nl550-applications-panel" data-panel="applications" hidden>
+      <section id="applicationRoleWorkbench" class="nl550-app-workbench"></section>
+
+      <section id="applicationCommandMetrics" class="nl550-kpi-strip">
+        <div class="nl-admin-loading">Loading application command metrics…</div>
+      </section>
+
+      <section class="nl550-progress-card">
+        <div class="nl550-section-heading">
+          <div>
+            <span>MEMBERSHIP PROCESSING PROGRESS</span>
+            <h2>Application Pipeline</h2>
+            <p>Live membership workflow counts from submission through approval and onboarding.</p>
+          </div>
+        </div>
+        <div id="applicationProgress" class="nl550-progress-grid">
+          <div class="nl-admin-loading">Loading membership processing progress…</div>
+        </div>
+      </section>
+
+      <section id="applicationWorkloadSection" class="nl552-workload-card">
+        <div class="nl552-workload-heading">
+          <div>
+            <span>REVIEWER WORKLOAD</span>
+            <h2>Queue Balance & Reviewer Capacity</h2>
+            <p>Operational queue pressure based on pending, urgent, high-priority and overdue reviews. This is a workload aid, not a staff performance rating.</p>
+          </div>
+          <div id="applicationWorkloadRecommendation" class="nl552-workload-recommendation"></div>
+        </div>
+        <div id="applicationWorkload" class="nl552-workload-grid">
+          <div class="nl-admin-loading">Loading reviewer workload…</div>
+        </div>
+      </section>
+
+      <section class="nl550-queue-card">
+        <div class="nl550-queue-heading">
+          <div>
+            <span>APPLICATIONS QUEUE</span>
+            <h2>Membership Applications</h2>
+            <p>Review, assign and progress membership applications through governed NurseLink workflows.</p>
+          </div>
+          <button id="viewAllApplications" class="nl550-primary-action" type="button">View All Applications</button>
+        </div>
+
+        <div class="nl552-triagebar">
+          <div class="nl552-quick-views" aria-label="Application quick views">
+            <span>Quick views</span>
+            <button type="button" data-application-quick="all" class="active">All Pending</button>
+            <button type="button" data-application-quick="ready">Ready for Approval</button>
+            <button type="button" data-application-quick="overdue">Overdue</button>
+            <button type="button" data-application-quick="unassigned">Unassigned</button>
+            <button type="button" data-application-quick="urgent">Urgent</button>
+            <button type="button" data-application-quick="mine">My Queue</button>
+          </div>
+
+          <div class="nl552-view-tools">
+            <label>
+              <span>Saved view</span>
+              <select id="applicationSavedView">
+                <option value="">Select saved view</option>
+              </select>
+            </label>
+            <button id="saveApplicationView" type="button">Save View</button>
+            <button id="deleteApplicationView" type="button">Delete</button>
+            <button id="exportApplications" class="nl552-export-button" type="button">Export CSV</button>
+          </div>
+        </div>
+
+        <div class="nl550-filterbar">
+          <label class="nl550-search-field">
+            <span class="sr-only">Search applications</span>
+            <b aria-hidden="true">⌕</b>
+            <input id="applicationSearch" type="search" placeholder="Search applications, applicant, email, employer…" autocomplete="off">
+          </label>
+
+          <label><span>Status</span><select id="applicationStatus">
+            <option value="">Pending only</option>
+            <option value="submitted">Submitted</option>
+            <option value="under_review">Under Review</option>
+            <option value="needs_information">Needs Information</option>
+            <option value="ready_for_approval">Ready for Approval</option>
+            <option value="approved">Approved</option>
+            <option value="declined">Declined</option>
+          </select></label>
+
+          <label><span>Review Stage</span><select id="applicationStage">
+            <option value="">All Stages</option>
+            <option value="initial_intake">Initial Intake</option>
+            <option value="document_review">Document Review</option>
+            <option value="applicant_follow_up">Applicant Follow-up</option>
+            <option value="admin_review">Admin Review</option>
+            <option value="completed">Completed</option>
+            <option value="closed">Closed</option>
+          </select></label>
+
+          <label><span>Assigned To</span><select id="applicationAssignment">
+            <option value="all">All Reviewers</option>
+            <option value="mine">Assigned to Me</option>
+            <option value="assigned">Assigned</option>
+            <option value="unassigned">Unassigned</option>
+          </select></label>
+
+          <label><span>Priority</span><select id="applicationFilterPriority">
+            <option value="">All Priorities</option>
+            <option value="urgent">Urgent</option>
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+          </select></label>
+
+          <label><span>Organization</span><input id="applicationOrganization" type="search" placeholder="All organizations"></label>
+
+          <label class="nl550-check-filter"><input id="applicationOverdue" type="checkbox"><span>Overdue only</span></label>
+
+          <button id="resetApplicationFilters" class="nl550-filter-action" type="button">Reset</button>
+          <button id="refreshApplications" class="nl550-filter-action" type="button">Refresh</button>
+        </div>
+
+        <div id="applicationsArea" class="nl550-table-wrap">
+          <div class="nl-admin-loading">Loading applications…</div>
+        </div>
+
+        <div class="nl550-table-footer">
+          <span id="applicationResultSummary">Loading application results…</span>
+          <div class="nl550-pagination-tools">
+            <label>Rows per page
+              <select id="applicationPageSize"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select>
+            </label>
+            <div id="applicationPagination" class="nl550-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <div id="applicationDetailDrawer" class="nl550-detail-drawer" hidden>
+        <button id="applicationDrawerBackdrop" class="nl550-detail-backdrop" type="button" aria-label="Close application detail"></button>
+        <aside class="nl550-detail-panel" role="dialog" aria-modal="true" aria-labelledby="applicationDetailTitle">
+          <div class="nl550-detail-toolbar">
+            <div><span>MEMBERSHIP APPLICATION</span><strong id="applicationDetailTitle">Application Review</strong></div>
+            <button id="closeApplicationDetail" type="button" aria-label="Close application detail">×</button>
+          </div>
+          <div id="applicationDetail" class="nl550-detail-body">
+            <div class="nl530-empty">Select an application to review.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="verification" hidden>
+      <div class="nl530-toolbar"><div><label><span>Status</span><select id="verificationStatus"><option value="">All</option><option value="pending">Pending</option><option value="unverified">Unverified</option><option value="verified">Verified</option><option value="expired">Expired</option></select></label></div><button id="refreshVerification" type="button">Refresh</button></div>
+      <div id="verificationArea" class="nl530-list"><div class="nl-admin-loading">Loading credential verification…</div></div>
+      <div id="verificationModules" class="nl530-module-grid nl530-module-spaced"></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="organizations" hidden>
+      <div class="nl530-grid-2">
+        <form id="organizationCreateForm" class="nl530-card nl530-form">
+          <div class="nl530-card-head"><div><span>ORGANIZATION</span><h2>Add Organization</h2></div></div>
+          <label><span>Name</span><input id="orgName" required maxlength="190"></label>
+          <label><span>Type</span><select id="orgType"><option value="hospital">Hospital</option><option value="health_system">Health System</option><option value="clinic">Clinic</option><option value="recruitment_agency">Recruitment Agency</option><option value="government">Government</option><option value="education">Education</option><option value="professional_organization">Professional Organization</option><option value="other">Other</option></select></label>
+          <label><span>Country</span><input id="orgCountry" value="Philippines" required></label>
+          <label><span>City</span><input id="orgCity"></label>
+          <label><span>Website</span><input id="orgWebsite" type="url" placeholder="https://"></label>
+          <label><span>Status</span><select id="orgStatus"><option value="pending">Pending</option><option value="verified">Verified</option><option value="suspended">Suspended</option></select></label>
+          <button type="submit">Create Organization</button>
+        </form>
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>PARTNERS</span><h2>Organization Registry</h2></div><button id="refreshOrganizations" type="button">Refresh</button></div>
+          <div id="organizationsArea" class="nl530-list"><div class="nl-admin-loading">Loading organizations…</div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="programs" hidden>
+      <div class="nl530-section-intro"><h2>Programs &amp; Member Services</h2><p>Manage communities, benefits, engagement and enterprise programs under the same Administrator session.</p></div>
+      <div id="programModules" class="nl530-module-grid"></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="employment" hidden>
+      <div class="nl530-grid-2">
+        <section class="nl530-card"><div class="nl530-card-head"><div><span>WORKFORCE</span><h2>Opportunities</h2></div><button id="refreshEmployment" type="button">Refresh</button></div><div id="opportunitiesArea" class="nl530-list"><div class="nl-admin-loading">Loading opportunities…</div></div></section>
+        <section class="nl530-card"><div class="nl530-card-head"><div><span>APPLICATIONS</span><h2>Job Applications</h2></div></div><div id="jobApplicationsArea" class="nl530-list"><div class="nl-admin-loading">Loading job applications…</div></div></section>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="training" hidden>
+      <div class="nl530-card"><div class="nl530-card-head"><div><span>LEARNING</span><h2>Training &amp; Events</h2></div><button id="refreshTraining" type="button">Refresh</button></div><div id="trainingArea" class="nl530-list"><div class="nl-admin-loading">Loading training and events…</div></div></div>
+      <div id="trainingModules" class="nl530-module-grid nl530-module-spaced"></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="communications" hidden>
+      <div class="nl530-grid-2">
+        <form id="communicationForm" class="nl530-card nl530-form">
+          <div class="nl530-card-head"><div><span>MEMBER COMMUNICATION</span><h2>Send Notification</h2><p>Send a controlled in-app NurseLink notification to one resolved member.</p></div></div>
+          <label><span>Email, member number or user ID</span><input id="communicationMember" required></label>
+          <label><span>Severity</span><select id="communicationSeverity"><option value="info">Information</option><option value="success">Success</option><option value="warning">Warning</option><option value="error">Important</option></select></label>
+          <label><span>Title</span><input id="communicationTitle" maxlength="190" required></label>
+          <label><span>Message</span><textarea id="communicationMessage" maxlength="5000" rows="6" required></textarea></label>
+          <label><span>Optional NurseLink action path</span><input id="communicationAction" placeholder="/notifications"></label>
+          <button type="submit">Send Member Notification</button>
+        </form>
+        <section class="nl530-card"><div class="nl530-card-head"><div><span>GOVERNANCE</span><h2>Communication Controls</h2></div></div><div class="nl530-principles"><div><strong>Targeted by default</strong><span>This release sends to one resolved NurseLink member; it does not create an unrestricted bulk-mail system.</span></div><div><strong>In-app first</strong><span>Messages use the existing NurseLink Notification Center.</span></div><div><strong>Audited</strong><span>Sender, target and message metadata are audited; the message body is excluded from the audit record.</span></div></div></section>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="reports" hidden>
+      <div class="nl530-card"><div class="nl530-card-head"><div><span>ANALYTICS</span><h2>Institutional Snapshot</h2></div><button id="refreshReports" type="button">Refresh</button></div><div id="reportsArea"><div class="nl-admin-loading">Loading analytics…</div></div></div>
+      <div id="reportModules" class="nl530-module-grid nl530-module-spaced"></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="support" hidden>
+      <div class="nl530-grid-support">
+        <form id="supportCreateForm" class="nl530-card nl530-form">
+          <div class="nl530-card-head"><div><span>CASE MANAGEMENT</span><h2>Open Support Case</h2></div></div>
+          <label><span>Member identifier (optional)</span><input id="supportMember"></label>
+          <label><span>Category</span><select id="supportCategory"><option value="membership">Membership</option><option value="verification">Verification</option><option value="employment">Employment</option><option value="training">Training</option><option value="technical">Technical</option><option value="organization">Organization</option><option value="communications">Communications</option><option value="other">Other</option></select></label>
+          <label><span>Priority</span><select id="supportPriority"><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option><option value="low">Low</option></select></label>
+          <label><span>Subject</span><input id="supportSubject" required maxlength="190"></label>
+          <label><span>Description</span><textarea id="supportDescription" rows="5" maxlength="10000"></textarea></label>
+          <label><span>Internal note</span><textarea id="supportInternalNote" rows="3" maxlength="10000"></textarea></label>
+          <button type="submit">Create Support Case</button>
+        </form>
+        <section class="nl530-card">
+          <div class="nl530-card-head"><div><span>QUEUE</span><h2>Support Cases</h2><p>Search, ownership and priority filters for day-to-day case handling.</p></div><button id="refreshSupport" type="button">Refresh</button></div>
+          <div class="nl542-support-toolbar">
+            <label><span>Search</span><input id="supportSearch" type="search" placeholder="Case #, member, email, subject"></label>
+            <label><span>Assignment</span><select id="supportAssignment"><option value="all">All</option><option value="mine">Mine</option><option value="unassigned">Unassigned</option><option value="assigned">Assigned</option></select></label>
+            <label><span>Status</span><select id="supportStatus"><option value="">All open / closed</option><option value="open">Open</option><option value="in_progress">In Progress</option><option value="waiting_member">Waiting Member</option><option value="waiting_internal">Waiting Internal</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select></label>
+            <label><span>Priority</span><select id="supportFilterPriority"><option value="">All</option><option value="urgent">Urgent</option><option value="high">High</option><option value="normal">Normal</option><option value="low">Low</option></select></label>
+          </div>
+          <div id="supportArea" class="nl530-list"><div class="nl-admin-loading">Loading cases…</div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="nl530-panel" data-panel="audit" hidden>
+      <div class="nl530-card"><div class="nl530-card-head"><div><span>ACCOUNTABILITY</span><h2>Administrative Audit Log</h2><p>Normalized operational events; raw before/after database state is intentionally not displayed here.</p></div><button id="refreshAudit" type="button">Refresh</button></div><div id="auditArea" class="nl530-list"><div class="nl-admin-loading">Loading audit log…</div></div></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="health" hidden>
+      <div id="healthArea" class="nl530-metrics"><div class="nl-admin-loading">Loading system health…</div></div>
+      <div id="healthModules" class="nl530-module-grid nl530-module-spaced"></div>
+    </section>
+
+    <section class="nl530-panel" data-panel="settings" hidden>
+      <div class="nl530-grid-2">
+        <section class="nl530-card"><div class="nl530-card-head"><div><span>PORTAL POLICY</span><h2>Administration Settings</h2></div></div><div id="settingsArea"><div class="nl-admin-loading">Loading settings…</div></div></section>
+        <section class="nl530-card"><div class="nl530-card-head"><div><span>ACCESS</span><h2>Privileged Staff</h2></div><button id="refreshSettings" type="button">Refresh</button></div><form id="grantAccessForm" class="nl530-inline-form" hidden><input id="grantEmail" type="email" placeholder="User email" required><select id="grantRole"><option value="reviewer">Reviewer</option><option value="admin">Administrator</option><option value="super_admin">Super Administrator</option></select><button type="submit">Grant / Change</button></form><div id="settingsAccessArea" class="nl530-list"></div></section>
+      </div>
+    </section>
+
+    <footer class="nl530-footer"><strong>Administration principle:</strong><span>Manage NurseLink through operational workflows and governed services—not direct raw database editing.</span></footer>
+  </main>
+</div>
+<script src="./portal-config.js?nlv=552"></script>
+<script src="./dashboard.js?nlv=552" defer></script>
+
+<!-- v5.2.0 historical panel markers retained for cumulative regression validation:
+data-panel="membership"
+data-panel="onboarding"
+data-panel="members"
+data-panel="access"
+data-panel="programs"
+data-panel="enterprise"
+data-panel="operations"
+-->
+</body>
+</html>

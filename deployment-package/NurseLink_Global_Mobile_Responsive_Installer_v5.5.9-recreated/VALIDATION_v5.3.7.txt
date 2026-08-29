@@ -1,0 +1,30 @@
+NurseLink v5.3.7 Validation
+==============================
+
+[PASS] install.sh Bash syntax
+[PASS] rollback.sh Bash syntax
+[PASS] cleanup_old_installers.sh Bash syntax
+[PASS] repair_admin_portal.sh Bash syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] 71 embedded Python heredocs/guards parse under Python 3.6
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] physical Administrator payload is complete
+[PASS] direct live admin/ deployment
+[PASS] source public/admin persistence deployment
+[PASS] existing dist/admin repair
+[PASS] explicit ^admin(?:/.*)?$ Apache END bypass
+[PASS] live root/public/dist htaccess repair logic
+[PASS] actual HTTPS /admin/ validation
+[PASS] actual HTTPS /admin/login.html validation
+[PASS] Member React #root shell rejection
+[PASS] live Administrator dashboard.js validation
+[PASS] live Administrator login.js validation
+[PASS] focused repair executes before cumulative copied-frontend validation
+[PASS] v5.3.7 direct-delivery regression guard executes
+[PASS] v5.3.6 physical-directory protections retained
+[PASS] v5.3.5 exact routing preflight retained
+[PASS] v5.3.4 centralized launcher protections retained
+[PASS] deterministic two-stage cleanup simulation
+[PASS] current v5.3.7 installer retained
+[PASS] protected hosting/source/production paths retained
+[PASS] no artisan tinker dependency

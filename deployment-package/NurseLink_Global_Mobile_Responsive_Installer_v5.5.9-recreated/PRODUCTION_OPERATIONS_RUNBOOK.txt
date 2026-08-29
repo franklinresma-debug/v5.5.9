@@ -1,0 +1,37 @@
+NurseLink v3.3.0 Production Operations Runbook
+================================================
+
+Run:
+php nurselink_ops_check.php   /home/frankresma/nurselink-api   /home/frankresma/app.amsertech.com   /home/frankresma/nurselink-backups
+
+PASS = healthy
+WARN = review recommended
+FAIL = release blocker
+
+Review Laravel logs at:
+  /home/frankresma/nurselink-api/storage/logs
+
+Confirm current backups under:
+  /home/frankresma/nurselink-backups
+
+Restore drills must be performed on staging or a backup copy, never over the
+live production system merely to test restoration.
+
+v3.3.0 intentionally does not enforce a strict Content-Security-Policy.
+Test CSP Report-Only on staging before any future enforcement.
+
+Production security-header baseline:
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  X-Permitted-Cross-Domain-Policies: none
+  Permissions-Policy: camera=(), microphone=(), geolocation=(),
+                      payment=(), usb=(), browsing-topics=()
+
+Before sign-off:
+- no critical Production Readiness blocker
+- manual UAT complete
+- no request storm
+- recent backup present
+- no unresolved recurring 5xx errors
+- reviewer/member/partner role tests complete

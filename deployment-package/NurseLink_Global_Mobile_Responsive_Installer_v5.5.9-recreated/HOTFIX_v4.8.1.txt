@@ -1,0 +1,29 @@
+NurseLink v5.0.5 — Namecheap Python Cleanup Compatibility Hotfix
+=================================================================
+
+ROOT CAUSE
+----------
+Namecheap's server Python is older than Python 3.7. The v4.8.0 cleanup helper
+contained:
+
+    from __future__ import annotations
+
+That future feature is unavailable on the host, so the installer stopped safely
+during PRE-INSTALL cleanup before application changes.
+
+FIX
+---
+v5.0.5:
+- removes the unsupported future import
+- removes evaluated modern built-in generic type annotations from the cleanup helper
+- keeps cleanup compatible with Python 3.6+
+- compiles post_install_cleanup.py on the actual server before cleanup begins
+- validates that unsupported cleanup syntax has not returned
+- preserves two-stage cleanup and protected production/source/hosting paths
+- remains fully cumulative with all v4.8.0 functionality
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.0.5
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

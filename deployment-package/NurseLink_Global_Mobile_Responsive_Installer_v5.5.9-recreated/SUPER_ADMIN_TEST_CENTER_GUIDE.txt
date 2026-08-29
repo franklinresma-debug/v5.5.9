@@ -1,0 +1,43 @@
+NurseLink v5.5.2 Super Administrator Test Center
+=================================================
+
+1. Sign in to:
+   https://app.amsertech.com/nurselink-admin-login.html
+
+2. Open:
+   https://app.amsertech.com/nurselink-super-admin-test-center.html
+
+3. Start Test Mode.
+   Recommended initial duration: 60 minutes.
+
+4. The main NurseLink application will show:
+   SUPER ADMINISTRATOR TEST MODE ACTIVE
+
+5. Test applicant functions normally.
+
+6. Use member test links to exercise member-only services while Test Mode is
+   active. The server marks member-gate responses with:
+   X-NurseLink-Test-Mode: super-admin
+
+7. Use Membership Command Center to test actual membership approval.
+
+8. For your own Super Administrator application, the command center still
+   requires the self-action confirmation checkbox and records:
+   membership.self_action_super_admin
+
+9. Use Run Safe Tests to check non-destructive API availability.
+
+10. End Test Mode when testing is finished. It also expires automatically.
+
+IMPORTANT
+---------
+Test Mode is access simulation, not membership simulation.
+
+The real nurselink_memberships status remains authoritative for:
+- member number issuance
+- Digital Member ID identity
+- public membership verification
+- approved-member registry
+- real membership standing
+
+The Partner Portal maintains its own tenant authorization and is not bypassed.

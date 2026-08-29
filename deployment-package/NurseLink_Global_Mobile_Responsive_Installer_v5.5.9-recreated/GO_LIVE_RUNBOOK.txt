@@ -1,0 +1,49 @@
+NurseLink v5.5.2 Go-Live Runbook
+===============================
+
+1. Install v5.5.2 only after v3.4.2 Release Candidate returned:
+   READY FOR FINAL SIGN-OFF
+
+2. Run the final production gate:
+
+   php nurselink_production_gate.php      /home/frankresma/nurselink-api      /home/frankresma/app.amsertech.com      /home/frankresma/nurselink-backups
+
+3. Expected ideal result:
+   PRODUCTION READY
+
+4. If:
+   PRODUCTION READY WITH WARNINGS
+   review every warning before final sign-off.
+
+5. If:
+   PRODUCTION BLOCKED
+   do not approve go-live.
+
+6. Verify manually:
+   https://app.amsertech.com/
+   https://app.amsertech.com/login
+   https://app.amsertech.com/nurselink-production-readiness.html
+   https://app.amsertech.com/nurselink-member-verify.html
+   https://app.amsertech.com/nurselink-partner-portal.html
+   https://app.amsertech.com/nurselink-institutional-analytics.html
+
+7. Sign in as:
+   - applicant
+   - approved member
+   - reviewer/admin
+   - partner user
+
+8. Review:
+   /home/frankresma/nurselink-api/storage/logs
+
+9. Retain:
+   - current installer folder for rollback
+   - latest backup folder
+   - FINAL_PRODUCTION_SIGNOFF.txt
+   - UAT/RC reports
+
+10. Rollback:
+    Use rollback.sh from the retained v5.5.2 installer directory if a
+    production regression is confirmed immediately after deployment.
+
+11. Do not delete backups during go-live validation.

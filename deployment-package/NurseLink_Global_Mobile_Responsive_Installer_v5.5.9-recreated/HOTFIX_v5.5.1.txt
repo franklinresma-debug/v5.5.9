@@ -1,0 +1,50 @@
+NurseLink v5.5.1 — Namecheap Administrator HTTPS Delivery Hotfix
+====================================================================
+
+ROOT CAUSE
+----------
+The v5.5.0 focused Administrator delivery verifier used:
+
+curl ... | grep -q ...
+
+for the live /admin/dashboard.js and /admin/login.js checks.
+
+The installer runs with strict pipe handling. When grep -q found its match,
+grep exited immediately and closed the pipe. On Namecheap/LiteSpeed, curl
+then reported:
+
+curl: (23) Failed writing body
+
+That non-zero curl status caused the successful JavaScript response to be
+misclassified as invalid.
+
+FIX
+---
+v5.5.1 no longer streams Administrator JavaScript through grep.
+
+It now:
+1. downloads /admin/dashboard.js to a temporary file;
+2. downloads /admin/login.js to a temporary file;
+3. verifies both files are non-empty;
+4. validates the expected Administrator API markers from the downloaded files;
+5. validates that dashboard.js includes the v5.5.x Applications Command Center;
+6. only reports repair SUCCESS after all HTTPS checks pass.
+
+The temporary validation files are:
+- /tmp/nurselink-admin-dashboard-v551.js
+- /tmp/nurselink-admin-login-v551.js
+
+CUMULATIVE
+----------
+v5.5.1 retains the complete v5.5.0 Applications Command Center and all earlier
+Administrator, membership, enterprise, member and operational features.
+
+FULL INSTALL RECOMMENDED
+------------------------
+Because the v5.5.0 installation stopped before SUCCESS, rerun the full
+cumulative v5.5.1 installer so API, frontend, deployment and final verification
+are completed as one transaction.
+
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.5.1
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh

@@ -1,0 +1,59 @@
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#10204d;font-family:Inter,Arial,sans-serif}.bf-top{min-height:68px;display:flex;align-items:center;justify-content:space-between;padding:10px clamp(16px,4vw,56px);background:#fff;border-bottom:1px solid #dce5ee}.bf-brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}.bf-brand>span{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#0b72d5;color:#fff;font-weight:900}.bf-brand strong,.bf-brand small{display:block}.bf-brand small{color:#7b899a;font-size:10px}.bf-top nav{display:flex;gap:7px;flex-wrap:wrap}.bf-top nav a,.bf-hero button{min-height:38px;display:inline-flex;align-items:center;padding:0 10px;border:1px solid #cbd7e4;border-radius:8px;background:#fff;color:#173253;text-decoration:none;font:inherit;font-size:9px;font-weight:800}.bf-shell{max-width:1200px;margin:auto;padding:24px clamp(14px,3vw,30px) 44px}.bf-hero{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px;border-radius:18px;background:linear-gradient(135deg,#10204d,#235c83);color:#fff}.bf-hero span{font-size:8px;font-weight:900;letter-spacing:.07em}.bf-hero h1{margin:6px 0;font-size:28px}.bf-hero p{max-width:760px;margin:0;color:#d7e5f4;font-size:11px;line-height:1.5}.bf-notice{margin-top:12px;padding:10px 12px;border-radius:9px;background:#eaf4ff;color:#0b5da8;font-size:10px}.bf-notice[data-tone=error]{background:#fff0f1;color:#962e39}.bf-filters{display:grid;grid-template-columns:1.5fr .7fr .7fr;gap:9px;margin-top:14px;padding:12px;border:1px solid #dce5ee;border-radius:12px;background:#fff}.bf-filters span{display:block;margin-bottom:5px;color:#68788c;font-size:8px;font-weight:850}.bf-filters input,.bf-filters select{width:100%;min-height:40px;padding:8px 9px;border:1px solid #ccd8e4;border-radius:8px;background:#fff;color:#173253;font:inherit;font-size:10px}.bf-list{display:grid;gap:10px;margin-top:14px}.bf-card{display:grid;grid-template-columns:1fr 230px;gap:16px;padding:17px;border:1px solid #dce5ee;border-radius:14px;background:#fff}.bf-main>span{color:#0b72d5;font-size:8px;font-weight:900;text-transform:uppercase}.bf-main h2{margin:5px 0 7px;font-size:18px}.bf-main>p{margin:0;color:#66768a;font-size:10px;line-height:1.55}.bf-meta{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:10px;color:#718096;font-size:9px}.bf-meta strong{color:#203b5b}.bf-main details{margin-top:10px;color:#69788b;font-size:9px}.bf-main details p{line-height:1.5}.bf-side{display:flex;align-items:stretch;flex-direction:column;gap:7px;padding-left:14px;border-left:1px solid #e5ebf1}.bf-side button,.bf-side a{min-height:38px;display:flex;align-items:center;justify-content:center;padding:0 9px;border:1px solid #0b72d5;border-radius:8px;background:#0b72d5;color:#fff;text-decoration:none;font:inherit;font-size:9px;font-weight:850;cursor:pointer}.bf-side button:disabled{background:#9eabb8;border-color:#9eabb8;cursor:not-allowed}.bf-side small{color:#748398;font-size:8px;line-height:1.45}.bf-status{align-self:flex-start;padding:5px 7px;border-radius:999px;background:#edf1f5;color:#617083;font-size:8px;font-weight:900;text-transform:uppercase}.bf-status[data-status=approved],.bf-status[data-status=fulfilled]{background:#e2f6eb;color:#176c4c}.bf-open{font-size:9px;font-weight:800;color:#526b84}.bf-loading,.bf-empty{padding:28px;border:1px dashed #cfd9e4;border-radius:12px;text-align:center;color:#7c8999;font-size:10px}.bf-advisory{display:flex;gap:9px;margin-top:14px;padding:12px;border:1px solid #e0e6ec;border-radius:10px;background:#f1f4f7;color:#69778a;font-size:9px;line-height:1.5}.bf-advisory strong{color:#263e59;white-space:nowrap}@media(max-width:760px){.bf-top,.bf-hero,.bf-advisory{align-items:flex-start;flex-direction:column}.bf-filters{grid-template-columns:1fr}.bf-card{grid-template-columns:1fr}.bf-side{padding:12px 0 0;border-left:0;border-top:1px solid #e5ebf1}.bf-advisory strong{white-space:normal}}
+.bf-summary{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-top:14px
+}
+.bf-stat{
+  padding:12px;
+  border:1px solid #dce5ee;
+  border-radius:10px;
+  background:#fff
+}
+.bf-stat span,.bf-stat strong,.bf-stat small{
+  display:block
+}
+.bf-stat span{
+  color:#748399;
+  font-size:7px;
+  font-weight:850
+}
+.bf-stat strong{
+  margin-top:4px;
+  font-size:19px
+}
+.bf-stat small{
+  margin-top:3px;
+  color:#8290a1;
+  font-size:8px
+}
+.bf-availability{
+  padding:3px 6px;
+  border-radius:999px;
+  background:#edf1f5
+}
+.bf-availability[data-state=ending_7]{
+  background:#fff0f1;
+  color:#962e39
+}
+.bf-availability[data-state=ending_30]{
+  background:#fff8df;
+  color:#856100
+}
+.bf-save{
+  background:#fff!important;
+  border-color:#c9d6e2!important;
+  color:#244461!important
+}
+@media(max-width:900px){
+  .bf-summary{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+@media(max-width:520px){
+  .bf-summary{
+    grid-template-columns:1fr
+  }
+}
+/* nurselink-benefit-intelligence-v483 */

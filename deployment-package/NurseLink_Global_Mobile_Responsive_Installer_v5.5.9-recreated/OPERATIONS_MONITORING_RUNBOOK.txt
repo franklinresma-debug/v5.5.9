@@ -1,0 +1,47 @@
+NurseLink v5.5.2 Operations Monitoring Runbook
+=============================================
+
+Operations Center:
+https://app.amsertech.com/nurselink-operations-center.html
+
+Access:
+Authorized NurseLink reviewer/admin accounts only.
+
+Monitored signals:
+- database response latency
+- filesystem free capacity
+- latest NurseLink backup age
+- recent Laravel ERROR/CRITICAL/ALERT/EMERGENCY count
+- security-header policy presence
+- operational incidents
+- deployment history
+- health snapshot history
+
+Manual snapshot:
+php nurselink_ops_snapshot.php   /home/frankresma/nurselink-api   manual
+
+Optional hourly cPanel cron example:
+0 * * * * /usr/local/bin/php   /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.5.2/nurselink_ops_snapshot.php   /home/frankresma/nurselink-api cron   >/dev/null 2>&1
+
+Confirm the correct PHP CLI path in cPanel before creating a cron job.
+The v5.5.2 installer does NOT create or alter cPanel cron jobs.
+
+Thresholds:
+- disk warning below 15%
+- critical disk below 5%
+- backup warning after 168 hours
+- database latency warning above 500 ms
+- recent log warning when error-level entries are detected in the inspected tail
+
+Incident register:
+Record operational information only.
+Do not enter member contact details, credential values, uploaded documents,
+medical information, or other personal data.
+
+Deployment history:
+v5.5.2 records a deployment entry only after live deployment verification
+succeeds.
+
+Rollback:
+Use rollback.sh from the retained v5.5.2 installer directory when an immediate
+verified production regression requires rollback.

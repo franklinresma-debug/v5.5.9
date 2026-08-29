@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Chapters & Communities</title>
+  <link rel="stylesheet" href="/nurselink-chapters.css">
+</head>
+<body>
+<header class="ch-top"><a class="ch-brand" href="/dashboard"><span>NL</span><div><strong>NurseLink</strong><small>Chapters & Communities</small></div></a><nav><a href="/nurselink-engagement.html">Engagement</a><a href="/nurselink-events.html">Events</a><a href="/dashboard">Dashboard</a></nav></header>
+<main class="ch-shell">
+  <section class="ch-hero"><div><span>MEMBER COMMUNITY</span><h1>Chapters & Communities</h1><p>Connect with regional, overseas, institutional and professional-interest communities within NurseLink.</p></div><button id="refreshChapters" type="button">Refresh</button></section>
+  <div id="chapterNotice" class="ch-notice" hidden></div>
+  <section class="ch-filters">
+    <label><span>Search</span><input id="chapterSearch" type="search" placeholder="Chapter, region, city, country"></label>
+    <label><span>Type</span><select id="chapterType"><option value="all">All types</option><option value="regional">Regional</option><option value="overseas">Overseas</option><option value="professional_interest">Professional Interest</option><option value="institutional">Institutional</option><option value="other">Other</option></select></label>
+    <label><span>View</span><select id="chapterScope"><option value="all">All active chapters</option><option value="mine">My chapters</option><option value="available">Available to join</option></select></label>
+  </section>
+  <section id="chapterList" class="ch-list"><div class="ch-loading">Loading chapters…</div></section>
+  <section class="ch-advisory"><strong>Membership structure</strong><span>Chapter membership is separate from NurseLink organization membership. Chapter officer and coordinator roles are assigned by authorized administrators.</span></section>
+</main>
+<script src="/nurselink-chapters.js" defer></script>
+</body>
+</html>

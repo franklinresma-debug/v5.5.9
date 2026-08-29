@@ -1,0 +1,28 @@
+NurseLink v5.0.5 Major Milestone
+================================
+
+MEMBER ENGAGEMENT & BENEFITS
+
+Completed cumulative foundations:
+- Events & Programs
+- Chapters & Communities
+- Mentoring & Peer Support
+- Member Engagement Hub
+- Member Benefits & Resources
+- Benefit request workflow
+- Saved Benefits
+- Benefit availability intelligence
+- Benefit analytics
+- De-duplicated saved-benefit reminders
+- Member engagement timeline
+- Administrator 30-day aggregate activity analytics
+
+PRIVACY
+-------
+Member timeline excludes private messages, private notes and private contacts.
+Administrator trend data is aggregate-only.
+
+INSTALLER RELIABILITY
+---------------------
+Namecheap Python 3.6 compatibility remains enforced before cleanup.
+All embedded Python installer guards are validated against Python 3.6 grammar.

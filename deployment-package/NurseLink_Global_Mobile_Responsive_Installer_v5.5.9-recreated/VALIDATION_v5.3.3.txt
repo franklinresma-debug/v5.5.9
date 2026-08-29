@@ -1,0 +1,37 @@
+NurseLink v5.3.3 Hotfix Validation
+====================================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] all 64 embedded installer Python guards parse under Python 3.6
+[PASS] Administrator SPA rescue JavaScript regression
+[PASS] Administrator Login JavaScript
+[PASS] Administration Operations Center JavaScript
+[PASS] Portal Configuration JavaScript
+[PASS] Member mobile runtime regression
+[PASS] inline v5.3.3 pre-React bootstrap JavaScript syntax
+[PASS] Administration Operations Center PHP regression
+[PASS] Production Readiness / Operations / Smoke PHP regression
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] root Vite index source backup
+[PASS] root Vite index rollback
+[PASS] pre-React bootstrap inserted immediately after <head>
+[PASS] bootstrap precedes first type=module script
+[PASS] built dist/index.html contains bootstrap
+[PASS] built bootstrap precedes React/Vite module
+[PASS] live index.html contains bootstrap
+[PASS] HTTP Administrator SPA response must contain bootstrap marker
+[PASS] Administrator Login SPA fallback bootstrap validation
+[PASS] Administrator Dashboard SPA fallback bootstrap validation
+[PASS] Administrator direct-standalone delivery remains supported
+[PASS] v5.3.2 secondary SPA rescue retained
+[PASS] v5.3.1 Apache route hardening retained
+[PASS] v5.3.0 Operations Center regression retained
+[PASS] v5.2 portal consolidation regression retained
+[PASS] v5.1.x membership/session regressions retained
+[PASS] v5.3.3 final regression guard executes
+[PASS] deterministic two-stage cleanup simulation
+[PASS] current v5.3.3 installer retained
+[PASS] protected production/source/hosting paths retained
+[PASS] no artisan tinker dependency

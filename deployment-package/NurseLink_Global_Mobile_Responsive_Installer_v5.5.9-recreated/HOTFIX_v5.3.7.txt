@@ -1,0 +1,70 @@
+NurseLink v5.3.7 — Direct Administrator Delivery Hotfix
+==========================================================
+
+DIAGNOSTIC EVIDENCE
+-------------------
+The server diagnostic showed:
+
+/home/frankresma/app.amsertech.com/admin
+  DOES NOT EXIST
+
+/home/frankresma/nurselink-web/dist/admin
+  DOES NOT EXIST
+
+The live request to:
+https://app.amsertech.com/admin/
+
+returned the 463-byte Member Vite index containing:
+- /assets/index-DfH1ttxH.js
+- <div id="root"></div>
+
+Therefore the physical Administrator portal was never deployed. This is not a
+browser-cache problem and not a login-form problem.
+
+V5.3.7 FIX
+----------
+A focused repair script is now included:
+
+repair_admin_portal.sh
+
+It runs EARLY in the cumulative installer, before the inherited frontend
+validators can stop the release.
+
+The repair:
+1. Backs up any existing live/public/dist Administrator directory.
+2. Copies payload/admin directly to:
+   /home/frankresma/app.amsertech.com/admin
+3. Copies the same portal to:
+   /home/frankresma/nurselink-web/public/admin
+4. Copies it to dist/admin when dist already exists.
+5. Inserts an explicit root rewrite bypass:
+   RewriteRule ^admin(?:/.*)?$ - [END]
+6. Applies that bypass to live/public/dist .htaccess locations when present.
+7. Verifies all live Administrator files byte-for-byte against the payload.
+8. Requests the actual HTTPS /admin/ and /admin/login.html URLs.
+9. Rejects SUCCESS if /admin/ still contains the Member React #root shell.
+10. Verifies live Administrator login/dashboard JavaScript endpoints.
+
+PRIMARY ADMINISTRATOR URLS
+--------------------------
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+FOCUSED REPAIR
+--------------
+The direct repair can also be run by itself:
+
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.7
+chmod +x repair_admin_portal.sh
+./repair_admin_portal.sh
+
+The normal cumulative install.sh automatically runs the same repair early.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.7
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh

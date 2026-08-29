@@ -1,0 +1,80 @@
+NurseLink v5.5.2 Career Intelligence Guide
+==========================================
+
+Career Intelligence URL:
+https://app.amsertech.com/nurselink-career-intelligence.html
+
+Who can access it:
+Approved NurseLink members only.
+
+What the overall score measures:
+- Career Profile: 20 points
+- Credentials: 20 points
+- Professional Experience: 20 points
+- Learning & Development: 15 points
+- Mobility Readiness: 15 points
+- Market Alignment: 10 points
+Total: 100 points
+
+Readiness bands:
+85–100  Career Ready
+70–84   Strong Foundation
+50–69   Developing
+0–49    Build Your Foundation
+
+Credential expiry forecast:
+NurseLink reviews expiry dates recorded in the Credential Registry and surfaces:
+- expired
+- expiring within 90 days
+- renewal window within 180 days
+
+Always confirm renewal rules directly with the issuing/licensing authority.
+
+Learning recommendations:
+Recommendations are inferred from:
+- stated specialty interests
+- recorded employment specialties
+- completed NurseLink learning records
+
+They are developmental suggestions only. They are NOT official CPD requirements.
+
+Mobility readiness:
+If overseas work is selected as a career preference, NurseLink reviews:
+- target destinations
+- current verified credentials recorded in NurseLink
+- overseas employment history
+- availability date
+- relocation preference
+
+This is NOT visa, immigration, deployment, foreign-license or recruitment clearance.
+
+Explainable job fit:
+Career Intelligence reuses NurseLink’s explainable job matching model:
+Role                25
+Specialty           20
+Target location     15
+Work setting        10
+Employment type     10
+License/profile     10
+Experience           5
+Overseas preference  5
+
+Job-match scores organize opportunities only. They do not guarantee hiring,
+interviews, licensing, visa approval or employment.
+
+Readiness history:
+Members may save a Career Intelligence snapshot. Up to 24 recent snapshots
+are displayed so a nurse can see how their profile develops over time.
+
+Privacy:
+Career Intelligence is member-only. It uses the member's own NurseLink data.
+No Career Intelligence endpoint is public.
+
+Recommended workflow:
+1. Complete Career Matching Profile.
+2. Keep Credential Registry current.
+3. Keep Employment / OFW history current.
+4. Record completed professional learning.
+5. Review Career Intelligence priority actions.
+6. Save a snapshot after meaningful profile updates.
+7. Review job-fit explanations before applying.

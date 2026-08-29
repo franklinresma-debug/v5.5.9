@@ -1,0 +1,41 @@
+NurseLink v5.2.0 Portal Consolidation Guide
+============================================
+
+MEMBER / APPLICANT
+------------------
+Login:
+https://app.amsertech.com/login
+
+Portal:
+https://app.amsertech.com/dashboard
+
+ADMINISTRATOR / REVIEWER / SUPER ADMINISTRATOR
+-----------------------------------------------
+Login:
+https://app.amsertech.com/nurselink-admin-login.html
+
+Portal:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+ADMINISTRATOR PORTAL SECTIONS
+-----------------------------
+Overview
+Membership
+Onboarding
+Members
+Roles & Access
+Programs
+Enterprise
+Operations
+
+MAINTENANCE RULE GOING FORWARD
+------------------------------
+1. Do not create a new login page for a feature.
+2. Member functions belong under /dashboard whenever practical.
+3. Privileged staff functions belong under the Administrator Portal.
+4. Reviewer/Admin/Super Admin are roles inside one Administrator Portal.
+5. A new standalone page should be an advanced module only when consolidation
+   would make the primary portal materially harder to maintain.
+6. Old URLs should redirect into a portal section when they are superseded.
+7. Authentication, role checks, navigation, and portal entry points should be
+   centralized rather than duplicated.

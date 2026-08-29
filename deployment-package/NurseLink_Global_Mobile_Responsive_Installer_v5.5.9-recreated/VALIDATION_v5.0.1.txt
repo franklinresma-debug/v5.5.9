@@ -1,0 +1,37 @@
+NurseLink v5.0.5 Validation
+=============================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] Namecheap cleanup helper Python 3.6 grammar
+[PASS] all embedded installer Python blocks parse under Python 3.6
+[PASS] Enterprise Goals migration PHP
+[PASS] Enterprise Goals controller PHP
+[PASS] Enterprise member goals JavaScript
+[PASS] Enterprise administrator goals JavaScript
+[PASS] Enterprise partner goal analytics JavaScript
+[PASS] 35 cumulative API route blocks with marker parity
+[PASS] adaptive users.id progress table
+[PASS] Approved + Active member goal gate
+[PASS] member own-cohort assignment restriction
+[PASS] member goal visibility restriction
+[PASS] secure member progress writes
+[PASS] Administrator Portal elevated-session authorization
+[PASS] Administrator-only detailed progress
+[PASS] verified partner own-organization scope
+[PASS] partner Members + Partners visibility restriction
+[PASS] partner aggregate-only privacy
+[PASS] partner member-note exclusion
+[PASS] small-cohort privacy threshold
+[PASS] self-reported-progress governance disclaimer
+[PASS] audit coverage
+[PASS] Super Administrator Test Center coverage
+[PASS] Production Readiness coverage
+[PASS] Operations coverage
+[PASS] standalone page smoke coverage
+[PASS] no-store cache coverage
+[PASS] targeted source-public rollback
+[PASS] deterministic old-installer cleanup simulation
+[PASS] current installer retention
+[PASS] protected hosting/source paths retained
+[PASS] no artisan tinker dependency

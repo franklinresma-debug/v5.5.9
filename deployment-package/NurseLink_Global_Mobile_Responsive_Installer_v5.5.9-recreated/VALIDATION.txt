@@ -1,0 +1,146 @@
+NurseLink v5.5.2 Validation
+============================
+
+[PASS] Bash syntax install.sh
+[PASS] Bash syntax rollback.sh
+[PASS] Bash syntax cleanup_old_installers.sh
+[PASS] Bash syntax repair_admin_portal.sh
+[PASS] JavaScript syntax admin/dashboard.js
+[PASS] JavaScript syntax admin/login.js
+[PASS] JavaScript syntax admin/portal-config.js
+[PASS] JavaScript syntax nurselink-admin-dashboard.js
+[PASS] JavaScript syntax nurselink-admin-login.js
+[PASS] JavaScript syntax nurselink-portal-config.js
+[PASS] JavaScript syntax nurselink-mobile.js
+[PASS] PHP syntax MembershipAdministrationController.php
+[PASS] PHP syntax AdministrationOperationsCenterController.php
+[PASS] PHP syntax AdminMembershipCommandController.php
+[PASS] PHP syntax MembershipOnboardingController.php
+[PASS] PHP syntax ProductionReadinessController.php
+[PASS] PHP syntax nurselink_ops_check.php
+[PASS] PHP syntax nurselink_smoke_test.php
+[PASS] Cleanup helper Python 3.6 grammar
+[PASS] Python 3.6 install:PYPYCOMPAT481
+[PASS] Python 3.6 install:PYPRE473
+[PASS] Python 3.6 install:PY
+[PASS] Python 3.6 install:PYGOALPRIV502
+[PASS] Python 3.6 install:PYENROLLPRIV503
+[PASS] Python 3.6 install:PYOUTCOMEPRIV504
+[PASS] Python 3.6 install:PYSUPPORTPRIV505
+[PASS] Python 3.6 install:PYMEMADMIN510
+[PASS] Python 3.6 install:PYONBOARD511
+[PASS] Python 3.6 install:PYADMINOPS530
+[PASS] Python 3.6 install:PYINDEXBOOT533
+[PASS] Python 3.6 install:PYADMINUI530
+[PASS] Python 3.6 install:PYCENTRALLAUNCH534
+[PASS] Python 3.6 install:PYNOTIF425
+[PASS] Python 3.6 install:PYUAT422
+[PASS] Python 3.6 install:PYREL341
+[PASS] Python 3.6 install:PYCONSIST341
+[PASS] Python 3.6 install:PYSTANDALONE535
+[PASS] Python 3.6 install:PYCACHE325
+[PASS] Python 3.6 install:PYSEC330
+[PASS] Python 3.6 install:PYVALIDATOR327
+[PASS] Python 3.6 install:PYINDEXORDER533
+[PASS] Python 3.6 install:PYADMINLOGINSOURCE541
+[PASS] Python 3.6 install:PYDISTINDEX533
+[PASS] Python 3.6 install:PYSPA
+[PASS] Python 3.6 install:PYORDER
+[PASS] Python 3.6 install:PYV324
+[PASS] Python 3.6 install:PYHT
+[PASS] Python 3.6 install:PYLIVECACHE325
+[PASS] Python 3.6 install:PYSECINSTALL330
+[PASS] Python 3.6 install:PYSMOKE342
+[PASS] Python 3.6 install:PYROLE427
+[PASS] Python 3.6 install:PYPORTAL451
+[PASS] Python 3.6 install:PYNOTIF424
+[PASS] Python 3.6 install:PYNOTIF426
+[PASS] Python 3.6 install:PYDASH431
+[PASS] Python 3.6 install:PYAUTH423
+[PASS] Python 3.6 install:PYTEST453
+[PASS] Python 3.6 install:PYLIFE460
+[PASS] Python 3.6 install:PYRENEW470
+[PASS] Python 3.6 install:PYEVENT473
+[PASS] Python 3.6 install:PYCHAPTER473
+[PASS] Python 3.6 install:PYMENTOR473
+[PASS] Python 3.6 install:PYCLEAN473
+[PASS] Python 3.6 install:PYENGAGE480
+[PASS] Python 3.6 install:PYBENEFIT482
+[PASS] Python 3.6 install:PYBENEFIT483
+[PASS] Python 3.6 install:PYBENEFIT484
+[PASS] Python 3.6 install:PYENGAGE490
+[PASS] Python 3.6 install:PYENTERPRISE500
+[PASS] Python 3.6 install:PYENTERPRISE501
+[PASS] Python 3.6 install:PYHOTFIX502
+[PASS] Python 3.6 install:PYENROLL503
+[PASS] Python 3.6 install:PYOUTCOME504
+[PASS] Python 3.6 install:PYSUPPORT505
+[PASS] Python 3.6 install:PYMEMADMINREG510
+[PASS] Python 3.6 install:PYONBOARDREG511
+[PASS] Python 3.6 install:PYREDIRECT512
+[PASS] Python 3.6 install:PYPORTAL520
+[PASS] Python 3.6 install:PYOPS530
+[PASS] Python 3.6 install:PYADMINROUTE531
+[PASS] Python 3.6 install:PYADMINSPARESCUE532
+[PASS] Python 3.6 install:PYADMININDEX533
+[PASS] Python 3.6 install:PYLAUNCHERREG534
+[PASS] Python 3.6 install:PYSTANDALONEREG535
+[PASS] Python 3.6 install:PYPHYSICALADMIN536
+[PASS] Python 3.6 install:PYADMINDELIVERY537
+[PASS] Python 3.6 install:PYADMINLIGHTBLUE538
+[PASS] Python 3.6 install:PYADMINMILESTONE540
+[PASS] Python 3.6 install:PYADMINSESSIONGATE541
+[PASS] Python 3.6 install:PYADMINLOGIN541
+[PASS] Python 3.6 install:PYADMINWORKBENCH542
+[PASS] Python 3.6 install:PYAPPLICATIONSCOMMAND550
+[PASS] Python 3.6 install:PYNAMECHEAPCURL551
+[PASS] Python 3.6 install:PYAPPLICATIONTRIAGE552
+[PASS] Python 3.6 repair:PYADMINHT537
+[PASS] Python 3.6 repair:PYADMINLOGINLINK541
+[PASS] Python 3.6 repair:PYADMINHTTPS551
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] Controlled export route appears once in Membership Administration block
+[PASS] All direct copied frontend source grep validations pass
+[PASS] Physical triage UI
+[PASS] Physical triage workflow
+[PASS] Physical triage styling
+[PASS] Physical cumulative Applications styling retained
+[PASS] Legacy triage UI
+[PASS] Legacy triage workflow
+[PASS] Legacy triage styling
+[PASS] Legacy cumulative Applications styling retained
+[PASS] API reviewer workload metrics
+[PASS] API controlled export implementation
+[PASS] API stage filtering
+[PASS] CSV formula-injection protection
+[PASS] Workload governance copy
+[PASS] Saved views persist filters only
+[PASS] Saved views capped at 12
+[PASS] Application query params include stage
+[PASS] Export reuses governed filter params
+[PASS] Reviewer workload fetch role-gated
+[PASS] Export UI role-gated
+[PASS] Administrator dashboard cache key 552
+[PASS] Administrator login cache key 552
+[PASS] Release 5.5.2
+[PASS] Cumulative backup prefix v552
+[PASS] Focused repair backup prefix v552
+[PASS] Focused repair cache key 552
+[PASS] Focused repair static validation
+[PASS] Final v552 regression guard
+[PASS] Inherited v551 curl guard retained
+[PASS] Inherited v550 Applications guard retained
+[PASS] Namecheap curl error-23 protection retained
+[PASS] Execute PYAPPLICATIONTRIAGE552
+[PASS] Member login isolation payload/nurselink-mobile.js
+[PASS] Member login isolation payload/nurselink-mobile.css
+[PASS] Member login isolation payload/nurselink-nurse-montage.png
+[PASS] No artisan tinker
+[PASS] Two-stage cleanup ordering
+[PASS] Cleanup simulation executes
+[PASS] Old matching installers removed
+[PASS] Current v5.5.2 retained
+[PASS] Protected hosting paths retained
+
+[PASS] 82 embedded Python guards/heredocs parse under Python 3.6
+[PASS] 41 cumulative API route blocks with marker parity

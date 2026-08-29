@@ -1,0 +1,56 @@
+.bm-main{max-width:calc(100vw - 240px)}.bm-layout{display:grid;grid-template-columns:minmax(350px,.85fr) minmax(430px,1.15fr);gap:12px}.bm-panel{padding:16px;border:1px solid #dce5ee;border-radius:14px;background:#fff}.bm-form{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}.bm-form .span2{grid-column:1/-1}.bm-form label>span{display:block;margin-bottom:4px;color:#68788c;font-size:8px;font-weight:850}.bm-form input,.bm-form select,.bm-form textarea{width:100%;padding:8px 9px;border:1px solid #ccd8e4;border-radius:8px;background:#fff;color:#173253;font:inherit;font-size:9px}.bm-form input,.bm-form select{min-height:38px}.bm-check{display:flex;align-items:center;gap:7px}.bm-check input{width:auto;min-height:auto}.bm-check span{margin:0!important}.bm-actions{display:flex;justify-content:flex-end;gap:7px}.bm-actions button,.nl-admin-section-head>button{min-height:37px;padding:0 10px;border:1px solid #cad7e4;border-radius:8px;background:#fff;color:#173253;font:inherit;font-size:9px;font-weight:800;cursor:pointer}.bm-actions .primary{background:#0b72d5;border-color:#0b72d5;color:#fff}.bm-list{display:grid;gap:8px;margin-top:11px}.bm-item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:11px;border:1px solid #e2e8ef;border-radius:10px;background:#fafcfe}.bm-item>div:first-child span,.bm-item strong,.bm-item small{display:block}.bm-item>div:first-child span{color:#0b72d5;font-size:7px;font-weight:900;text-transform:uppercase}.bm-item strong{margin-top:3px;font-size:10px}.bm-item small{margin-top:3px;color:#7d8b9d;font-size:8px}.bm-counts{text-align:right}.bm-counts span{display:inline-flex;padding:4px 6px;border-radius:999px;background:#edf1f5;color:#607083;font-size:7px;font-weight:900}.bm-counts span[data-status=published]{background:#e2f6eb;color:#176c4c}.bm-item-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:6px}.bm-item-actions button{min-height:31px;padding:0 8px;border:1px solid #c7d6e4;border-radius:7px;background:#fff;color:#1b3b5c;font:inherit;font-size:8px;font-weight:800;cursor:pointer}.bm-requests{display:grid;gap:8px;margin-top:10px}.bm-request{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border:1px solid #e1e7ed;border-radius:9px;background:#fafcfe}.bm-request strong,.bm-request small{display:block}.bm-request strong{font-size:9px}.bm-request small{margin-top:3px;color:#7c899a;font-size:8px;line-height:1.45}.bm-request-controls{display:grid;grid-template-columns:120px minmax(180px,1fr) auto;gap:6px;min-width:420px}.bm-request-controls select,.bm-request-controls input,.bm-request-controls button{min-height:34px;padding:0 8px;border:1px solid #cbd7e3;border-radius:7px;background:#fff;color:#173253;font:inherit;font-size:8px}.bm-request-controls button{background:#0b72d5;border-color:#0b72d5;color:#fff;font-weight:850;cursor:pointer}.bm-advisory{display:flex;gap:9px;margin-top:12px;padding:12px;border:1px solid #e0e6ec;border-radius:10px;background:#f4f6f8;color:#68768a;font-size:9px;line-height:1.5}.bm-advisory strong{color:#223b57;white-space:nowrap}@media(max-width:1100px){.bm-main{max-width:none}.bm-layout{grid-template-columns:1fr}}@media(max-width:760px){.bm-form{grid-template-columns:1fr}.bm-form .span2{grid-column:auto}.bm-request{align-items:flex-start;flex-direction:column}.bm-request-controls{grid-template-columns:1fr;min-width:0;width:100%}.bm-advisory{display:block}.bm-advisory strong{display:block;margin-bottom:4px;white-space:normal}}
+.bm-summary{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-bottom:12px
+}
+.bm-stat{
+  padding:12px;
+  border:1px solid #dce5ee;
+  border-radius:10px;
+  background:#fff
+}
+.bm-stat span,.bm-stat strong,.bm-stat small{
+  display:block
+}
+.bm-stat span{
+  color:#748399;
+  font-size:7px;
+  font-weight:850
+}
+.bm-stat strong{
+  margin-top:4px;
+  font-size:19px
+}
+.bm-stat small{
+  margin-top:3px;
+  color:#8190a2;
+  font-size:8px
+}
+@media(max-width:1050px){
+  .bm-summary{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+@media(max-width:560px){
+  .bm-summary{
+    grid-template-columns:1fr
+  }
+}
+/* nurselink-benefit-admin-intelligence-v483 */
+
+.bm-head-actions{display:flex;gap:6px;flex-wrap:wrap}
+.bm-head-actions button{
+  min-height:37px;
+  padding:0 10px;
+  border:1px solid #cad7e4;
+  border-radius:8px;
+  background:#fff;
+  color:#173253;
+  font:inherit;
+  font-size:9px;
+  font-weight:800;
+  cursor:pointer
+}
+/* nurselink-benefit-reminders-v484 */

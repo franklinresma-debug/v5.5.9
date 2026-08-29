@@ -1,0 +1,42 @@
+NurseLink v5.3.4 Hotfix Validation
+====================================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] 66 embedded installer Python guards parse under Python 3.6
+[PASS] Administration Operations Center JavaScript
+[PASS] Administrator Login JavaScript
+[PASS] centralized Portal Configuration JavaScript
+[PASS] Administrator SPA rescue JavaScript regression
+[PASS] NurseLink mobile runtime JavaScript regression
+[PASS] Administration Operations Center PHP regression
+[PASS] Production Readiness / Operations / Smoke PHP regression
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] every direct copied public/src grep validation executes against payload
+[PASS] Credential Compliance centralized launcher
+[PASS] Credential Compliance Verification-domain ownership
+[PASS] Event Management centralized launcher
+[PASS] Benefits centralized launcher
+[PASS] Engagement centralized launcher
+[PASS] Enterprise Command Center centralized launcher
+[PASS] Enterprise Goals centralized launcher
+[PASS] Enterprise Enrollment centralized launcher
+[PASS] Enterprise Outcomes centralized launcher
+[PASS] Enterprise Support centralized launcher
+[PASS] Super Admin Test Center centralized launcher
+[PASS] Membership legacy routes centralized
+[PASS] no stale direct-dashboard launcher assertions
+[PASS] consolidated Members Export CSV control
+[PASS] consolidated Members CSV implementation
+[PASS] v5.3.4 centralized launcher validator executes
+[PASS] v5.3.4 final launcher regression guard executes
+[PASS] v5.3.3 pre-React index bootstrap retained
+[PASS] v5.3.2 SPA rescue retained
+[PASS] v5.3.1 routing hardening retained
+[PASS] v5.3.0 Operations Center regression retained
+[PASS] two-stage cleanup ordering retained
+[PASS] deterministic cleanup simulation
+[PASS] current v5.3.4 installer retained
+[PASS] protected hosting/source/production paths retained
+[PASS] no artisan tinker dependency

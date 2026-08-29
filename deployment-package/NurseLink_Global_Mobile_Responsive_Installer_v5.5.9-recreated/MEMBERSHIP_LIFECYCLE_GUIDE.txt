@@ -1,0 +1,109 @@
+NurseLink v5.2.0 CONSOLIDATION NOTE
+-----------------------------------
+The primary Administrator UI is now:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+The legacy URL described in this guide remains available only as a
+compatibility redirect into the appropriate consolidated portal section.
+
+NurseLink v5.2.0 Membership Lifecycle Guide
+=============================================
+
+CONCEPT
+-------
+Application approval is permanent historical information.
+
+Professional membership standing determines current NurseLink member-service
+access.
+
+Approved membership is therefore not overwritten when a member is suspended
+or becomes inactive.
+
+STANDINGS
+---------
+ACTIVE
+Member is in current active NurseLink professional standing.
+Member-only services are available.
+
+SUSPENDED
+Membership remains approved and member number remains permanent.
+Member-only services are temporarily unavailable.
+Digital ID and public verification show Suspended.
+
+INACTIVE
+Membership remains approved and member number remains permanent.
+Member-only services are unavailable.
+Digital ID and public verification show Inactive.
+
+ADMINISTRATION
+--------------
+Use:
+https://app.amsertech.com/nurselink-member-registry.html
+
+Select an approved member and use Membership Lifecycle Management.
+
+Every change requires a written reason.
+
+ADMINISTRATOR
+-------------
+Can manage other members' standing.
+Cannot manage their own standing.
+
+SUPER ADMINISTRATOR
+-------------------
+Can manage standing.
+Own-membership standing changes require explicit self-action confirmation and
+are written to the audit trail.
+
+AUDIT
+-----
+Standard:
+membership.standing_changed
+
+Super Administrator self-action:
+membership.standing_self_action_super_admin
+
+NOTIFICATIONS
+-------------
+Members receive notifications when standing changes to:
+- Active
+- Suspended
+- Inactive
+
+ACCESS ENFORCEMENT
+------------------
+EnsureApprovedNurseLinkMember now requires:
+  membership.status = approved
+  AND
+  membership.standing = active
+
+Super Administrator Test Mode remains a short-lived QA exception requiring
+both Super Administrator authority and separate Administrator Portal elevation.
+
+PUBLIC PROFILE
+--------------
+The public professional profile and its photo endpoint require Active standing.
+
+PUBLIC VERIFICATION
+-------------------
+Verification continues to recognize the permanent approved membership record,
+but reports the current standing. It does not expose internal standing reasons.
+
+DATA RETENTION
+--------------
+Suspension or inactivity does not delete:
+- member number
+- approval date
+- professional profile records
+- credentials
+- employment history
+- learning records
+- portfolio records
+- audit history
+
+REACTIVATION
+------------
+Suspended → Active
+Inactive → Active
+
+Reactivation requires a reason and is audited.

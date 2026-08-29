@@ -1,0 +1,49 @@
+NurseLink v5.3.6 — Physical Administrator Directory Hotfix
+=============================================================
+
+The live host continues to rewrite root-level Administrator .html URLs into the
+Member React SPA. v5.3.6 stops depending on those URLs as the primary
+Administrator delivery mechanism.
+
+NEW PRIMARY ADMINISTRATOR URLS
+------------------------------
+Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+ARCHITECTURE
+------------
+The Administrator portal is now a real physical /admin/ directory containing
+its own:
+- index.html
+- login.html
+- dashboard.js
+- login.js
+- portal-config.js
+- admin-portal.css
+- admin-consolidated.css
+- .htaccess
+
+The directory is copied to Vite public before build, verified in dist/admin,
+and force-deployed to the live document root after normal deployment.
+
+This means the Administrator portal is present whether the app subdomain is
+serving the Vite dist tree or the normal live deployment tree.
+
+The Member login page now links directly to /admin/login.html.
+
+INSTALLER VALIDATION
+--------------------
+SUCCESS requires the live HTTP response for /admin/ to contain the
+Administration Operations Center and not the Member React #root shell.
+
+The live /admin/login.js, /admin/dashboard.js and /admin/portal-config.js are
+also verified directly.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.6
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

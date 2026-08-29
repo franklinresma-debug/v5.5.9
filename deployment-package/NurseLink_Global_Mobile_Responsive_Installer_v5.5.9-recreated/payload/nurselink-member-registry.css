@@ -1,0 +1,113 @@
+.nl-member-registry-main{max-width:calc(100vw - 240px)}.nl-member-registry-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-bottom:14px}.nl-member-registry-summary-card{padding:14px;border:1px solid #dce5ef;border-radius:12px;background:#fff}.nl-member-registry-summary-card span,.nl-member-registry-summary-card strong{display:block}.nl-member-registry-summary-card span{color:#758399;font-size:9px;font-weight:800}.nl-member-registry-summary-card strong{margin-top:6px;font-size:23px}.nl-member-registry-workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,.8fr);gap:12px;align-items:start}.nl-member-registry-list,.nl-member-registry-detail{min-width:0;padding:17px;border:1px solid #dce5ef;border-radius:14px;background:#fff}.nl-member-registry-detail{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto}.nl-member-registry-head-actions{display:flex;gap:7px}.nl-member-registry-filters{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:9px;margin-top:14px;padding:12px;border:1px solid #e2e8ef;border-radius:11px;background:#f8fbfe}.nl-member-registry-filters label span{display:block;margin-bottom:5px;color:#5f6f84;font-size:9px;font-weight:800}.nl-member-registry-filters input,.nl-member-registry-filters select{width:100%;min-height:42px;padding:8px 10px;border:1px solid #cedae6;border-radius:8px;background:#fff;color:#10204d;font:inherit;font-size:11px}.nl-member-registry-area{margin-top:12px}.nl-member-registry-table-wrap{overflow:auto}.nl-member-registry-table{width:100%;border-collapse:collapse;font-size:10px}.nl-member-registry-table th,.nl-member-registry-table td{padding:10px 8px;border-bottom:1px solid #edf1f5;text-align:left;vertical-align:middle}.nl-member-registry-table th{color:#78869a;font-size:8px;text-transform:uppercase;letter-spacing:.06em}.nl-member-registry-table td strong,.nl-member-registry-table td small{display:block}.nl-member-registry-table td small{margin-top:3px;color:#8491a3}.nl-member-view-button{min-height:34px;padding:0 10px;border:1px solid #a8cef2;border-radius:8px;background:#eef7ff;color:#0b66b8;font-weight:850;cursor:pointer}.nl-member-public-state{display:inline-flex;padding:5px 7px;border-radius:999px;font-size:8px;font-weight:900}.nl-member-public-state[data-enabled="1"]{background:#e7f8ef;color:#176d4e}.nl-member-public-state[data-enabled="0"]{background:#f1f3f6;color:#758095}.nl-member-registry-empty{padding:40px 20px;text-align:center;color:#78869a}.nl-member-registry-empty strong,.nl-member-registry-empty small{display:block}.nl-member-registry-empty small{margin-top:5px;line-height:1.5}.nl-member-registry-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #e7edf3}.nl-member-registry-detail-head h2{margin:4px 0;font-size:20px}.nl-member-registry-detail-head p{margin:0;color:#7b899c;font-size:11px}.nl-member-approved-badge{display:inline-flex;padding:6px 8px;border-radius:999px;background:#daf5e7;color:#126743;font-size:8px;font-weight:900}.nl-member-registry-id-grid,.nl-member-registry-signal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:11px}.nl-member-registry-signal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nl-member-registry-id-grid>div,.nl-member-registry-signal-grid>div{padding:10px;border:1px solid #e0e7ef;border-radius:9px;background:#fafcfe}.nl-member-registry-id-grid span,.nl-member-registry-id-grid strong,.nl-member-registry-signal-grid span,.nl-member-registry-signal-grid strong{display:block}.nl-member-registry-id-grid span,.nl-member-registry-signal-grid span{color:#7a889a;font-size:8px;font-weight:750}.nl-member-registry-id-grid strong,.nl-member-registry-signal-grid strong{margin-top:4px;font-size:10px;overflow-wrap:anywhere}.nl-member-registry-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.nl-member-registry-actions a,.nl-member-registry-actions button,.nl-member-registry-head-actions button{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;border:1px solid #cbd8e5;border-radius:8px;background:#fff;color:#173152;text-decoration:none;font:inherit;font-size:10px;font-weight:800;cursor:pointer}.nl-member-registry-actions a:first-child{background:#0b72d5;border-color:#0b72d5;color:#fff}.nl-member-registry-section{margin-top:13px;padding-top:13px;border-top:1px solid #e7edf3}.nl-member-registry-section-head{display:flex;align-items:center;justify-content:space-between}.nl-member-registry-section-head h3{margin:0;font-size:12px}.nl-member-registry-section-head span{color:#7b899c;font-size:8px}.nl-member-registry-section-list{display:grid;gap:7px;margin-top:8px}.nl-member-registry-record{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:9px;border:1px solid #e3e9ef;border-radius:9px;background:#fafcfe}.nl-member-registry-record strong,.nl-member-registry-record small{display:block}.nl-member-registry-record strong{font-size:9px}.nl-member-registry-record small{margin-top:3px;color:#8190a2;font-size:8px}.nl-member-registry-record>span{flex:0 0 auto;color:#5d6e82;font-size:8px;font-weight:800}.nl-member-registry-record>span[data-status=verified]{color:#16704d}.nl-member-registry-record>span[data-status=expired]{color:#a34732}.nl-member-registry-none{padding:10px;border:1px dashed #d8e1e9;border-radius:8px;color:#8491a3;text-align:center;font-size:9px}.nl-member-registry-detail-privacy,.nl-member-registry-privacy{margin-top:12px;padding:11px;border:1px solid #e1e6ec;border-radius:9px;background:#f5f7fa;color:#65748a;font-size:9px;line-height:1.5}.nl-member-registry-privacy{display:flex;gap:9px}.nl-member-registry-privacy strong{color:#213954;white-space:nowrap}@media(max-width:1250px){.nl-member-registry-summary{grid-template-columns:repeat(3,1fr)}.nl-member-registry-workspace{grid-template-columns:1fr}.nl-member-registry-detail{position:relative;top:auto;max-height:none}.nl-member-registry-main{max-width:none}}@media(max-width:800px){.nl-member-registry-summary{grid-template-columns:repeat(2,1fr)}.nl-member-registry-filters,.nl-member-registry-id-grid,.nl-member-registry-signal-grid{grid-template-columns:1fr}.nl-member-registry-privacy{display:block}.nl-member-registry-privacy strong{display:block;margin-bottom:4px}}
+/* NurseLink v5.5.2 — Membership Lifecycle Management */
+.nl-member-registry-summary{
+  grid-template-columns:repeat(4,minmax(0,1fr))
+}
+.nl-member-registry-filters{
+  grid-template-columns:1.4fr .7fr .7fr .7fr
+}
+.nl-member-standing{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:0 7px;
+  border-radius:999px;
+  font-size:8px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.03em
+}
+.nl-member-standing[data-standing=active]{
+  background:#def6e9;
+  color:#146b48
+}
+.nl-member-standing[data-standing=suspended]{
+  background:#fff0ca;
+  color:#7d5a00
+}
+.nl-member-standing[data-standing=inactive]{
+  background:#eef1f4;
+  color:#5e6977
+}
+.nl-member-registry-status-stack{
+  display:flex;
+  align-items:flex-end;
+  flex-direction:column;
+  gap:6px
+}
+.nl-member-lifecycle-panel{
+  margin-top:13px;
+  padding-top:13px;
+  border-top:1px solid #e7edf3
+}
+.nl-member-lifecycle-panel form{
+  display:grid;
+  gap:9px;
+  margin-top:9px
+}
+.nl-member-lifecycle-panel label>span{
+  display:block;
+  margin-bottom:5px;
+  color:#617186;
+  font-size:8px;
+  font-weight:800
+}
+.nl-member-lifecycle-panel select,
+.nl-member-lifecycle-panel textarea{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #cfdbe6;
+  border-radius:8px;
+  background:#fff;
+  color:#10204d;
+  font:inherit;
+  font-size:10px
+}
+.nl-member-lifecycle-self-confirm{
+  display:flex!important;
+  gap:8px;
+  padding:9px;
+  border:1px solid #e3c86d;
+  border-radius:8px;
+  background:#fff9e8;
+  color:#6b5718;
+  line-height:1.4
+}
+.nl-member-lifecycle-self-confirm[hidden]{
+  display:none!important
+}
+.nl-member-lifecycle-guidance{
+  padding:9px;
+  border-radius:8px;
+  background:#f3f6f9;
+  color:#69798c;
+  font-size:8px;
+  line-height:1.5
+}
+.nl-member-lifecycle-submit{
+  min-height:40px;
+  border:1px solid #0b72d5;
+  border-radius:8px;
+  background:#0b72d5;
+  color:#fff;
+  font-weight:850;
+  cursor:pointer
+}
+.nl-member-lifecycle-submit:disabled{
+  opacity:.5;
+  cursor:not-allowed
+}
+@media(max-width:1000px){
+  .nl-member-registry-summary{
+    grid-template-columns:repeat(2,1fr)
+  }
+  .nl-member-registry-filters{
+    grid-template-columns:1fr 1fr
+  }
+}
+@media(max-width:650px){
+  .nl-member-registry-filters{
+    grid-template-columns:1fr
+  }
+}
+/* nurselink-membership-lifecycle-v460 */

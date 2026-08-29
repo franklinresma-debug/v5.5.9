@@ -1,0 +1,106 @@
+NurseLink v5.1.0 Major Milestone — Membership Administration Suite
+===================================================================
+
+PURPOSE
+-------
+v5.1.0 substantially strengthens the NurseLink membership phase and brings
+review, approval, lifecycle administration, workload assignment, staff roles
+and audit visibility into one protected Administrator workspace.
+
+PRIMARY ADMINISTRATION PAGE
+---------------------------
+https://app.amsertech.com/nurselink-membership-administration.html
+
+SEPARATE ADMINISTRATOR SIGN-IN
+------------------------------
+https://app.amsertech.com/nurselink-admin-login.html
+
+A normal NurseLink member/applicant session does not create an Administrator
+Portal session. Staff must re-enter credentials and establish a separate
+elevated Administrator session.
+
+MEMBERSHIP REVIEW WORKFLOW
+--------------------------
+Reviewer:
+- View pending applications
+- Review application signals
+- Move Submitted -> Under Review
+- Request additional information
+- Mark applications Ready for Approval
+- Add reviewer notes
+- Receive assigned review workload
+
+Administrator:
+- Everything a Reviewer can do
+- Assign review ownership
+- Set Low / Normal / High / Urgent priority
+- Set review due dates
+- View overdue/unassigned/aging workloads
+- Approve applications that are Ready for Approval
+- Decline applications with a required reason
+- Manage approved-member standing
+
+Super Administrator:
+- Everything an Administrator can do
+- Grant Reviewer / Administrator / Super Administrator roles
+- Change privileged staff roles
+- Revoke privileged staff access
+- Perform explicitly confirmed self-membership actions when permitted
+
+ROLE SAFETY
+-----------
+Privileged role changes remain Super Administrator-only.
+
+Safeguards retained:
+- A Super Administrator cannot revoke their own browser access.
+- The last active Super Administrator cannot be demoted or revoked.
+- Final membership approval/decline is Administrator-only.
+- Approval requires Ready for Approval status.
+- Self-membership privileged actions require explicit Super Administrator
+  confirmation where applicable.
+- All major review, assignment and staff-access actions are audited.
+
+REVIEW OPERATIONS
+-----------------
+New membership workflow metadata:
+- assigned_reviewer_user_id
+- review_priority
+- review_due_at
+- review_started_at
+- last_admin_action_at
+
+The Membership Administration Suite reports:
+- total pending applications
+- applications Ready for Approval
+- overdue reviews
+- unassigned reviews
+- 0–2 / 3–7 / 8–14 / 15+ day aging
+- staff role counts
+- reviewer pending workload
+- Active / Suspended / Inactive membership counts
+
+MEMBER LIFECYCLE
+----------------
+Administrators can manage approved membership standing:
+- Active
+- Suspended
+- Inactive
+- Reactivation to Active where allowed
+
+A reason is required for standing changes. Existing self-action safeguards,
+audit logging and member notifications remain enabled.
+
+ADMINISTRATIVE AUDIT
+--------------------
+The suite exposes protected audit activity for:
+- membership review decisions
+- review assignment changes
+- privileged staff-access changes
+
+Sensitive administration remains inside the elevated Administrator Portal.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.1.0
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

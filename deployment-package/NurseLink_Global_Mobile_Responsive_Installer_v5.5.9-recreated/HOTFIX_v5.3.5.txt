@@ -1,0 +1,62 @@
+NurseLink v5.3.5 — Standalone Routing Preflight Hotfix
+========================================================
+
+FAILED V5.3.4 CHECK
+-------------------
+Installation stopped at:
+
+[NurseLink v5.3.4] Verifying standalone routing package preflight
+
+ERROR: Exact Administrator Login routing bypass is missing from package.
+
+ROOT CAUSE
+----------
+The Administrator routing rule was present in the packaged .htaccess:
+
+RewriteRule ^nurselink-admin-login\.html$ - [END]
+
+but the installer used an over-escaped grep regular expression. The grep
+expression did not match the literal Apache directive and produced a false
+preflight failure.
+
+No application build/deploy stage had run when this error occurred.
+
+V5.3.5 FIX
+----------
+The fragile regular-expression grep checks have been removed.
+
+Standalone routing package preflight now uses Python exact-literal validation
+for:
+- standalone routing start/end markers
+- Options -MultiViews
+- RewriteEngine On
+- Administrator Login exact bypass
+- Administrator Dashboard exact bypass
+- Administrator Login JS bypass
+- Administrator Dashboard JS bypass
+- Portal Configuration JS bypass
+- Administrator Portal CSS bypass
+- Administrator consolidated CSS bypass
+- existing-file bypass
+- existing-directory bypass
+- final static END bypass
+- directive ordering
+
+The new validator is compatible with Python 3.6 and executes successfully
+against the exact .htaccess included in this installer.
+
+PROACTIVE VALIDATION
+--------------------
+Before packaging v5.3.5:
+- every direct copied-source grep validation was executed against the payload
+- all standalone routing directives were checked literally
+- both new standalone-routing Python guards were executed
+- all embedded Python guards were parsed against Python 3.6 grammar
+- cumulative v5.3.4 / v5.3.3 / v5.3.2 / v5.3.1 guards were retained
+- cleanup simulation passed
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.5
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

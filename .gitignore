@@ -1,0 +1,24 @@
+# Local connection metadata
+.ssh-known-hosts
+
+# Temporary and generated artifacts
+tmp/
+output/
+
+# Recovery archives are retained outside Git; commit their manifests/checksums.
+recovery-baseline/*.tar.gz
+recovery-baseline/*.sql.gz
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Common operating-system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+

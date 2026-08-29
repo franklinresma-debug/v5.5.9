@@ -1,0 +1,38 @@
+NurseLink v5.3.1 Hotfix Validation
+====================================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] all 59 embedded installer Python guards parse under Python 3.6
+[PASS] Administration Operations Center controller PHP regression
+[PASS] Production Readiness PHP regression
+[PASS] Operations / Smoke PHP regression
+[PASS] Administrator Login JavaScript
+[PASS] Administrator Dashboard JavaScript
+[PASS] centralized Portal Configuration JavaScript
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] exact Administrator Login Apache END bypass
+[PASS] exact Administrator Dashboard Apache END bypass
+[PASS] static-file Apache END bypass
+[PASS] Apache MultiViews disabled for standalone routing
+[PASS] Administrator entry files force-deployed from validated payload
+[PASS] live Administrator entry files byte-for-byte equality checks
+[PASS] remote React member-SPA shell rejection
+[PASS] remote React member-SPA asset-bundle rejection
+[PASS] current v5.3.1 Administrator Login remote probe
+[PASS] current v5.3.1 Administrator Dashboard remote probe
+[PASS] Administration Operations Center login identity assertion
+[PASS] Administration Operations Center dashboard identity assertion
+[PASS] obsolete Administrator content assertions removed
+[PASS] v5.1 membership regression retained
+[PASS] v5.1 onboarding regression retained
+[PASS] v5.1.2 redirect/session regression retained
+[PASS] v5.2 portal consolidation regression retained
+[PASS] v5.3 Operations Center regression retained
+[PASS] v5.3.1 routing/deployment regression guard executes
+[PASS] two-stage cleanup ordering retained
+[PASS] deterministic cleanup simulation
+[PASS] current v5.3.1 installer retained
+[PASS] protected production/source/hosting paths retained
+[PASS] no artisan tinker dependency

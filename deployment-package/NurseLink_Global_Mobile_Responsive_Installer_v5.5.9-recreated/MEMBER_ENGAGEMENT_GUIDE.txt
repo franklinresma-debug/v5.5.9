@@ -1,0 +1,32 @@
+NurseLink v5.5.2 Member Engagement Guide
+=========================================
+
+MEMBER FLOW
+-----------
+1. Open Member Engagement Hub.
+2. Review chapter, event and mentoring participation.
+3. Follow useful recommended actions.
+4. Join a chapter if relevant.
+5. Register for NurseLink activities.
+6. Configure mentoring only if desired.
+7. Use the hub as an internal NurseLink participation summary.
+
+ADMIN FLOW
+----------
+1. Sign in through the separate Administrator Portal.
+2. Open Engagement Command Center.
+3. Review aggregate member engagement workload.
+4. Use Event Management for activities and attendance.
+5. Use Chapter Management for chapters and member requests.
+6. Use the Super Administrator Test Center for QA.
+
+PRIVACY
+-------
+The Engagement Command Center is aggregate-only.
+Private mentoring messages and private contact information are excluded.
+
+GOVERNANCE
+----------
+Participation metrics and mentoring roles are community/productivity features.
+They must not be represented as official regulator, licensing, employer or CPD
+credentials.

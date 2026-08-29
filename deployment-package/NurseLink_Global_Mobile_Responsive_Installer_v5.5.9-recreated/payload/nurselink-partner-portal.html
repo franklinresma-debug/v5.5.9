@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NurseLink Partner Portal</title>
+  <link rel="stylesheet" href="/nurselink-partner-portal.css">
+</head>
+<body>
+  <header class="partner-topbar">
+    <div class="brand">
+      <div class="brand-mark">NL</div>
+      <div>
+        <strong>NurseLink</strong>
+        <span>Employer / Partner Portal</span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="https://app.amsertech.com/dashboard">NurseLink Home</a>
+      <button id="refreshButton" type="button">Refresh</button>
+    </nav>
+  </header>
+
+  <main id="partnerRoot" class="partner-shell">
+<section class="nurselink-enterprise-partner-launcher" style="margin:14px 0;padding:14px;border:1px solid #d9e3ec;border-radius:12px;background:#f9fbfd">
+  <strong style="display:block">Enterprise Cohort Analytics</strong>
+  <small style="display:block;margin-top:4px">View aggregate institutional cohort participation without member identity exposure.</small>
+  <a href="/nurselink-enterprise-partner.html" style="display:inline-block;margin-top:8px">Open Enterprise Analytics →</a>
+</section>
+
+    <section class="loading-card">
+      <div class="spinner"></div>
+      <strong>Loading Partner Portal…</strong>
+      <small>Checking your NurseLink partner authorization.</small>
+    </section>
+  </main>
+
+  <script src="/nurselink-partner-portal.js" defer></script>
+</body>
+</html>

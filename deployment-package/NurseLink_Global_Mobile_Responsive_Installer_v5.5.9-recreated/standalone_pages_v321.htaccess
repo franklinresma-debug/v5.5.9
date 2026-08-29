@@ -1,0 +1,26 @@
+# NURSELINK_STANDALONE_PAGES_V321_START
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # v5.5.2 hard routing protection for the two privileged entry documents.
+  # [END] prevents a later SPA history fallback from rewriting these requests.
+  RewriteRule ^nurselink-admin-login\.html$ - [END]
+  RewriteRule ^nurselink-admin-dashboard\.html$ - [END]
+
+  # Their direct static dependencies are also protected from SPA rewriting.
+  RewriteRule ^nurselink-admin-login\.js$ - [END]
+  RewriteRule ^nurselink-admin-dashboard\.js$ - [END]
+  RewriteRule ^nurselink-portal-config\.js$ - [END]
+  RewriteRule ^nurselink-admin-portal\.css$ - [END]
+  RewriteRule ^nurselink-admin-consolidated\.css$ - [END]
+
+  # Existing static files and directories must be served directly.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [END]
+</IfModule>
+# NURSELINK_STANDALONE_PAGES_V321_END

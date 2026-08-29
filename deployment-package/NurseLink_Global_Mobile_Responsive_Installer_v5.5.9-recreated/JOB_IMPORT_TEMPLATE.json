@@ -1,0 +1,25 @@
+[
+  {
+    "reference_code": "EXAMPLE-001",
+    "title": "Staff Nurse",
+    "employer_name": "Example Hospital",
+    "country": "Philippines",
+    "city": "Metro Manila",
+    "work_setting": "hospital",
+    "employment_type": "full_time",
+    "specialty": "Medical-Surgical",
+    "required_license_type": "prc_license",
+    "minimum_experience_years": 1,
+    "overseas_opportunity": false,
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": "PHP",
+    "description": "Replace this example with a verified NurseLink opportunity.",
+    "requirements": "Replace with verified employer requirements.",
+    "apply_url": null,
+    "source_label": "NurseLink Example Template",
+    "status": "paused",
+    "published_at": null,
+    "expires_at": null
+  }
+]

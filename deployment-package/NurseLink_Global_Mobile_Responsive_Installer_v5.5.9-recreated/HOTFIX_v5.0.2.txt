@@ -1,0 +1,34 @@
+NurseLink v5.0.2 Hotfix
+========================
+
+ROOT CAUSE
+----------
+v5.0.1 correctly declared partner privacy as:
+'member_notes_included' => false
+
+However, EnterpriseGoalsController.php formatted the key and value across
+separate physical lines. The v5.0.1 installer used a line-sensitive grep and
+reported a false failure:
+
+ERROR: Enterprise goal partner member-note privacy missing.
+
+FIX
+---
+v5.0.2 replaces that line-sensitive check with a whitespace-normalized Python
+3.6-compatible validator that verifies all partner goal privacy declarations:
+
+- aggregate_only => true
+- member_identity_included => false
+- member_notes_included => false
+- member_contact_details_included => false
+- small_cohort_metrics_suppressed => true
+- minimum_aggregate_cohort_size => 3
+
+No rollback of the failed v5.0.1 attempt is required before installing v5.0.5.
+The cumulative installer is idempotent for already-applied migrations/routes.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.0.2
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

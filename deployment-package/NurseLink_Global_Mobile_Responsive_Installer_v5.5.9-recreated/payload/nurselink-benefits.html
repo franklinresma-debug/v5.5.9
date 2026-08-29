@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>NurseLink Member Benefits & Resources</title>
+<link rel="stylesheet" href="/nurselink-benefits.css">
+</head>
+<body>
+<header class="bf-top"><a class="bf-brand" href="/dashboard"><span>NL</span><div><strong>NurseLink</strong><small>Member Benefits & Resources</small></div></a><nav><a href="/nurselink-engagement.html">Engagement</a><a href="/nurselink-events.html">Events</a><a href="/dashboard">Dashboard</a></nav></header>
+<main class="bf-shell">
+<section class="bf-hero"><div><span>MEMBER SUPPORT</span><h1>Benefits & Resources</h1><p>Browse NurseLink member resources, professional support offers and community opportunities available to Approved + Active members.</p></div><button id="refreshBenefits" type="button">Refresh</button></section>
+<div id="benefitNotice" class="bf-notice" hidden></div>
+<section id="benefitSummary" class="bf-summary"><div class="bf-loading">Loading benefit intelligence…</div></section>
+<section class="bf-filters">
+<label><span>Search</span><input id="benefitSearch" type="search" placeholder="Benefit, provider, resource"></label>
+<label><span>Category</span><select id="benefitCategory"><option value="all">All categories</option><option value="wellness">Wellness</option><option value="education">Education</option><option value="career">Career</option><option value="financial">Financial</option><option value="community">Community</option><option value="partner_offer">Partner Offer</option><option value="resource">Resource</option><option value="other">Other</option></select></label>
+<label><span>View</span><select id="benefitScope"><option value="all">All available</option><option value="available">Available to request</option><option value="requested">My requests</option><option value="saved">Saved benefits</option></select></label>
+</section>
+<section id="benefitList" class="bf-list"><div class="bf-loading">Loading benefits…</div></section>
+<section class="bf-advisory"><strong>Eligibility advisory</strong><span>Listing a benefit or resource does not guarantee eligibility, availability, provider acceptance or endorsement. Provider terms and any stated eligibility requirements remain applicable.</span></section>
+</main>
+<script src="/nurselink-benefits.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+NurseLink v5.0.5 Validation
+===========================
+
+[PASS] bash install.sh
+[PASS] bash rollback.sh
+[PASS] bash cleanup_old_installers.sh
+[PASS] cleanup Python 3.6 grammar
+[PASS] future annotations removed
+[PASS] PEP585 generics removed
+[PASS] function type annotations removed
+[PASS] embedded PYPYCOMPAT481 Python 3.6 grammar
+[PASS] embedded PYPRE473 Python 3.6 grammar
+[PASS] embedded PY Python 3.6 grammar
+[PASS] embedded PYNOTIF425 Python 3.6 grammar
+[PASS] embedded PYUAT422 Python 3.6 grammar
+[PASS] embedded PYREL341 Python 3.6 grammar
+[PASS] embedded PYCONSIST341 Python 3.6 grammar
+[PASS] embedded PYCACHE325 Python 3.6 grammar
+[PASS] embedded PYSEC330 Python 3.6 grammar
+[PASS] embedded PYVALIDATOR327 Python 3.6 grammar
+[PASS] embedded PYSPA Python 3.6 grammar
+[PASS] embedded PYORDER Python 3.6 grammar
+[PASS] embedded PYV324 Python 3.6 grammar
+[PASS] embedded PYHT Python 3.6 grammar
+[PASS] embedded PYLIVECACHE325 Python 3.6 grammar
+[PASS] embedded PYSECINSTALL330 Python 3.6 grammar
+[PASS] embedded PYSMOKE342 Python 3.6 grammar
+[PASS] embedded PYROLE427 Python 3.6 grammar
+[PASS] embedded PYPORTAL451 Python 3.6 grammar
+[PASS] embedded PYNOTIF424 Python 3.6 grammar
+[PASS] embedded PYNOTIF426 Python 3.6 grammar
+[PASS] embedded PYDASH431 Python 3.6 grammar
+[PASS] embedded PYAUTH423 Python 3.6 grammar
+[PASS] embedded PYTEST453 Python 3.6 grammar
+[PASS] embedded PYLIFE460 Python 3.6 grammar
+[PASS] embedded PYRENEW470 Python 3.6 grammar
+[PASS] embedded PYEVENT473 Python 3.6 grammar
+[PASS] embedded PYCHAPTER473 Python 3.6 grammar
+[PASS] embedded PYMENTOR473 Python 3.6 grammar
+[PASS] embedded PYCLEAN473 Python 3.6 grammar
+[PASS] embedded PYENGAGE480 Python 3.6 grammar
+[PASS] server py_compile preflight present
+[PASS] compatibility runtime marker present
+[PASS] 29 cumulative route blocks
+[PASS] cleanup simulation
+[PASS] old installer packages removed
+[PASS] current installer retained
+[PASS] protected paths retained
+[PASS] cleanup/install/SUCCESS ordering
+[PASS] version 5.0.5
+[PASS] backup prefix v481

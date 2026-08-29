@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Events & Programs</title>
+  <link rel="stylesheet" href="/nurselink-events.css">
+</head>
+<body>
+<header class="ev-top"><a href="/dashboard" class="ev-brand"><span>NL</span><div><strong>NurseLink</strong><small>Events & Programs</small></div></a><nav><a href="/nurselink-engagement.html">Engagement</a><a href="/learning">Learning</a><a href="/dashboard">Dashboard</a></nav></header>
+<main class="ev-shell">
+  <section class="ev-hero"><div><span>MEMBER ENGAGEMENT</span><h1>Events & Programs</h1><p>Discover NurseLink webinars, workshops, orientations, networking activities and professional programs.</p></div><button id="refreshEvents" type="button">Refresh</button></section>
+  <div id="eventNotice" class="ev-notice" hidden></div>
+  <section class="ev-filters">
+    <label><span>Search</span><input id="eventSearch" type="search" placeholder="Event, organizer, venue"></label>
+    <label><span>Format</span><select id="eventMode"><option value="all">All formats</option><option value="online">Online</option><option value="onsite">Onsite</option><option value="hybrid">Hybrid</option></select></label>
+    <label><span>View</span><select id="eventScope"><option value="upcoming">Upcoming</option><option value="registered">My registrations</option><option value="all">All upcoming</option></select></label>
+  </section>
+  <section id="eventList" class="ev-list"><div class="ev-loading">Loading events…</div></section>
+  <section class="ev-advisory"><strong>CPD advisory</strong><span>Any learning hours or CPD units shown in NurseLink are informational unless separately validated by the appropriate issuing or regulatory authority.</span></section>
+</main>
+<script src="/nurselink-events.js" defer></script>
+</body>
+</html>

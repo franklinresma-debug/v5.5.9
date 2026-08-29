@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Operations Center</title>
+  <link rel="stylesheet" href="/nurselink-operations-center.css">
+  <link rel="stylesheet" href="/nurselink-admin-identity.css?v=421">
+</head>
+<body>
+  <main class="ops-shell">
+    <header class="ops-header">
+      <div>
+        <span class="eyebrow">NURSELINK ADMINISTRATOR</span>
+        <h1>Operations Center</h1>
+        <p>Production health, incidents, snapshots and deployment history.</p>
+      </div>
+      <div class="ops-actions">
+        <button id="refreshButton" type="button">Refresh</button>
+        <button id="snapshotButton" class="primary" type="button">Capture Snapshot</button>
+      </div>
+    </header>
+    <div id="statusMessage" class="notice" hidden></div>
+    <section id="operationsRoot"><div class="panel">Loading NurseLink Operations Center…</div></section>
+  </main>
+  <script src="/nurselink-operations-center.js" defer></script>
+  <script src="/nurselink-admin-identity.js?v=421" defer></script>
+</body>
+</html>

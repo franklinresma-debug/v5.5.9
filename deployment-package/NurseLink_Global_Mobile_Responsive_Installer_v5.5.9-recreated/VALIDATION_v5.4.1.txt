@@ -1,0 +1,36 @@
+NurseLink v5.4.1 Validation
+==============================
+
+[PASS] Bash installer / rollback / cleanup / focused-repair syntax
+[PASS] Administrator physical dashboard JavaScript syntax
+[PASS] Administrator physical login JavaScript syntax
+[PASS] legacy Administrator dashboard/login JavaScript syntax
+[PASS] Administration Operations Center PHP regression
+[PASS] Membership Administration PHP regression
+[PASS] Membership Onboarding PHP regression
+[PASS] Production Readiness / Operations / Smoke PHP regression
+[PASS] 41 cumulative API route blocks with marker parity
+[PASS] 77 embedded Python guards/heredocs parse under Python 3.6
+[PASS] physical /admin/ dashboard starts session-pending
+[PASS] legacy Administrator dashboard starts session-pending
+[PASS] inline no-flash session gate precedes protected shell
+[PASS] portal reveal occurs only after /api/nurselink/admin/session succeeds
+[PASS] unauthorized session redirect does not reveal protected shell
+[PASS] session-gate light-blue styling
+[PASS] v5.4.0 progress summary retained
+[PASS] v5.3.8 light-blue Administrator theme retained
+[PASS] physical Administrator login has exactly one Member / Applicant Sign In link
+[PASS] legacy Administrator login has exactly one Member / Applicant Sign In link
+[PASS] NurseLink Home footer link removed
+[PASS] extra Administrator login footer note removed
+[PASS] single Member / Applicant link placed after the sign-in form
+[PASS] Member login runtime/style isolation
+[PASS] Member nurse montage binary unchanged
+[PASS] v5.4.1 focused repair session-gate validation
+[PASS] v5.4.1 focused repair simplified-login validation
+[PASS] v5.4.1 final session-gate regression guard executes
+[PASS] v5.4.1 final simplified-login regression guard executes
+[PASS] two-stage cleanup ordering retained
+[PASS] deterministic cleanup simulation
+[PASS] protected hosting/source/production paths retained
+[PASS] no artisan tinker dependency

@@ -1,0 +1,32 @@
+NurseLink v5.0.5 Validation
+=============================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] Namecheap Python 3.6 cleanup compatibility
+[PASS] all embedded Python heredocs parse as Python 3.6
+[PASS] Saved Benefits migration PHP
+[PASS] Benefit Intelligence controller PHP
+[PASS] Member Benefits controller PHP
+[PASS] Engagement controller PHP
+[PASS] Member Benefits JavaScript
+[PASS] Benefit Management JavaScript
+[PASS] 31 cumulative API route blocks with marker parity
+[PASS] adaptive users.id migration
+[PASS] Approved + Active member gate
+[PASS] save / unsave benefit workflow
+[PASS] save only currently available benefits
+[PASS] 7-day availability intelligence
+[PASS] 30-day availability intelligence
+[PASS] Saved Benefits filter
+[PASS] aggregate administrator benefit analytics
+[PASS] benefit analytics privacy boundary
+[PASS] Engagement Hub saved/ending-soon integration
+[PASS] Super Administrator Test Center probes
+[PASS] Production Readiness coverage
+[PASS] Operations coverage
+[PASS] two-stage cleanup simulation
+[PASS] old installer package removal simulation
+[PASS] current installer retention
+[PASS] protected production/source/hosting paths retained
+[PASS] no artisan tinker dependency

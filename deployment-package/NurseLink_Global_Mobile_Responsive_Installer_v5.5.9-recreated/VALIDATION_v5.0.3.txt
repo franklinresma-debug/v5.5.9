@@ -1,0 +1,52 @@
+NurseLink v5.0.5 Validation
+=============================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] unsupported future annotations absent
+[PASS] 45 embedded installer Python blocks parse under Python 3.6
+[PASS] Enterprise Invitations migration PHP
+[PASS] Enterprise Enrollment controller PHP
+[PASS] Enterprise Goals controller PHP
+[PASS] Enterprise Platform controller PHP
+[PASS] Production Readiness controller PHP
+[PASS] Super Admin Test Mode controller PHP
+[PASS] Operations checker PHP
+[PASS] Smoke checker PHP
+[PASS] Enterprise Invitations JavaScript
+[PASS] Enterprise Enrollment Admin JavaScript
+[PASS] Enterprise Enrollment Partner JavaScript
+[PASS] Enterprise core/member/partner JavaScript
+[PASS] 36 cumulative API route blocks with marker parity
+[PASS] adaptive users.id invitation column
+[PASS] Approved + Active invitation eligibility
+[PASS] verified-organization invitation boundary
+[PASS] existing cohort assignment duplicate guard
+[PASS] invitation expiry handling
+[PASS] accept / decline member workflow
+[PASS] invitation acceptance creates NurseLink cohort assignment
+[PASS] invitation governance disclaimer
+[PASS] in-app invitation notification
+[PASS] Administrator Portal elevated-session gate
+[PASS] Administrator-only invitation detail
+[PASS] verified partner own-organization reporting
+[PASS] partner member identity exclusion
+[PASS] partner contact/note/document/credential exclusion
+[PASS] small-cohort privacy threshold
+[PASS] organization-level enrollment reporting
+[PASS] member/admin/partner UI wiring
+[PASS] Super Administrator Test Center coverage
+[PASS] Production Readiness coverage
+[PASS] Operations governance/privacy coverage
+[PASS] standalone smoke coverage
+[PASS] no-store cache coverage
+[PASS] v5.0.2 normalized goal privacy validator retained
+[PASS] obsolete v5.0.1 line-sensitive privacy validator absent
+[PASS] v5.0.5 normalized enrollment privacy validator
+[PASS] targeted source-public rollback coverage
+[PASS] deterministic cleanup simulation
+[PASS] historical installer removal simulation
+[PASS] current v5.0.5 installer retention
+[PASS] protected production/source/hosting paths retained
+[PASS] no artisan tinker dependency

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Super Administrator Test Center</title>
+  <link rel="stylesheet" href="/nurselink-admin-portal.css">
+  <link rel="stylesheet" href="/nurselink-super-admin-test-center.css">
+</head>
+<body class="nl-admin-body">
+  <div class="nl-admin-shell">
+    <aside class="nl-admin-sidebar">
+      <div class="nl-admin-sidebar-brand">
+        <div class="nl-admin-brand-mark">NL</div>
+        <div>
+          <strong>NurseLink</strong>
+          <small>Administrator Portal</small>
+        </div>
+      </div>
+      <nav>
+        <a href="/nurselink-admin-dashboard.html">Dashboard</a>
+        <a href="/nurselink-membership-command-center.html">Membership Command Center</a>
+        <a href="/nurselink-member-registry.html">Member Registry</a>
+        <a class="active" href="/nurselink-super-admin-test-center.html">Super Admin Test Center</a>
+        <a href="/nurselink-admin-dashboard.html#accessManagement">Admin Users & Access</a>
+        <a href="/admin">Review Center</a>
+        <a href="/nurselink-operations-center.html">Operations Center</a>
+        <a href="/nurselink-institutional-analytics.html">Institutional Analytics</a>
+        <a href="/nurselink-production-readiness.html">Production Readiness</a>
+        <a href="/dashboard">Member / Applicant Portal</a>
+      </nav>
+      <button id="adminSignOut" type="button">Sign out of Admin Portal</button>
+    </aside>
+
+    <main class="nl-admin-main nl-super-test-main">
+      <header class="nl-admin-header">
+        <div>
+          <span class="nl-admin-eyebrow">SUPER ADMINISTRATOR QA</span>
+          <h1>Functional Test Center</h1>
+          <p>Exercise applicant, member and administrator functionality while keeping real membership status unchanged.</p>
+        </div>
+        <div id="adminIdentity" class="nl-admin-identity">
+          Checking Super Administrator session…
+        </div>
+      </header>
+
+      <div id="testNotice" class="nl-admin-notice" hidden></div>
+
+      <section id="testModeStatus" class="nl-super-test-status">
+        <div class="nl-admin-loading">Checking Test Mode…</div>
+      </section>
+
+      <section class="nl-super-test-controls">
+        <div>
+          <span class="nl-admin-eyebrow">TEMPORARY QA ACCESS</span>
+          <h2>Super Administrator Test Mode</h2>
+          <p>
+            Test Mode temporarily permits the Super Administrator through approved-member
+            server gates. It does not approve your membership, issue a member number,
+            alter public verification, or bypass partner-organization tenancy.
+          </p>
+        </div>
+        <div class="nl-super-test-control-actions">
+          <label>
+            <span>Duration</span>
+            <select id="testModeMinutes">
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="60" selected>60 minutes</option>
+              <option value="90">90 minutes</option>
+              <option value="120">120 minutes</option>
+            </select>
+          </label>
+          <button id="startTestMode" class="primary" type="button">
+            Start Test Mode
+          </button>
+          <button id="stopTestMode" type="button">
+            End Test Mode
+          </button>
+        </div>
+      </section>
+
+      <section class="nl-super-test-approval">
+        <div>
+          <span class="nl-admin-eyebrow">MEMBERSHIP APPROVAL TEST</span>
+          <h2>Test the complete approval workflow</h2>
+          <p>
+            Open the Membership Command Center to move a test application through
+            Submitted → Under Review → Ready for Approval → Approved. When testing
+            your own Super Administrator application, the explicit self-action
+            confirmation and audit trail remain mandatory.
+          </p>
+        </div>
+        <a href="/nurselink-membership-command-center.html">
+          Open Membership Command Center
+        </a>
+      </section>
+
+      <section class="nl-super-test-runner">
+        <div class="nl-admin-section-head">
+          <div>
+            <span class="nl-admin-eyebrow">SAFE API TESTS</span>
+            <h2>Functional API Check</h2>
+            <p>Runs non-destructive GET requests against core applicant, member and administrator services.</p>
+          </div>
+          <button id="runSafeTests" type="button">Run Safe Tests</button>
+        </div>
+        <div id="safeTestResults" class="nl-super-test-results">
+          <div class="nl-super-test-empty">No API test has been run yet.</div>
+        </div>
+      </section>
+
+      <section class="nl-super-test-matrix">
+        <div class="nl-admin-section-head">
+          <div>
+            <span class="nl-admin-eyebrow">FUNCTION MATRIX</span>
+            <h2>Website Functional Areas</h2>
+            <p>Launch each major NurseLink workflow from one place.</p>
+          </div>
+          <button id="refreshTestMatrix" type="button">Refresh</button>
+        </div>
+        <div id="testMatrix" class="nl-super-test-groups">
+          <div class="nl-admin-loading">Loading functional areas…</div>
+        </div>
+      </section>
+
+      <section class="nl-super-test-boundary">
+        <strong>Test Mode security boundary</strong>
+        <span>
+          This capability is available only to a server-confirmed Super Administrator
+          with an active separate Administrator Portal session. Partner tenant access,
+          public membership verification and the real membership record remain authoritative.
+        </span>
+      </section>
+    </main>
+  </div>
+
+  <script src="/nurselink-super-admin-test-center.js" defer></script>
+</body>
+</html>

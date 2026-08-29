@@ -1,0 +1,76 @@
+NurseLink v5.3.4 — Centralized Launcher Validation Hotfix
+===========================================================
+
+FAILED V5.3.3 CHECK
+-------------------
+Installation stopped during copied-frontend validation with:
+
+ERROR: Administrator Dashboard Credential Compliance launcher missing.
+
+No build/deploy stage had run yet when this check failed.
+
+ROOT CAUSE
+----------
+The Administration Operations Center architecture correctly moved advanced
+module discovery into the centralized:
+
+nurselink-portal-config.js
+
+but several inherited cumulative installer checks still expected legacy
+launcher filenames to be hard-coded directly inside:
+
+nurselink-admin-dashboard.html
+
+That assumption is no longer correct under the consolidated Operations Center.
+
+V5.3.4 FIX
+----------
+The whole stale launcher-validator family was modernized, not only Credential
+Compliance.
+
+Central portal configuration now owns discovery for:
+- Credential Compliance
+- Event Management
+- Benefits & Resources
+- Engagement
+- Enterprise Command Center
+- Enterprise Goals
+- Enterprise Enrollment
+- Enterprise Outcomes
+- Enterprise Support
+- Super Admin Test Center
+
+Membership Command, Membership Administration, Onboarding and Member Registry
+remain centralized compatibility routes into the Operations Center domains.
+
+CREDENTIAL COMPLIANCE
+---------------------
+Credential Compliance is now explicitly owned by the Verification domain and
+appears as an advanced Verification workflow launcher.
+
+MEMBER CSV EXPORT
+-----------------
+The old standalone Member Registry page is now only a compatibility redirect,
+so its historical Export CSV control is no longer the correct UI target.
+
+v5.3.4 preserves CSV export directly inside the consolidated Members domain of
+the Administration Operations Center.
+
+VALIDATOR HARDENING
+-------------------
+v5.3.4:
+- checks centralized portal configuration for advanced launchers
+- no longer requires legacy launcher filenames inside dashboard HTML
+- validates Credential Compliance under Verification
+- validates consolidated Members CSV export
+- executes all direct copied-source grep checks before packaging
+- retains v5.3.3 pre-React bootstrap protection
+- retains v5.3.2 SPA rescue
+- retains v5.3.1 Apache routing hardening
+- retains v5.3.0 Operations Center governance
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.4
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

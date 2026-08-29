@@ -1,0 +1,54 @@
+NurseLink v5.1.1 Validation
+=============================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] 53 embedded installer Python guards parse under Python 3.6
+[PASS] Membership Onboarding migration PHP
+[PASS] Membership Onboarding controller PHP
+[PASS] Membership Administration controller regression PHP
+[PASS] Membership Command controller regression PHP
+[PASS] Admin Portal controller regression PHP
+[PASS] Production Readiness controller PHP
+[PASS] Super Admin Test Mode controller PHP
+[PASS] Operations and Smoke PHP
+[PASS] Membership Welcome Center JavaScript
+[PASS] Membership Onboarding Admin JavaScript
+[PASS] Membership Administration JavaScript regression
+[PASS] Administrator Login JavaScript regression
+[PASS] Super Admin Test Center JavaScript regression
+[PASS] 40 cumulative API route blocks with marker parity
+[PASS] adaptive users.id onboarding column
+[PASS] Approved membership onboarding boundary
+[PASS] Approved + Active member API gate
+[PASS] secure member onboarding progress writes
+[PASS] automatic approval-to-onboarding creation
+[PASS] 14-day default onboarding target
+[PASS] approval notification Welcome Center link
+[PASS] separate Administrator session requirement
+[PASS] Administrator-only onboarding management
+[PASS] Administrator/Super Administrator owner validation
+[PASS] member Administrator-note exclusion
+[PASS] member assigned-Administrator identity exclusion
+[PASS] other-member data exclusion
+[PASS] onboarding credential/licensure/regulatory governance
+[PASS] member activation signal aggregation
+[PASS] onboarding Welcome notification workflow
+[PASS] Membership Administration launcher
+[PASS] Administrator Dashboard launcher
+[PASS] Administrator Login safe return
+[PASS] Super Admin Test Center page/API coverage
+[PASS] Production Readiness table/route coverage
+[PASS] Operations governance/approval-bridge coverage
+[PASS] standalone smoke coverage
+[PASS] no-store cache coverage
+[PASS] v5.1.0 governance validators retained
+[PASS] v5.1.1 governance validator
+[PASS] v5.1.1 regression guard
+[PASS] targeted source-public rollback
+[PASS] deterministic cleanup simulation
+[PASS] historical installer removal simulation
+[PASS] current v5.1.1 installer retention
+[PASS] protected production/source/hosting paths retained
+[PASS] no artisan tinker dependency

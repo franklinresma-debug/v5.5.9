@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Administrator Sign In</title>
+  <link rel="stylesheet" href="./admin-portal.css?nlv=552">
+</head>
+<body class="nl-admin-auth-body">
+  <main class="nl-admin-auth-shell">
+    <section class="nl-admin-auth-brand">
+      <div class="nl-admin-brand-mark">NL</div>
+      <span>KAPIT-BISIG</span>
+      <h1>NurseLink Administration Operations Center</h1>
+      <p>Separate privileged access for NurseLink reviewers, administrators and Super Administrators.</p>
+      <div class="nl-admin-security-note">
+        <strong>Protected staff access</strong>
+        <small>A normal NurseLink member sign-in does not establish an Administrator Portal session.</small>
+      </div>
+    </section>
+
+    <section class="nl-admin-login-card">
+      <span class="nl-admin-eyebrow">ADMINISTRATOR ACCESS</span>
+      <h2>Sign in to Administration Operations Center</h2>
+      <p>One privileged sign-in for the NurseLink Administration Operations Center.</p>
+
+      <form id="adminLoginForm">
+        <label>
+          <span>Email address</span>
+          <input id="adminEmail" type="email" autocomplete="username" required>
+        </label>
+        <label>
+          <span>Password</span>
+          <input id="adminPassword" type="password" autocomplete="current-password" required>
+        </label>
+        <div id="adminLoginStatus" class="nl-admin-form-status" aria-live="polite"></div>
+        <button id="adminLoginButton" class="primary" type="submit">Sign in to Administration Operations Center</button>
+      </form>
+
+      <div class="nl-admin-auth-links nl-admin-auth-links-single">
+        <a href="/login">Member / Applicant Sign In</a>
+      </div>
+    </section>
+  </main>
+  <script src="./portal-config.js?nlv=552"></script>
+  <script src="./login.js?nlv=552" defer></script>
+<!-- legacy regression marker: nurselink-admin-login.js?nlv=552 -->
+
+<!-- v5.1.2 regression marker: nurselink-admin-login.js?nlv=552 -->
+</body>
+</html>

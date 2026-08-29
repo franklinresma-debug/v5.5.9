@@ -1,0 +1,23 @@
+/* NURSELINK_CORS_PREFLIGHT_V261_START */
+\Illuminate\Support\Facades\Route::options('/{any}', function (\Illuminate\Http\Request $request) {
+    $origin = (string) $request->headers->get('Origin', '');
+
+    if ($origin !== 'https://app.amsertech.com') {
+        return response('', 403);
+    }
+
+    $requestedHeaders = (string) $request->headers->get(
+        'Access-Control-Request-Headers',
+        'content-type,x-xsrf-token,x-requested-with,accept,authorization'
+    );
+
+    return response('', 204)->withHeaders([
+        'Access-Control-Allow-Origin' => $origin,
+        'Access-Control-Allow-Credentials' => 'true',
+        'Access-Control-Allow-Methods' => 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+        'Access-Control-Allow-Headers' => $requestedHeaders,
+        'Access-Control-Max-Age' => '600',
+        'Vary' => 'Origin',
+    ]);
+})->where('any', '.*');
+/* NURSELINK_CORS_PREFLIGHT_V261_END */

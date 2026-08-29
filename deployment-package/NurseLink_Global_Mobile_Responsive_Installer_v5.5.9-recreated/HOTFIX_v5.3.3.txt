@@ -1,0 +1,90 @@
+NurseLink v5.3.3 — Pre-React Administrator Index Bootstrap Hotfix
+===================================================================
+
+OBSERVED FAILURE
+----------------
+The live browser network trace showed:
+
+1. /nurselink-admin-dashboard.html returned a very small HTML document.
+2. That document loaded the normal Vite index-*.js member bundle.
+3. The member application then navigated to /login.
+
+This proves the hosting layer is rewriting the Administrator URL to the root
+SPA index before the standalone Administrator page can take control.
+
+WHY V5.3.2 WAS NOT ENOUGH
+-------------------------
+v5.3.2 added a rescue inside the React dependency graph. On this hosting
+configuration, the member application could still initialize before that
+secondary rescue reliably took control.
+
+V5.3.3 FIX
+----------
+v5.3.3 moves Administrator interception ahead of React entirely.
+
+The installer patches the real Vite root:
+
+/home/frankresma/nurselink-web/index.html
+
+and inserts:
+
+NURSELINK_ADMIN_INDEX_BOOTSTRAP_V533
+
+immediately after <head> and before the first type="module" React/Vite script.
+
+If Namecheap returns the member SPA index for:
+
+/nurselink-admin-login.html
+/nurselink-admin-dashboard.html
+
+the inline bootstrap runs synchronously while the HTML is being parsed.
+
+It:
+- detects the Administrator pathname
+- opens a replacement document
+- writes the proper Administrator Login or Operations Center HTML
+- loads Administrator CSS
+- loads nurselink-portal-config.js
+- loads the correct Administrator JS
+- closes the replacement document
+
+The React member module script from the rewritten SPA document therefore never
+gets the opportunity to take over the Administrator route.
+
+VALIDATION CHANGE
+-----------------
+If the server returns the SPA shell for an Administrator URL, v5.3.3 requires
+the ACTUAL HTTP HTML response itself to contain:
+
+NURSELINK_ADMIN_INDEX_BOOTSTRAP_V533_START
+
+This is stronger than merely finding a rescue string somewhere in the built
+JavaScript assets.
+
+The installer also verifies that the bootstrap appears before the first module
+script in:
+- source index.html
+- built dist/index.html
+- live index.html
+
+ROLLBACK
+--------
+The original source index.html is backed up before modification and restored by
+rollback.
+
+EXPECTED FLOW
+-------------
+https://app.amsertech.com/nurselink-admin-dashboard.html
+          ↓
+Administrator Sign In if required
+          ↓
+Administration Operations Center
+
+The Member Access /login screen must no longer take ownership of the
+Administrator pathname.
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.3
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

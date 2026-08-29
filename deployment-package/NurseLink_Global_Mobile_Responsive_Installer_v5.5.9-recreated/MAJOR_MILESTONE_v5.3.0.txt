@@ -1,0 +1,91 @@
+NurseLink v5.3.0 Major Milestone — Administration Operations Center
+====================================================================
+
+PRIMARY ADMINISTRATOR ENTRY
+---------------------------
+Sign in:
+https://app.amsertech.com/nurselink-admin-login.html
+
+Administration Operations Center:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+OPERATIONS CENTER MENU
+----------------------
+Dashboard
+Members
+Applications
+Verification
+Organizations
+Programs
+Employment & Opportunities
+Training & Events
+Communications
+Reports & Analytics
+Support Cases
+Audit Logs
+System Health
+Settings
+
+ARCHITECTURE
+------------
+NurseLink administration is workflow-first. Administrators use governed
+NurseLink controllers and operational services rather than direct raw
+production database editing.
+
+The Operations Center consolidates membership, workforce, organizations,
+programs, communications, analytics, support, audit and system-health
+workflows under the same separate Administrator session.
+
+NEW SUPPORT CASE FOUNDATION
+---------------------------
+Migration:
+2026_08_14_040000_create_nurselink_support_cases_table.php
+
+Table:
+nurselink_support_cases
+
+Support Cases include case number, optional member/organization, category,
+priority, status, subject, description, Administrator owner, internal notes,
+resolution summary, and activity/resolution/closure timestamps.
+
+User-ID columns adapt to the live users.id schema, including UUID-style
+char(36) production IDs.
+
+NEW OPERATIONS WORKFLOW API
+---------------------------
+Controller:
+AdministrationOperationsCenterController.php
+
+GET  /api/nurselink/admin/operations-center/summary
+GET  /api/nurselink/admin/operations-center/support-cases
+POST /api/nurselink/admin/operations-center/support-cases
+PUT  /api/nurselink/admin/operations-center/support-cases/{caseId}
+POST /api/nurselink/admin/operations-center/communications
+GET  /api/nurselink/admin/operations-center/audit-log
+GET  /api/nurselink/admin/operations-center/system-health
+GET  /api/nurselink/admin/operations-center/settings
+
+GOVERNANCE
+----------
+- raw database administration is not the normal Administrator interface
+- message body is excluded from communication audit metadata
+- normalized Audit Logs do not return raw before_state / after_state snapshots
+- database credentials and raw environment secrets are not exposed
+- privileged role changes remain Super Administrator-only
+- self-revocation and last-Super-Administrator protections remain enabled
+- final membership approval remains role-gated
+- Ready-for-Approval remains required before approval
+
+TWO SIGN-IN EXPERIENCES REMAIN
+------------------------------
+Members / Applicants:
+https://app.amsertech.com/login
+
+Administrators / Reviewers / Super Administrators:
+https://app.amsertech.com/nurselink-admin-login.html
+
+INSTALL
+-------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.0
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py
+./install.sh

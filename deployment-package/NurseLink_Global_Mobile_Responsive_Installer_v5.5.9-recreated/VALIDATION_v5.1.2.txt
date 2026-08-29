@@ -1,0 +1,33 @@
+NurseLink v5.1.2 Hotfix Validation
+====================================
+
+[PASS] Bash installer syntax
+[PASS] Bash rollback syntax
+[PASS] cleanup helper Python 3.6 grammar
+[PASS] 54 embedded installer Python guards parse under Python 3.6
+[PASS] Membership Welcome Center JavaScript
+[PASS] Membership Administration JavaScript
+[PASS] Membership Onboarding Admin JavaScript
+[PASS] Administrator Login JavaScript
+[PASS] 40 cumulative API route blocks with marker parity
+[PASS] Member Welcome HTTP 403 no-login-loop behavior
+[PASS] HTTP 401/419 authentication redirect retained
+[PASS] Membership Administration Administrator-return preservation
+[PASS] Membership Onboarding Administrator-return preservation
+[PASS] 403 permission-error classification
+[PASS] Administrator Login sessionStorage return recovery
+[PASS] same-origin return-path validation
+[PASS] explicit Administrator-page allowlist
+[PASS] Membership Administration safe return
+[PASS] Membership Onboarding safe return
+[PASS] v5.1.2 protected asset cache-busting
+[PASS] redirect-critical no-cache/no-store policy
+[PASS] v5.1.0 Membership Administration validators retained
+[PASS] v5.1.1 Membership Onboarding validators retained
+[PASS] v5.1.2 redirect regression guard
+[PASS] Administrator Login HTML targeted rollback coverage
+[PASS] deterministic cleanup simulation
+[PASS] historical installer removal simulation
+[PASS] current v5.1.2 installer retained
+[PASS] protected hosting/source directories retained
+[PASS] no artisan tinker dependency

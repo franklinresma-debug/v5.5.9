@@ -1,0 +1,21 @@
+NurseLink v5.5.9 RECREATED RECOVERY BUILD
+
+Recovered from the v5.5.2 cumulative package available in this runtime.
+This package is not byte-identical to the previously generated v5.5.9 archive.
+
+Recovery scope included here:
+- true Draft membership creation for new applicants
+- mobile-first four-step Smart Registration
+- private supporting-document storage
+- optional PDF/image/DOCX extraction with graceful fallback
+- provenance-aware prefill and applicant-confirmed edits
+- required-field prompts
+- explicit Submit and Needs Information -> Resubmit transitions
+- reviewer access to Smart Registration profile/evidence APIs
+- MariaDB-safe short index names
+- append-only membership lifecycle history
+- approval-to-onboarding service bridge
+- membership cycle health and restricted derived-state reconciliation
+
+The original v5.5.2 cumulative modules are preserved unchanged except for the corrected Draft semantics in MembershipController payload.
+A live end-to-end registration test is required before production sign-off.

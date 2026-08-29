@@ -1,0 +1,29 @@
+NurseLink v3.4.2 Release Candidate Sign-Off
+==========================================
+
+[ ] RC gate = READY FOR FINAL SIGN-OFF
+[ ] Production Readiness has no critical blocker
+[ ] .env permissions PASS
+[ ] Recent backup PASS
+[ ] Laravel logs writable
+[ ] Disk headroom acceptable
+[ ] No recurring unresolved recent server errors
+[ ] Applicant journey verified
+[ ] Reviewer workflow verified
+[ ] Membership approval verified
+[ ] Digital Member ID + QR verified
+[ ] Member-only boundaries verified
+[ ] Jobs/applications verified
+[ ] Partner Portal verified
+[ ] Messaging/interviews verified
+[ ] Analytics verified
+[ ] Public privacy verified
+[ ] Mobile/tablet verified
+[ ] Backup restore drill completed on staging/backup copy
+[ ] No browser request storms
+[ ] UAT report exported
+[ ] Production owner approved release
+
+Final decision:
+[ ] APPROVE GO-LIVE
+[ ] HOLD / REMEDIATE

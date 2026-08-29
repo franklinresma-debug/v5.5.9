@@ -1,0 +1,72 @@
+NurseLink v5.4.2 — Administrator Global Search & Role-Aware Workbench
+======================================================================
+
+PRIMARY ADMINISTRATOR URLS
+--------------------------
+Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+GLOBAL SEARCH
+-------------
+A new Administrator search bar is available in the Operations Center header.
+
+Keyboard shortcut:
+Ctrl + K
+(Command + K on macOS)
+
+The search uses governed NurseLink APIs and combines accessible results from:
+- Member Registry
+- Membership Applications
+- Support Cases
+
+Search results show only operational summary fields needed to locate the
+workflow. Internal support notes, raw audit state and credential numbers are
+not rendered by Global Search.
+
+ROLE-AWARE WORKBENCH
+--------------------
+The Dashboard now creates quick-access actions after the server confirms the
+privileged Administrator session.
+
+Reviewer-oriented quick access emphasizes:
+- Dashboard
+- Applications
+- Verification
+
+Administrator access adds:
+- Members
+- Support Cases
+- Organizations
+
+Super Administrator access additionally surfaces:
+- Staff Access
+- System Health
+
+This is only navigation tailoring. Server-side authorization remains
+authoritative for every API and mutation.
+
+SUPPORT CASE PRODUCTIVITY
+-------------------------
+The Support Cases queue now includes:
+- Search
+- Assignment: All / Mine / Unassigned / Assigned
+- Status
+- Priority
+
+The filters use the existing governed Support Case API and do not introduce
+direct database administration.
+
+CUMULATIVE PROTECTIONS RETAINED
+-------------------------------
+- physical /admin/ delivery
+- light-blue Administrator theme
+- membership processing progress summary
+- no-flash privileged session gate
+- simplified Administrator login footer
+- exactly one Member / Applicant Sign In link
+- Member login visual design unchanged
+- two-stage installer cleanup
+- Python 3.6 hosting compatibility

@@ -1,0 +1,92 @@
+NurseLink v5.2.0 CONSOLIDATION NOTE
+-----------------------------------
+The primary Administrator UI is now:
+https://app.amsertech.com/nurselink-admin-dashboard.html
+
+The legacy URL described in this guide remains available only as a
+compatibility redirect into the appropriate consolidated portal section.
+
+NurseLink v5.2.0 Membership Command Center
+===========================================
+
+OPEN
+----
+https://app.amsertech.com/nurselink-membership-command-center.html
+
+A valid separate NurseLink Administrator Portal session is required.
+
+QUEUE
+-----
+Filter by:
+- Submitted
+- Under Review
+- Needs Information
+- Ready for Approval
+- Approved
+- Declined
+
+Search by:
+- applicant name
+- email
+- member number
+
+REVIEW PANEL
+------------
+Shows:
+- applicant name/email
+- membership status
+- member number
+- last review timestamp
+- profile photo indicator
+- employment record count
+- credential total/verified/pending/expired
+- current reviewer notes
+- allowed next actions
+- membership audit history
+
+GOVERNANCE
+----------
+Reviewers cannot make final membership decisions.
+
+Administrators and Super Administrators can approve/decline only through the
+allowed workflow.
+
+Approval is only allowed when the application is Ready for Approval.
+
+Needs Information and Declined require a written reason.
+
+Approved and Declined are closed in the v4.4 command-center workflow.
+
+SUPER ADMINISTRATOR SELF-ACTION
+-------------------------------
+If the currently elevated Super Administrator opens their own membership:
+- the system identifies it as YOUR APPLICATION
+- every self-action requires an explicit checkbox
+- the API independently requires confirm_self_action=true
+- the audit action is membership.self_action_super_admin
+
+The older membership-review endpoint rejects self-actions entirely, preventing
+the explicit confirmation/audit requirement from being bypassed.
+
+MEMBER NUMBER
+-------------
+Final approval issues:
+NL-YYYY-######
+
+The numeric part is based on the permanent membership record ID, preserving
+stable uniqueness without a race-prone manual sequence counter.
+
+Approval also creates the public membership verification code if one does not
+already exist.
+
+AUDIT
+-----
+Membership decisions are stored in nurselink_review_audit with before/after
+state, reviewer user ID, action and timestamp.
+
+Applicant notifications are generated for:
+- Under Review
+- Needs Information
+- Ready for Approval
+- Approved
+- Declined

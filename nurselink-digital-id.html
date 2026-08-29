@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Digital Member ID | KAPIT-BISIG NurseLink</title>
+  <link rel="stylesheet" href="/nurselink-digital-id.css?nlv=560">
+  <link rel="stylesheet" href="/nurselink-digital-id-qr.css?nlv=560">
+  <link rel="stylesheet" href="/nurselink-typography.css?v=622">
+<link rel="stylesheet" href="/nurselink-member-desktop-cohesion-v6300.css?v=6300">
+<script src="/nurselink-member-shell-cohesion-v6300.js?v=6301" defer></script>
+<link rel="stylesheet" href="/nurselink-member-dark-surface-v6500.css?v=6500">
+<script src="/nurselink-member-dark-surface-v6500.js?v=6500" defer></script>
+  <link rel="stylesheet" href="/nurselink-digital-id-one-column-v6435.css?v=6435">
+  <script src="/nurselink-digital-id-one-column-v6435.js?v=6435" defer></script>
+</head>
+<body>
+  <header class="ndi-topbar">
+    <a class="ndi-brand" href="/dashboard"><span>NL</span><strong>KAPIT-BISIG NurseLink<small>Member Portal</small></strong></a>
+    <nav aria-label="Member ID navigation"><a href="/dashboard">Dashboard</a><a href="/profile">My Profile</a></nav>
+  </header>
+  <main class="ndi-main">
+    <section class="ndi-heading">
+      <div><span>DIGITAL MEMBER IDENTITY</span><h1>Your NurseLink Member ID</h1><p>A convenient membership card for approved, active NurseLink members.</p></div>
+      <button id="printId" type="button">Print / Save ID</button>
+    </section>
+    <div id="notice" class="ndi-notice" role="status" aria-live="polite">Loading your member ID…</div>
+    <section id="identityContent" class="ndi-content" hidden>
+      <article class="ndi-card" aria-label="NurseLink digital member ID">
+        <div class="ndi-card-head"><div class="ndi-mark">NL</div><div><strong>KAPIT-BISIG</strong><span>NurseLink</span></div><em>MEMBER</em></div>
+        <div class="ndi-card-body">
+          <div class="ndi-photo"><img id="memberPhoto" alt="Member profile photo" hidden><span id="memberInitials" aria-hidden="true">NL</span></div>
+          <div class="ndi-details"><small>MEMBER NAME</small><h2 id="memberName">—</h2><small>MEMBER NUMBER</small><strong id="memberNumber">—</strong><div class="ndi-meta"><div><small>MEMBERSHIP STATUS</small><b id="memberStanding">Active</b></div><div><small>MEMBER SINCE</small><b id="memberSince">—</b></div></div></div>
+          <div class="ndi-qr-block"><div id="memberQr" class="ndi-qr" role="img" aria-label="QR code for NurseLink membership verification"></div><small>SCAN TO VERIFY</small></div>
+        </div>
+        <div class="ndi-card-foot"><span>APPROVED NURSELINK MEMBER</span><strong id="statusBadge">ACTIVE</strong></div>
+      </article>
+      <aside class="ndi-panel">
+        <span>MEMBERSHIP IDENTITY</span><h2>Keep your member details current</h2><p>This card uses your permanent NurseLink member number and your current profile photo.</p>
+        <div class="ndi-scan-info"><strong>One QR for NurseLink services</strong><p>Scan the code to confirm active membership for benefits, workshops, events and other authorized NurseLink services.</p><a id="verificationLink" href="#" target="_blank" rel="noopener">Open verification page</a></div>
+        <div id="photoReminder" class="ndi-photo-reminder" hidden><strong>Profile photo needed</strong><p>Add a clear, recent photo to complete your digital ID.</p><a href="/profile">Add profile photo</a></div>
+        <dl><div><dt>Availability</dt><dd>Approved + Active members</dd></div><div><dt>Photo privacy</dt><dd>Loaded through your secure signed-in session</dd></div><div><dt>Important</dt><dd>This is a NurseLink membership ID. It is not a government ID, PRC license, or proof of professional licensure.</dd></div></dl>
+      </aside>
+    </section>
+  </main>
+  <script src="/nurselink-qrcode.min.js?nlv=560" defer></script>
+  <script src="/nurselink-digital-id.js?nlv=560" defer></script>
+</body>
+</html>

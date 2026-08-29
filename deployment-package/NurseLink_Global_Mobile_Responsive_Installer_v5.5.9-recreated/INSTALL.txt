@@ -1,0 +1,14 @@
+NurseLink v5.5.9 RECREATED cumulative recovery installer
+
+This package was reconstructed from the available v5.5.2 cumulative archive using the NurseLink project history. It is NOT byte-identical to the earlier generated v5.5.9 archive.
+
+Install:
+  cd /home/frankresma
+  unzip -o NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated.zip
+  cd NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated
+  chmod +x install.sh rollback.sh install_v552_base.sh RECOVERY_OVERLAY_v559.sh repair_admin_portal.sh cleanup_old_installers.sh
+  bash -n install.sh
+  ./install.sh
+
+The wrapper first installs the known v5.5.2 cumulative baseline, then applies the reconstructed Smart Registration/lifecycle recovery layer.
+Run one complete live registration cycle before adopting this as the canonical baseline.

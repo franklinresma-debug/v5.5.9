@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NurseLink Chapter Management</title>
+  <link rel="stylesheet" href="/nurselink-admin-portal.css">
+  <link rel="stylesheet" href="/nurselink-chapter-management.css">
+</head>
+<body class="nl-admin-body">
+<div class="nl-admin-shell">
+  <aside class="nl-admin-sidebar">
+    <div class="nl-admin-sidebar-brand"><div class="nl-admin-brand-mark">NL</div><div><strong>NurseLink</strong><small>Administrator Portal</small></div></div>
+    <nav>
+      <a href="/nurselink-admin-dashboard.html">Dashboard</a>
+      <a href="/nurselink-membership-command-center.html">Membership Command Center</a>
+      <a href="/nurselink-member-registry.html">Member Registry</a>
+      <a href="/nurselink-credential-compliance.html">Credential Compliance</a>
+      <a href="/nurselink-event-management.html">Events & Programs</a>
+      <a class="active" href="/nurselink-chapter-management.html">Chapters & Communities</a>
+      <a href="/nurselink-engagement-command-center.html">Engagement Command Center</a>
+      <a href="/nurselink-super-admin-test-center.html">Super Admin Test Center</a>
+      <a href="/admin">Review Center</a>
+      <a href="/nurselink-operations-center.html">Operations Center</a>
+      <a href="/nurselink-institutional-analytics.html">Institutional Analytics</a>
+      <a href="/dashboard">Member / Applicant Portal</a>
+    </nav>
+    <button id="adminSignOut" type="button">Sign out of Admin Portal</button>
+  </aside>
+  <main class="nl-admin-main cm-main">
+    <header class="nl-admin-header">
+      <div><span class="nl-admin-eyebrow">MEMBER COMMUNITY</span><h1>Chapters & Communities Management</h1><p>Create chapters, review join requests, assign chapter roles and maintain a primary chapter relationship.</p></div>
+      <div id="adminIdentity" class="nl-admin-identity">Checking administrator session…</div>
+    </header>
+    <div id="chapterAdminNotice" class="nl-admin-notice" hidden></div>
+
+    <section class="cm-layout">
+      <section class="cm-panel">
+        <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">CREATE / EDIT</span><h2>Chapter or Community</h2></div></div>
+        <form id="chapterForm" class="cm-form">
+          <input id="chapterId" type="hidden">
+          <label class="span2"><span>Name</span><input id="chapterName" maxlength="190" required></label>
+          <label><span>Type</span><select id="chapterType" required><option value="regional">Regional</option><option value="overseas">Overseas</option><option value="professional_interest">Professional Interest</option><option value="institutional">Institutional</option><option value="other">Other</option></select></label>
+          <label><span>Status</span><select id="chapterStatus"><option value="draft">Draft</option><option value="active">Active</option><option value="inactive">Inactive</option></select></label>
+          <label><span>Region</span><input id="chapterRegion" maxlength="160"></label>
+          <label><span>Country</span><input id="chapterCountry" maxlength="120" value="Philippines" required></label>
+          <label><span>City</span><input id="chapterCity" maxlength="120"></label>
+          <label><span>Contact email</span><input id="chapterEmail" type="email" maxlength="190"></label>
+          <label class="span2"><span>Description</span><textarea id="chapterDescription" rows="4" maxlength="10000"></textarea></label>
+          <label class="cm-check span2"><input id="chapterJoinEnabled" type="checkbox" checked><span>Members may request to join</span></label>
+          <div class="cm-actions span2"><button id="resetChapter" type="button">Clear</button><button class="primary" type="submit">Save Chapter</button></div>
+        </form>
+      </section>
+
+      <section class="cm-panel">
+        <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">CHAPTER INVENTORY</span><h2>Chapters & Communities</h2></div><button id="refreshChaptersAdmin" type="button">Refresh</button></div>
+        <div id="chapterAdminList" class="cm-list"><div class="nl-admin-loading">Loading chapters…</div></div>
+      </section>
+    </section>
+
+    <section id="chapterRosterPanel" class="cm-panel" hidden>
+      <div class="nl-admin-section-head"><div><span class="nl-admin-eyebrow">MEMBERSHIP REQUESTS & ROSTER</span><h2 id="chapterRosterTitle">Chapter roster</h2></div><button id="closeRoster" type="button">Close</button></div>
+      <div id="chapterRoster" class="cm-roster"></div>
+    </section>
+
+    <section class="cm-advisory"><strong>Governance boundary</strong><span>Chapter officer/coordinator roles are internal NurseLink community roles. They do not confer professional licensure, government authority or employer credential status.</span></section>
+  </main>
+</div>
+<script src="/nurselink-chapter-management.js" defer></script>
+</body>
+</html>

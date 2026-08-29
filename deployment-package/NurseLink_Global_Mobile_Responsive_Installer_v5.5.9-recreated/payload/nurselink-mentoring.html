@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>NurseLink Mentoring & Peer Support</title>
+<link rel="stylesheet" href="/nurselink-mentoring.css">
+</head>
+<body>
+<header class="mt-top"><a href="/dashboard" class="mt-brand"><span>NL</span><div><strong>NurseLink</strong><small>Mentoring & Peer Support</small></div></a><nav><a href="/nurselink-engagement.html">Engagement</a><a href="/nurselink-chapters.html">Chapters</a><a href="/nurselink-events.html">Events</a><a href="/dashboard">Dashboard</a></nav></header>
+<main class="mt-shell">
+<section class="mt-hero"><div><span>PROFESSIONAL CONNECTION</span><h1>Mentoring & Peer Support</h1><p>Create a mentoring profile, discover other NurseLink members and manage mentoring requests without exposing private contact information.</p></div><button id="refreshMentoring" type="button">Refresh</button></section>
+<div id="mentoringNotice" class="mt-notice" hidden></div>
+<section class="mt-grid">
+  <section class="mt-panel">
+    <div class="mt-head"><span>YOUR PROFILE</span><h2>Mentoring preferences</h2></div>
+    <form id="mentoringProfile" class="mt-form">
+      <label><span>Role</span><select id="mentorRole"><option value="mentee">Looking for a Mentor</option><option value="mentor">Available as Mentor</option><option value="both">Mentor & Mentee</option></select></label>
+      <label><span>Availability</span><select id="mentorAvailability"><option value="open">Open</option><option value="limited">Limited</option><option value="unavailable">Unavailable</option></select></label>
+      <label class="span2"><span>Focus areas</span><input id="mentorFocus" maxlength="1000" placeholder="Critical care, leadership, NCLEX, overseas transition"></label>
+      <label><span>Languages</span><input id="mentorLanguages" maxlength="500" placeholder="English, Filipino"></label>
+      <label><span>Timezone</span><input id="mentorTimezone" maxlength="120" placeholder="Asia/Manila"></label>
+      <label class="span2"><span>Professional mentoring bio</span><textarea id="mentorBio" rows="4" maxlength="3000"></textarea></label>
+      <label class="mt-check span2"><input id="mentorDiscoverable" type="checkbox"><span>Allow Approved + Active NurseLink members to discover this mentoring profile</span></label>
+      <button class="span2" type="submit">Save Mentoring Profile</button>
+    </form>
+  </section>
+  <section class="mt-panel">
+    <div class="mt-head"><span>MY CONNECTIONS</span><h2>Requests</h2></div>
+    <div id="mentoringRequests" class="mt-requests"><div class="mt-loading">Loading requests…</div></div>
+  </section>
+</section>
+<section class="mt-panel mt-directory-panel">
+  <div class="mt-directory-head"><div class="mt-head"><span>MEMBER DIRECTORY</span><h2>Find a mentor</h2><p>Only opt-in mentoring profiles are listed. Email, phone and address are not exposed.</p></div><div class="mt-filters"><input id="mentorSearch" type="search" placeholder="Name, specialty, language"><select id="mentorDirectoryRole"><option value="all">All available profiles</option><option value="mentor">Mentors</option><option value="both">Mentor & mentee</option></select></div></div>
+  <div id="mentoringDirectory" class="mt-directory"><div class="mt-loading">Loading directory…</div></div>
+</section>
+<section class="mt-advisory"><strong>Mentoring advisory</strong><span>NurseLink mentoring roles are peer/professional community roles only. They do not establish licensure, employment authority, clinical supervision, official preceptorship, or regulator-approved mentorship.</span></section>
+</main>
+<script src="/nurselink-mentoring.js" defer></script>
+</body>
+</html>

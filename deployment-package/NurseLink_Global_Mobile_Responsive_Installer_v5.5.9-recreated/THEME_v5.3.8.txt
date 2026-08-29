@@ -1,0 +1,50 @@
+NurseLink v5.3.8 — Administrator Light Blue Theme
+=====================================================
+
+SCOPE
+-----
+Administrator surfaces only.
+
+Primary Administrator Sign In:
+https://app.amsertech.com/admin/login.html
+
+Administration Operations Center:
+https://app.amsertech.com/admin/
+
+THEME
+-----
+The Administrator interface now uses a calm light-blue operational palette:
+
+- very-light-blue Administration sidebar
+- pale-blue active navigation state
+- navy-blue text for strong readability
+- white cards with soft blue borders
+- subtle blue shadows
+- light-blue forms/toolbars
+- existing green/orange/red/purple semantic status colors retained
+- Administrator Login uses the same light-blue family
+
+MEMBER LOGIN
+------------
+The Member login visual design is intentionally unchanged.
+
+The NurseLink member nurse montage, public-auth layout, and member login styling
+are not restyled by this release.
+
+DELIVERY
+--------
+The v5.3.7 physical /admin/ direct-delivery repair is retained. The focused
+repair script in this package deploys the light-blue Administrator assets
+directly and verifies the theme markers before HTTPS validation.
+
+FOCUSED ADMIN DEPLOY
+--------------------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.8
+chmod +x repair_admin_portal.sh
+./repair_admin_portal.sh
+
+FULL CUMULATIVE INSTALL
+-----------------------
+cd /home/frankresma/NurseLink_Global_Mobile_Responsive_Installer_v5.3.8
+chmod +x install.sh rollback.sh cleanup_old_installers.sh post_install_cleanup.py repair_admin_portal.sh
+./install.sh
