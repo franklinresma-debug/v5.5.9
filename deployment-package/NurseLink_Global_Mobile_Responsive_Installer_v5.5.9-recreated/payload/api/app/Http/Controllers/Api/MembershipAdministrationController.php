@@ -1088,6 +1088,91 @@ class MembershipAdministrationController extends Controller
         ]);
     }
 
+    public function slaAlerts(Request $request): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to view SLA alerts.');
+        abort_unless(Schema::hasTable('nurselink_application_sla_alerts'), 503, 'Application SLA alerts are unavailable.');
+
+        $data = $request->validate([
+            'state' => ['nullable', Rule::in(['warning', 'breached'])],
+            'status' => ['nullable', Rule::in(['open', 'acknowledged', 'resolved'])],
+            'limit' => ['nullable', 'integer', Rule::in([25, 50, 100])],
+        ]);
+
+        $query = DB::table('nurselink_application_sla_alerts as a')
+            ->leftJoin('nurselink_memberships as m', 'm.id', '=', 'a.membership_id');
+
+        if (! empty($data['state'])) {
+            $query->where('a.alert_state', $data['state']);
+        }
+
+        match ($data['status'] ?? 'open') {
+            'acknowledged' => $query->whereNotNull('a.acknowledged_at')->whereNull('a.resolved_at'),
+            'resolved' => $query->whereNotNull('a.resolved_at'),
+            default => $query->whereNull('a.resolved_at'),
+        };
+
+        $rows = $query
+            ->orderByRaw("CASE a.alert_state WHEN 'breached' THEN 1 ELSE 2 END")
+            ->orderBy('a.due_at')
+            ->orderBy('a.id')
+            ->limit((int) ($data['limit'] ?? 50))
+            ->get([
+                'a.id',
+                'a.membership_id',
+                'a.policy_version',
+                'a.alert_state',
+                'a.due_at',
+                'a.notified_at',
+                'a.acknowledged_at',
+                'a.resolved_at',
+                'a.created_at',
+                'm.status as membership_status',
+            ])
+            ->map(fn (object $row): array => [
+                'id' => (int) $row->id,
+                'membership_id' => (int) $row->membership_id,
+                'application_reference' => 'APP-' . str_pad((string) $row->membership_id, 6, '0', STR_PAD_LEFT),
+                'policy_version' => (int) $row->policy_version,
+                'alert_state' => (string) $row->alert_state,
+                'due_at' => $row->due_at,
+                'notified_at' => $row->notified_at,
+                'acknowledged_at' => $row->acknowledged_at,
+                'resolved_at' => $row->resolved_at,
+                'created_at' => $row->created_at,
+                'membership_status' => $row->membership_status,
+            ])
+            ->values();
+
+        return response()->json(['data' => $rows]);
+    }
+
+    public function acknowledgeSlaAlert(Request $request, int $alertId): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to acknowledge SLA alerts.');
+        abort_unless(Schema::hasTable('nurselink_application_sla_alerts'), 503, 'Application SLA alerts are unavailable.');
+
+        $before = DB::table('nurselink_application_sla_alerts')->where('id', $alertId)->first();
+        abort_unless($before, 404, 'SLA alert not found.');
+        abort_if($before->resolved_at, 409, 'Resolved SLA alerts cannot be acknowledged.');
+
+        DB::table('nurselink_application_sla_alerts')
+            ->where('id', $alertId)
+            ->whereNull('resolved_at')
+            ->update([
+                'acknowledged_at' => $before->acknowledged_at ?: now(),
+                'acknowledged_by_user_id' => $before->acknowledged_by_user_id ?: (string) $request->user()->getKey(),
+                'updated_at' => now(),
+            ]);
+
+        $after = DB::table('nurselink_application_sla_alerts')->where('id', $alertId)->first();
+        $this->audit($request, 'application.sla_alert.acknowledged', 'application_sla_alert', (string) $alertId, $before, $after);
+
+        return response()->json(['message' => 'SLA alert acknowledged.']);
+    }
+
     public function assignReview(
         Request $request,
         int $membershipId

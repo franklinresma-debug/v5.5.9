@@ -177,6 +177,32 @@
         </div>
       </section>
 
+      <section id="applicationSlaSection" class="nl560-sla-card" hidden>
+        <div class="nl550-queue-heading">
+          <div>
+            <span>APPLICATION SLA</span>
+            <h2>Policy & Alerts</h2>
+            <p>Operational timing controls and review alerts. These signals are workflow aids, not staff performance ratings.</p>
+          </div>
+          <button id="evaluateApplicationSla" class="nl550-primary-action" type="button">Evaluate Now</button>
+        </div>
+        <form id="applicationSlaPolicyForm" class="nl560-sla-policy">
+          <input id="applicationSlaVersion" type="hidden">
+          <label><span>Status</span><select id="applicationSlaEnabled"><option value="1">Enabled</option><option value="0">Paused</option></select></label>
+          <label><span>Warning Hours</span><input id="applicationSlaWarningHours" type="number" min="1" max="720" required></label>
+          <label><span>Target Hours</span><input id="applicationSlaTargetHours" type="number" min="2" max="2160" required></label>
+          <label><span>Timezone</span><input id="applicationSlaTimezone" type="text" maxlength="64" required></label>
+          <fieldset><legend>Business Days</legend><label><input type="checkbox" data-sla-day="1">Mon</label><label><input type="checkbox" data-sla-day="2">Tue</label><label><input type="checkbox" data-sla-day="3">Wed</label><label><input type="checkbox" data-sla-day="4">Thu</label><label><input type="checkbox" data-sla-day="5">Fri</label><label><input type="checkbox" data-sla-day="6">Sat</label><label><input type="checkbox" data-sla-day="7">Sun</label></fieldset>
+          <button id="saveApplicationSlaPolicy" class="nl550-primary-action" type="submit">Save Policy</button>
+        </form>
+        <div class="nl560-sla-alert-tools">
+          <label><span>Alert Status</span><select id="applicationSlaAlertStatus"><option value="open">Open</option><option value="acknowledged">Acknowledged</option><option value="resolved">Resolved</option></select></label>
+          <label><span>State</span><select id="applicationSlaAlertState"><option value="">All</option><option value="breached">Breached</option><option value="warning">Warning</option></select></label>
+          <button id="refreshApplicationSlaAlerts" type="button">Refresh Alerts</button>
+        </div>
+        <div id="applicationSlaAlerts" class="nl560-sla-alerts"><div class="nl-admin-loading">Loading SLA controls…</div></div>
+      </section>
+
       <section class="nl550-queue-card">
         <div class="nl550-queue-heading">
           <div>

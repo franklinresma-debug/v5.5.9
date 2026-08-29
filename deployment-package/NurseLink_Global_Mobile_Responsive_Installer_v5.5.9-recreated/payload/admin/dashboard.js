@@ -1780,6 +1780,118 @@
     );
   }
 
+  function renderApplicationSlaPolicy(policy = {}) {
+    if (!$('applicationSlaPolicyForm')) return;
+    $('applicationSlaVersion').value = String(policy.version || 1);
+    $('applicationSlaEnabled').value = policy.enabled ? '1' : '0';
+    $('applicationSlaWarningHours').value = String(policy.warning_hours || 24);
+    $('applicationSlaTargetHours').value = String(policy.target_hours || 72);
+    $('applicationSlaTimezone').value = String(policy.timezone || 'Asia/Manila');
+    const days = new Set((policy.business_days || [1, 2, 3, 4, 5]).map(Number));
+    document.querySelectorAll('[data-sla-day]').forEach(input => {
+      input.checked = days.has(Number(input.dataset.slaDay));
+    });
+  }
+
+  function renderApplicationSlaAlerts(rows = []) {
+    const el = $('applicationSlaAlerts');
+    if (!el) return;
+    if (!rows.length) {
+      el.innerHTML = '<div class="nl530-empty">No SLA alerts match this view.</div>';
+      return;
+    }
+
+    el.innerHTML = rows.map(row => `
+      <article class="nl560-sla-alert" data-state="${esc(row.alert_state)}">
+        <div class="nl560-sla-alert-copy">
+          <strong>${esc(label(row.alert_state))} · ${esc(row.application_reference)}</strong>
+          <small>Due ${esc(formatApplicationDate(row.due_at))} · Policy v${esc(row.policy_version)} · ${esc(label(row.membership_status || 'unknown'))}</small>
+          <small>${row.acknowledged_at ? `Acknowledged ${esc(formatApplicationDate(row.acknowledged_at))}` : 'Awaiting acknowledgement'}</small>
+        </div>
+        <div class="nl560-sla-alert-actions">
+          ${!row.acknowledged_at && !row.resolved_at ? `<button type="button" data-ack-sla="${esc(row.id)}">Acknowledge</button>` : ''}
+        </div>
+      </article>
+    `).join('');
+
+    el.querySelectorAll('[data-ack-sla]').forEach(button => {
+      button.addEventListener('click', async () => {
+        button.disabled = true;
+        try {
+          const payload = await request(`/api/nurselink/admin/membership-administration/sla-alerts/${encodeURIComponent(button.dataset.ackSla)}/acknowledge`, {method: 'POST', body: '{}'});
+          notice(payload?.message || 'SLA alert acknowledged.', 'good');
+          await loadApplicationSlaAlerts();
+        } catch (error) {
+          notice(error.message || 'Unable to acknowledge SLA alert.', 'danger');
+          button.disabled = false;
+        }
+      });
+    });
+  }
+
+  async function loadApplicationSlaAlerts() {
+    const status = $('applicationSlaAlertStatus')?.value || 'open';
+    const state = $('applicationSlaAlertState')?.value || '';
+    const params = new URLSearchParams({status, limit: '50'});
+    if (state) params.set('state', state);
+    const payload = await request(`/api/nurselink/admin/membership-administration/sla-alerts?${params}`);
+    renderApplicationSlaAlerts(Array.isArray(payload?.data) ? payload.data : []);
+  }
+
+  async function loadApplicationSlaControls() {
+    const section = $('applicationSlaSection');
+    if (!section || !['admin', 'super_admin'].includes(roleKey())) return;
+    section.hidden = false;
+
+    try {
+      const [policyPayload] = await Promise.all([
+        request('/api/nurselink/admin/membership-administration/sla-policy'),
+        loadApplicationSlaAlerts()
+      ]);
+      renderApplicationSlaPolicy(policyPayload?.data || {});
+    } catch (error) {
+      $('applicationSlaAlerts').innerHTML = `<div class="nl530-empty">${esc(error.message || 'Unable to load SLA controls.')}</div>`;
+    }
+  }
+
+  async function saveApplicationSlaPolicy(event) {
+    event.preventDefault();
+    const businessDays = Array.from(document.querySelectorAll('[data-sla-day]:checked')).map(input => Number(input.dataset.slaDay));
+
+    try {
+      const payload = await request('/api/nurselink/admin/membership-administration/sla-policy', {
+        method: 'PUT',
+        body: JSON.stringify({
+          version: Number($('applicationSlaVersion').value || 1),
+          enabled: $('applicationSlaEnabled').value === '1',
+          warning_hours: Number($('applicationSlaWarningHours').value),
+          target_hours: Number($('applicationSlaTargetHours').value),
+          timezone: $('applicationSlaTimezone').value.trim(),
+          business_days: businessDays
+        })
+      });
+      renderApplicationSlaPolicy(payload?.data || {});
+      notice(payload?.message || 'Application SLA policy updated.', 'good');
+    } catch (error) {
+      notice(error.message || 'Unable to update SLA policy.', 'danger');
+    }
+  }
+
+  async function evaluateApplicationSla() {
+    const button = $('evaluateApplicationSla');
+    if (button) button.disabled = true;
+    try {
+      const payload = await request('/api/nurselink/admin/membership-administration/sla-evaluate', {method: 'POST', body: '{}'});
+      const data = payload?.data || {};
+      notice(`SLA evaluation complete: ${Number(data.warning || 0)} warning, ${Number(data.breached || 0)} breached.`, 'good');
+      await loadApplicationSlaAlerts();
+    } catch (error) {
+      notice(error.message || 'Unable to evaluate SLA alerts.', 'danger');
+    } finally {
+      if (button) button.disabled = false;
+    }
+  }
+
   async function loadApplications() {
     const el = $('applicationsArea');
     el.innerHTML =
@@ -1871,6 +1983,7 @@
       }
 
       renderApplicationTable();
+      loadApplicationSlaControls();
     } catch (error) {
       if (needsLogin(error)) {
         redirectToLogin();
@@ -2871,6 +2984,11 @@
       'click',
       exportApplicationQueue
     );
+    $('applicationSlaPolicyForm')?.addEventListener('submit', saveApplicationSlaPolicy);
+    $('evaluateApplicationSla')?.addEventListener('click', evaluateApplicationSla);
+    $('refreshApplicationSlaAlerts')?.addEventListener('click', loadApplicationSlaAlerts);
+    $('applicationSlaAlertStatus')?.addEventListener('change', loadApplicationSlaAlerts);
+    $('applicationSlaAlertState')?.addEventListener('change', loadApplicationSlaAlerts);
 
     renderApplicationSavedViews();
 

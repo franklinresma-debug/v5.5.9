@@ -1421,6 +1421,8 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::get('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaPolicy']);
     Route::put('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'updateSlaPolicy']);
     Route::post('/nurselink/admin/membership-administration/sla-evaluate', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'evaluateSla']);
+    Route::get('/nurselink/admin/membership-administration/sla-alerts', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaAlerts']);
+    Route::post('/nurselink/admin/membership-administration/sla-alerts/{alertId}/acknowledge', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'acknowledgeSlaAlert']);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 '''.strip(),

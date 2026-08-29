@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **60%** — `[████████████░░░░░░░░]`
+Overall: **70%** — `[██████████████░░░░░░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -12,8 +12,8 @@ Overall: **60%** — `[████████████░░░░░░░
 | Privacy-safe URL queue state | Complete | commit `3fa4856` |
 | Governed SLA policy | Complete | commit `a3362a4` |
 | Idempotent SLA evaluation and deduplicated alerts | Complete | Alert ledger and evaluator service |
-| Administrator SLA controls and alert workflow | In progress | Next implementation increment |
-| Governed bulk triage | Planned | Phase 3 |
+| Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
+| Governed bulk triage | In progress | Next implementation increment |
 | Controlled exports and readiness signals | Planned | Phase 4 |
 | Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
 
@@ -49,7 +49,7 @@ Acceptance criteria:
 
 ## Phase 2 — SLA policy and alerts
 
-Status: **In progress. Policy storage, governed API, idempotent evaluation, deduplicated notifications, and automatic resolution are complete; administrator controls remain.**
+Status: **Complete in the v5.6 development branch; staging validation pending.**
 
 1. Replace hard-coded presentation thresholds with an administrator-controlled SLA policy.
 2. Add warning and breach states with deduplicated in-app notifications.
@@ -98,4 +98,4 @@ Status: **Planned.**
 
 ## Current implementation increment
 
-Add administrator SLA controls and an alert workflow for policy editing, manual evaluation, alert visibility, acknowledgement, and resolution review. Controls must preserve role boundaries and must not frame SLA data as staff performance scoring.
+Implement governed bulk triage for bounded assignment, priority, and due-date changes. Add preview, per-record authorization and concurrency checks, explicit partial-failure reporting, correlation IDs, and per-application audit records. Final approval, decline, and standing changes must remain individual actions.
