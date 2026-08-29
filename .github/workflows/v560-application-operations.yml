@@ -1,0 +1,52 @@
+name: v5.6 Application Operations
+
+on:
+  push:
+    branches:
+      - codex/v5.6.0-application-operations
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-and-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Validate Git whitespace
+        run: git diff --check HEAD^
+
+      - name: Validate administrator JavaScript syntax
+        run: node --check deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/admin/dashboard.js
+
+      - name: Run v5.6 contract suite
+        run: node production-audit/check-v560-application-operations.mjs
+
+      - name: Validate modified PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -l deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/api/app/Http/Controllers/Api/MembershipAdministrationController.php
+          php -l deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/api/app/Services/ApplicationSlaEvaluationService.php
+          php -l deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/api/database/migrations/2026_08_29_045000_create_nurselink_admin_saved_views.php
+          php -l deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/api/database/migrations/2026_08_29_046000_create_nurselink_application_sla_policy.php
+          php -l deployment-package/NurseLink_Global_Mobile_Responsive_Installer_v5.5.9-recreated/payload/api/database/migrations/2026_08_29_047000_create_nurselink_application_sla_alerts.php
