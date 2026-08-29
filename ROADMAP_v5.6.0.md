@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **90%** — `[██████████████████░░]`
+Overall: **95%** — `[███████████████████░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -15,7 +15,7 @@ Overall: **90%** — `[██████████████████░
 | Administrator SLA controls and alert workflow | Complete | Policy editor, evaluation, alert list, acknowledgement |
 | Governed bulk triage | Complete | Bounded API, preview/apply UI, concurrency and audit controls |
 | Controlled exports and readiness signals | Complete | Minimized CSV, export history, advisory readiness |
-| Staging UAT and v5.6.0 release candidate | In progress | Local contract suite complete; PHP/staging gates next |
+| Staging UAT and v5.6.0 release candidate | In progress | CI and PHP syntax pass; Laravel/staging gates remain |
 
 ## Release objective
 
