@@ -287,6 +287,20 @@ class MembershipAdministrationController extends Controller
                 'string',
                 'max:190',
             ],
+            'page' => [
+                'nullable',
+                'integer',
+                'min:1',
+            ],
+            'per_page' => [
+                'nullable',
+                'integer',
+                Rule::in([
+                    10,
+                    25,
+                    50,
+                ]),
+            ],
         ]);
 
         $query = DB::table(
@@ -429,6 +443,9 @@ class MembershipAdministrationController extends Controller
             )
             ->orderBy(
                 'm.created_at'
+            )
+            ->orderBy(
+                'm.id'
             )
             ->limit(750)
             ->get();
@@ -755,9 +772,62 @@ class MembershipAdministrationController extends Controller
                 );
         }
 
+        $paginationRequested =
+            $request->has('page')
+            || $request->has('per_page');
+
+        $pagination = null;
+
+        if ($paginationRequested) {
+            $page = (int) (
+                $data['page']
+                ?? 1
+            );
+            $perPage = (int) (
+                $data['per_page']
+                ?? 25
+            );
+            $total = $presented->count();
+            $lastPage = max(
+                1,
+                (int) ceil(
+                    $total / $perPage
+                )
+            );
+            $page = min(
+                $page,
+                $lastPage
+            );
+
+            $presented = $presented
+                ->slice(
+                    ($page - 1) * $perPage,
+                    $perPage
+                )
+                ->values();
+
+            $pagination = [
+                'page' => $page,
+                'per_page' => $perPage,
+                'total' => $total,
+                'last_page' => $lastPage,
+                'from' => $total > 0
+                    ? (($page - 1) * $perPage) + 1
+                    : null,
+                'to' => $total > 0
+                    ? min(
+                        $page * $perPage,
+                        $total
+                    )
+                    : null,
+            ];
+        }
+
         return response()->json([
             'data' =>
                 $presented->values(),
+            'pagination' =>
+                $pagination,
             'permissions' => [
                 'role' =>
                     $access['role'],

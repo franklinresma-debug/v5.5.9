@@ -29,6 +29,7 @@
   let globalSearchSequence = 0;
   let applicationPage = 1;
   let applicationPageSize = 10;
+  let applicationPaginationData = null;
   let applicationVisibleRows = [];
   let applicationCommandData = null;
   let applicationStaffRows = [];
@@ -1030,19 +1031,25 @@
 
   function renderApplicationPagination(total) {
     const pageSize = Math.max(1, Number(applicationPageSize || 10));
-    const pages = Math.max(1, Math.ceil(total / pageSize));
+    const pages = applicationPaginationData
+      ? Math.max(1, Number(applicationPaginationData.last_page || 1))
+      : Math.max(1, Math.ceil(total / pageSize));
+
+    if (applicationPaginationData) {
+      total = Number(applicationPaginationData.total || 0);
+      applicationPage = Number(applicationPaginationData.page || 1);
+    }
 
     if (applicationPage > pages) {
       applicationPage = pages;
     }
 
-    const start = total
-      ? ((applicationPage - 1) * pageSize) + 1
-      : 0;
-    const end = Math.min(
-      total,
-      applicationPage * pageSize
-    );
+    const start = applicationPaginationData
+      ? Number(applicationPaginationData.from || 0)
+      : (total ? ((applicationPage - 1) * pageSize) + 1 : 0);
+    const end = applicationPaginationData
+      ? Number(applicationPaginationData.to || 0)
+      : Math.min(total, applicationPage * pageSize);
 
     $('applicationResultSummary').textContent =
       total
@@ -1094,7 +1101,11 @@
       .forEach(button => {
         button.addEventListener('click', () => {
           applicationPage = Number(button.dataset.page || 1);
-          renderApplicationTable();
+          if (applicationPaginationData) {
+            loadApplications();
+          } else {
+            renderApplicationTable();
+          }
         });
       });
   }
@@ -1107,10 +1118,12 @@
       Number(applicationPageSize || 10)
     );
     const start = (applicationPage - 1) * pageSize;
-    const pageRows = rows.slice(
-      start,
-      start + pageSize
-    );
+    const pageRows = applicationPaginationData
+      ? rows
+      : rows.slice(
+          start,
+          start + pageSize
+        );
 
     if (!rows.length) {
       el.innerHTML =
@@ -1152,7 +1165,11 @@
         );
       });
 
-    renderApplicationPagination(rows.length);
+    renderApplicationPagination(
+      applicationPaginationData
+        ? Number(applicationPaginationData.total || 0)
+        : rows.length
+    );
   }
 
   function applicationFilterSnapshot() {
@@ -1181,6 +1198,8 @@
       'assignment',
       snapshot.assignment || 'all'
     );
+    params.set('page', String(applicationPage));
+    params.set('per_page', String(applicationPageSize));
 
     return params;
   }
@@ -1648,6 +1667,18 @@
         ? queuePayload.data
         : [];
 
+      applicationPaginationData =
+        queuePayload?.pagination
+        && typeof queuePayload.pagination === 'object'
+          ? queuePayload.pagination
+          : null;
+
+      if (applicationPaginationData) {
+        applicationPage = Number(
+          applicationPaginationData.page || 1
+        );
+      }
+
       applicationVisibleRows = applicationClientFilter(
         applicationRows
       );
@@ -1673,7 +1704,6 @@
         $('applicationSavedView')?.value || ''
       );
 
-      applicationPage = 1;
       renderApplicationTable();
     } catch (error) {
       if (needsLogin(error)) {
@@ -2627,7 +2657,7 @@
         $('applicationPageSize').value || 10
       );
       applicationPage = 1;
-      renderApplicationTable();
+      loadApplications();
     });
 
     const clearApplicationFilters = () => {
