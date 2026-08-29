@@ -54,6 +54,7 @@ MEMBERSHIP_ADMIN_MIGRATION="2026_08_14_038000_add_membership_administration_fiel
 MEMBERSHIP_ONBOARDING_MIGRATION="2026_08_14_039000_create_nurselink_membership_onboarding.php"
 SUPPORT_CASES_MIGRATION="2026_08_14_040000_create_nurselink_support_cases_table.php"
 ADMIN_SAVED_VIEWS_MIGRATION="2026_08_29_045000_create_nurselink_admin_saved_views.php"
+APPLICATION_SLA_POLICY_MIGRATION="2026_08_29_046000_create_nurselink_application_sla_policy.php"
 
 say() { printf '\n[NurseLink v%s] %s\n' "$VERSION" "$*"; }
 fail() { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
@@ -164,7 +165,8 @@ for f in \
   "$PAYLOAD_DIR/api/database/migrations/$MEMBERSHIP_ADMIN_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$MEMBERSHIP_ONBOARDING_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$SUPPORT_CASES_MIGRATION" \
-  "$PAYLOAD_DIR/api/database/migrations/$ADMIN_SAVED_VIEWS_MIGRATION"
+  "$PAYLOAD_DIR/api/database/migrations/$ADMIN_SAVED_VIEWS_MIGRATION" \
+  "$PAYLOAD_DIR/api/database/migrations/$APPLICATION_SLA_POLICY_MIGRATION"
 do
   [[ -f "$f" ]] || fail "Required payload missing: $f"
 done
@@ -732,6 +734,7 @@ MIGRATIONS=(
   "$MEMBERSHIP_ONBOARDING_MIGRATION"
   "$SUPPORT_CASES_MIGRATION"
   "$ADMIN_SAVED_VIEWS_MIGRATION"
+  "$APPLICATION_SLA_POLICY_MIGRATION"
 )
 
 for controller in "${CONTROLLERS[@]}"; do
@@ -1403,6 +1406,8 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::get('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'savedViews']);
     Route::post('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'storeSavedView']);
     Route::delete('/nurselink/admin/membership-administration/saved-views/{viewId}', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'deleteSavedView']);
+    Route::get('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaPolicy']);
+    Route::put('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'updateSlaPolicy']);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 '''.strip(),

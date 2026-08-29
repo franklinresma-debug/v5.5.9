@@ -970,6 +970,100 @@ class MembershipAdministrationController extends Controller
         return response()->json(['message' => 'Application view deleted.']);
     }
 
+    public function slaPolicy(Request $request): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to view SLA policy.');
+        $this->requireSlaPolicyTable();
+
+        return response()->json([
+            'data' => $this->presentSlaPolicy(
+                DB::table('nurselink_application_sla_policy')
+                    ->orderByDesc('id')
+                    ->first()
+            ),
+        ]);
+    }
+
+    public function updateSlaPolicy(Request $request): JsonResponse
+    {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to update SLA policy.');
+        $this->requireSlaPolicyTable();
+
+        $data = $request->validate([
+            'enabled' => ['required', 'boolean'],
+            'warning_hours' => ['required', 'integer', 'min:1', 'max:720'],
+            'target_hours' => ['required', 'integer', 'min:2', 'max:2160'],
+            'timezone' => [
+                'required',
+                'string',
+                'max:64',
+                function (string $attribute, mixed $value, \Closure $fail): void {
+                    if (! in_array($value, timezone_identifiers_list(), true)) {
+                        $fail('The SLA timezone must be a valid IANA timezone.');
+                    }
+                },
+            ],
+            'business_days' => ['required', 'array', 'min:1', 'max:7'],
+            'business_days.*' => ['required', 'integer', 'between:1,7', 'distinct'],
+            'version' => ['required', 'integer', 'min:1'],
+        ]);
+
+        abort_unless(
+            (int) $data['warning_hours'] < (int) $data['target_hours'],
+            422,
+            'Warning hours must be less than target hours.'
+        );
+
+        $before = null;
+        $after = null;
+
+        DB::transaction(function () use ($request, $data, &$before, &$after): void {
+            $row = DB::table('nurselink_application_sla_policy')
+                ->lockForUpdate()
+                ->orderByDesc('id')
+                ->first();
+
+            abort_unless($row, 503, 'Application SLA policy is unavailable.');
+            abort_unless(
+                (int) $row->version === (int) $data['version'],
+                409,
+                'The SLA policy changed in another session. Refresh and try again.'
+            );
+
+            $before = $this->presentSlaPolicy($row);
+            $days = array_values(array_unique(array_map('intval', $data['business_days'])));
+            sort($days);
+
+            DB::table('nurselink_application_sla_policy')
+                ->where('id', $row->id)
+                ->update([
+                    'version' => (int) $row->version + 1,
+                    'enabled' => (bool) $data['enabled'],
+                    'warning_hours' => (int) $data['warning_hours'],
+                    'target_hours' => (int) $data['target_hours'],
+                    'timezone' => (string) $data['timezone'],
+                    'business_days' => json_encode($days),
+                    'updated_by_user_id' => (string) $request->user()->getKey(),
+                    'updated_at' => now(),
+                ]);
+
+            $after = $this->presentSlaPolicy(
+                DB::table('nurselink_application_sla_policy')
+                    ->where('id', $row->id)
+                    ->first()
+            );
+        });
+
+        $this->audit($request, 'application.sla_policy.updated', 'application_sla_policy', 'default', $before, $after);
+
+        return response()->json([
+            'data' => $after,
+            'message' => 'Application SLA policy updated.',
+        ]);
+    }
+
     public function assignReview(
         Request $request,
         int $membershipId
@@ -2109,6 +2203,35 @@ class MembershipAdministrationController extends Controller
             503,
             'Saved application views are not available until the v5.6 migration is complete.'
         );
+    }
+
+    private function requireSlaPolicyTable(): void
+    {
+        abort_unless(
+            Schema::hasTable('nurselink_application_sla_policy'),
+            503,
+            'Application SLA policy is not available until the v5.6 migration is complete.'
+        );
+    }
+
+    private function presentSlaPolicy(object $row): array
+    {
+        $businessDays = json_decode((string) $row->business_days, true);
+
+        return [
+            'id' => (int) $row->id,
+            'version' => (int) $row->version,
+            'enabled' => (bool) $row->enabled,
+            'warning_hours' => (int) $row->warning_hours,
+            'target_hours' => (int) $row->target_hours,
+            'timezone' => (string) $row->timezone,
+            'business_days' => is_array($businessDays)
+                ? array_values(array_map('intval', $businessDays))
+                : [],
+            'updated_by_user_id' => $row->updated_by_user_id ?: null,
+            'created_at' => $row->created_at,
+            'updated_at' => $row->updated_at,
+        ];
     }
 
     private function presentSavedView(object $row): array
