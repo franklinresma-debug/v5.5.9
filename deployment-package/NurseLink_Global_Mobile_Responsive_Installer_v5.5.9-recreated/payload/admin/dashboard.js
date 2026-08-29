@@ -36,6 +36,8 @@
   let applicationActiveQuickView = 'all';
   let applicationServerSavedViews = null;
   let applicationSavedViewsLoading = null;
+  let applicationUrlSavedView = '';
+  let applicationUrlViewApplied = false;
 
   const subtitles = {
     dashboard: 'Operational workflows across membership, workforce, programs and platform health.',
@@ -1186,6 +1188,71 @@
     };
   }
 
+  function restoreApplicationStateFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const allowed = {
+      status: new Set(['submitted', 'under_review', 'needs_information', 'ready_for_approval', 'approved', 'declined']),
+      stage: new Set(['initial_intake', 'document_review', 'applicant_follow_up', 'admin_review', 'completed', 'closed']),
+      assignment: new Set(['all', 'assigned', 'unassigned', 'mine']),
+      priority: new Set(['low', 'normal', 'high', 'urgent'])
+    };
+    const value = (key, fallback = '') => {
+      const candidate = params.get(`app_${key}`) || fallback;
+      return allowed[key]?.has(candidate) ? candidate : fallback;
+    };
+
+    applyApplicationFilterSnapshot({
+      search: '',
+      status: value('status'),
+      stage: value('stage'),
+      assignment: value('assignment', 'all'),
+      priority: value('priority'),
+      organization: '',
+      overdue: params.get('app_overdue') === '1'
+    }, false);
+
+    applicationPage = Math.max(1, Number(params.get('app_page') || 1));
+    applicationPageSize = [10, 25, 50].includes(Number(params.get('app_per_page')))
+      ? Number(params.get('app_per_page'))
+      : 10;
+    applicationUrlSavedView = String(params.get('app_view') || '').slice(0, 80);
+    applicationUrlViewApplied = false;
+
+    if ($('applicationPageSize')) {
+      $('applicationPageSize').value = String(applicationPageSize);
+    }
+
+    markApplicationQuickView('');
+  }
+
+  function writeApplicationStateToUrl() {
+    const url = new URL(location.href);
+    const filters = applicationFilterSnapshot();
+    const values = {
+      app_status: filters.status,
+      app_stage: filters.stage,
+      app_assignment: filters.assignment !== 'all' ? filters.assignment : '',
+      app_priority: filters.priority,
+      app_overdue: filters.overdue ? '1' : '',
+      app_page: applicationPage > 1 ? String(applicationPage) : '',
+      app_per_page: applicationPageSize !== 10 ? String(applicationPageSize) : '',
+      app_view: applicationUrlSavedView
+    };
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    });
+
+    history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+  }
+
+  function clearApplicationSavedViewSelection() {
+    applicationUrlSavedView = '';
+    applicationUrlViewApplied = false;
+    if ($('applicationSavedView')) $('applicationSavedView').value = '';
+  }
+
   function applicationQueryParams(snapshot = applicationFilterSnapshot()) {
     const params = new URLSearchParams();
 
@@ -1262,8 +1329,21 @@
           ? payload.data.slice(0, 12)
           : [];
         renderApplicationSavedViews(
-          $('applicationSavedView')?.value || ''
+          applicationUrlSavedView
+          || $('applicationSavedView')?.value
+          || ''
         );
+
+        if (applicationUrlSavedView && !applicationUrlViewApplied) {
+          const selected = applicationServerSavedViews.find(
+            row => String(row.id) === applicationUrlSavedView
+          );
+
+          if (selected) {
+            applicationUrlViewApplied = true;
+            applyApplicationFilterSnapshot(selected.filters || {});
+          }
+        }
         return applicationServerSavedViews;
       })
       .catch(error => {
@@ -1362,6 +1442,8 @@
   }
 
   function setApplicationQuickView(key) {
+    clearApplicationSavedViewSelection();
+
     const base = {
       search: '',
       status: '',
@@ -1412,8 +1494,11 @@
       );
 
       const saved = payload?.data;
+      applicationUrlSavedView = String(saved?.id || '');
+      applicationUrlViewApplied = true;
       await syncApplicationSavedViews();
       renderApplicationSavedViews(saved?.id || '');
+      writeApplicationStateToUrl();
       notice(payload?.message || `Saved application view “${name}”.`, 'good');
     } catch (error) {
       if (![404, 503].includes(Number(error?.status || 0)) && error?.status) {
@@ -1426,7 +1511,10 @@
       rows.unshift({id, name, filters});
       writeApplicationSavedViews(rows);
       applicationServerSavedViews = null;
+      applicationUrlSavedView = id;
+      applicationUrlViewApplied = true;
       renderApplicationSavedViews(id);
+      writeApplicationStateToUrl();
       notice(`Saved application view “${name}” in this browser.`, 'good');
     }
   }
@@ -1435,6 +1523,9 @@
     const id = $('applicationSavedView')?.value || '';
 
     if (!id) return;
+
+    applicationUrlSavedView = id;
+    applicationUrlViewApplied = true;
 
     const row = activeApplicationSavedViews()
       .find(
@@ -1460,6 +1551,9 @@
       row => String(row.id) === String(id)
     );
 
+    applicationUrlSavedView = '';
+    applicationUrlViewApplied = false;
+
     if (Array.isArray(applicationServerSavedViews)) {
       try {
         await request(
@@ -1480,6 +1574,7 @@
     }
 
     renderApplicationSavedViews();
+    writeApplicationStateToUrl();
 
     if (target) notice(`Deleted saved view “${target.name}”.`);
   }
@@ -1691,6 +1786,7 @@
       '<div class="nl-admin-loading">Loading professional applications command center…</div>';
 
     const params = applicationQueryParams();
+    writeApplicationStateToUrl();
 
     try {
       const commandPromise = applicationCommandData
@@ -1764,7 +1860,9 @@
       );
 
       renderApplicationSavedViews(
-        $('applicationSavedView')?.value || ''
+        applicationUrlSavedView
+        || $('applicationSavedView')?.value
+        || ''
       );
       if (applicationServerSavedViews === null) {
         syncApplicationSavedViews().catch(error => {
@@ -2708,6 +2806,8 @@
     ].forEach(id => {
       $(id)?.addEventListener('change', () => {
         markApplicationQuickView('');
+        clearApplicationSavedViewSelection();
+        applicationPage = 1;
         loadApplications();
       });
     });
@@ -2715,6 +2815,8 @@
     ['applicationSearch', 'applicationOrganization'].forEach(id => {
       $(id)?.addEventListener('input', () => {
         markApplicationQuickView('');
+        clearApplicationSavedViewSelection();
+        applicationPage = 1;
         clearTimeout(searchTimer);
         searchTimer = setTimeout(loadApplications, 300);
       });
@@ -2730,6 +2832,7 @@
 
     const clearApplicationFilters = () => {
       markApplicationQuickView('all');
+      clearApplicationSavedViewSelection();
       applyApplicationFilterSnapshot({
         search: '',
         status: '',
@@ -2839,6 +2942,7 @@
       `;
 
       bindFilters();
+      restoreApplicationStateFromUrl();
       bindGlobalSearch();
       renderRoleWorkbench();
 
