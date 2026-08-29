@@ -1,5 +1,22 @@
 # NurseLink v5.6.0 — Application Operations
 
+## Delivery progress
+
+Overall: **50%** — `[██████████░░░░░░░░░░]`
+
+| Milestone | Status | Evidence |
+|---|---|---|
+| Stable v5.5.9 baseline, tag, and remote backup | Complete | `v5.5.9`, commit `cc0832f` |
+| Server-side queue pagination | Complete | commit `5c4439a` |
+| Server-backed private saved views | Complete | commit `da45cb4` |
+| Privacy-safe URL queue state | Complete | commit `3fa4856` |
+| Governed SLA policy | Complete | commit `a3362a4` |
+| Idempotent SLA evaluation and deduplicated alerts | In progress | Next implementation increment |
+| Administrator SLA controls and alert workflow | Planned | Follows alert service |
+| Governed bulk triage | Planned | Phase 3 |
+| Controlled exports and readiness signals | Planned | Phase 4 |
+| Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
+
 ## Release objective
 
 Turn the existing application command center into a durable, scalable operations workflow without changing the approved applicant-to-member lifecycle established in v5.5.9.
@@ -16,6 +33,8 @@ These are the starting baseline, not v5.6 deliverables.
 
 ## Phase 1 — Durable queues and scalable retrieval
 
+Status: **Complete in the v5.6 development branch; staging validation pending.**
+
 1. Persist saved views through the API so they follow an administrator across devices and browsers.
 2. Add server-side pagination with validated page size, stable ordering, and total-result metadata.
 3. Preserve filters and the active saved view in the URL for refreshable and shareable operational links.
@@ -29,6 +48,8 @@ Acceptance criteria:
 - Existing quick queues and v5.5.9 filter behavior remain compatible.
 
 ## Phase 2 — SLA policy and alerts
+
+Status: **In progress. Policy storage and governed API are complete; alert evaluation and administrator controls remain.**
 
 1. Replace hard-coded presentation thresholds with an administrator-controlled SLA policy.
 2. Add warning and breach states with deduplicated in-app notifications.
@@ -44,6 +65,8 @@ Acceptance criteria:
 
 ## Phase 3 — Governed bulk triage
 
+Status: **Planned.**
+
 1. Enable selection only for actions authorized for the current role.
 2. Support bounded bulk changes to assignment, priority, and review due date.
 3. Validate every selected application and report partial failures explicitly.
@@ -58,6 +81,8 @@ Acceptance criteria:
 
 ## Phase 4 — Controlled exports and readiness signals
 
+Status: **Planned.**
+
 1. Add permission-gated exports with an export audit history.
 2. Protect CSV output from formula injection and minimize exported personal data.
 3. Add explainable application completeness signals based on required evidence.
@@ -71,6 +96,6 @@ Acceptance criteria:
 - Backup and tested rollback path before production migration.
 - Post-deployment smoke test and a new sanitized recovery baseline.
 
-## First implementation increment
+## Current implementation increment
 
-Implement server-backed private saved views and server-side pagination together. They share queue-query state, provide immediate operational value, and establish the API contract required by later alerts and bulk triage.
+Implement idempotent SLA evaluation and deduplicated warning/breach alerts. Evaluation must be safe to rerun, preserve historical alert facts, avoid duplicate notifications, respect the configured timezone and business days, and resolve open alerts when an application leaves the governed pending workflow.
