@@ -814,6 +814,7 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::delete('/nurselink/admin/membership-administration/saved-views/{viewId}', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'deleteSavedView'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::get('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaPolicy'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::put('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'updateSlaPolicy'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
+    Route::post('/nurselink/admin/membership-administration/sla-evaluate', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'evaluateSla'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 

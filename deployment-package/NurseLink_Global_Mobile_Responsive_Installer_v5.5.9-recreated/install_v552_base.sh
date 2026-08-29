@@ -55,6 +55,7 @@ MEMBERSHIP_ONBOARDING_MIGRATION="2026_08_14_039000_create_nurselink_membership_o
 SUPPORT_CASES_MIGRATION="2026_08_14_040000_create_nurselink_support_cases_table.php"
 ADMIN_SAVED_VIEWS_MIGRATION="2026_08_29_045000_create_nurselink_admin_saved_views.php"
 APPLICATION_SLA_POLICY_MIGRATION="2026_08_29_046000_create_nurselink_application_sla_policy.php"
+APPLICATION_SLA_ALERTS_MIGRATION="2026_08_29_047000_create_nurselink_application_sla_alerts.php"
 
 say() { printf '\n[NurseLink v%s] %s\n' "$VERSION" "$*"; }
 fail() { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
@@ -124,6 +125,7 @@ for f in \
   "$PAYLOAD_DIR/api/app/Http/Controllers/Api/MembershipOnboardingController.php" \
   "$PAYLOAD_DIR/api/app/Http/Controllers/Api/AdministrationOperationsCenterController.php" \
   "$PAYLOAD_DIR/api/app/Services/BenefitReminderService.php" \
+  "$PAYLOAD_DIR/api/app/Services/ApplicationSlaEvaluationService.php" \
   "$PAYLOAD_DIR/api/app/Http/Middleware/EnsureApprovedNurseLinkMember.php" \
   "$PAYLOAD_DIR/api/database/migrations/$PROFILE_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$EMPLOYMENT_MIGRATION" \
@@ -166,7 +168,8 @@ for f in \
   "$PAYLOAD_DIR/api/database/migrations/$MEMBERSHIP_ONBOARDING_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$SUPPORT_CASES_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$ADMIN_SAVED_VIEWS_MIGRATION" \
-  "$PAYLOAD_DIR/api/database/migrations/$APPLICATION_SLA_POLICY_MIGRATION"
+  "$PAYLOAD_DIR/api/database/migrations/$APPLICATION_SLA_POLICY_MIGRATION" \
+  "$PAYLOAD_DIR/api/database/migrations/$APPLICATION_SLA_ALERTS_MIGRATION"
 do
   [[ -f "$f" ]] || fail "Required payload missing: $f"
 done
@@ -387,6 +390,7 @@ printf 'Physical Administrator directory payload [OK]\n'
 "$PHP_BIN" -l "$PAYLOAD_DIR/api/app/Http/Controllers/Api/MembershipOnboardingController.php" >/dev/null || fail "Membership Onboarding controller has invalid PHP syntax."
 "$PHP_BIN" -l "$PAYLOAD_DIR/api/app/Http/Controllers/Api/AdministrationOperationsCenterController.php" >/dev/null || fail "Administration Operations Center controller has invalid PHP syntax."
 "$PHP_BIN" -l "$PAYLOAD_DIR/api/app/Services/BenefitReminderService.php" >/dev/null || fail "Benefit Reminder service has invalid PHP syntax."
+"$PHP_BIN" -l "$PAYLOAD_DIR/api/app/Services/ApplicationSlaEvaluationService.php" >/dev/null || fail "Application SLA Evaluation service has invalid PHP syntax."
 "$PHP_BIN" -l "$SCRIPT_DIR/nurselink_benefit_reminders.php" >/dev/null || fail "Benefit Reminder generator has invalid PHP syntax."
 "$PHP_BIN" -l "$SCRIPT_DIR/nurselink_credential_alerts.php" >/dev/null || fail "Credential renewal alert utility has invalid PHP syntax."
 
@@ -735,6 +739,7 @@ MIGRATIONS=(
   "$SUPPORT_CASES_MIGRATION"
   "$ADMIN_SAVED_VIEWS_MIGRATION"
   "$APPLICATION_SLA_POLICY_MIGRATION"
+  "$APPLICATION_SLA_ALERTS_MIGRATION"
 )
 
 for controller in "${CONTROLLERS[@]}"; do
@@ -747,6 +752,11 @@ done
 if [[ -f "$API_ROOT/app/Services/BenefitReminderService.php" ]]; then
   cp -a "$API_ROOT/app/Services/BenefitReminderService.php"     "$BACKUP_DIR/api/BenefitReminderService.php.previous"
   touch "$BACKUP_DIR/api/BenefitReminderService.php.existed"
+fi
+
+if [[ -f "$API_ROOT/app/Services/ApplicationSlaEvaluationService.php" ]]; then
+  cp -a "$API_ROOT/app/Services/ApplicationSlaEvaluationService.php" "$BACKUP_DIR/api/ApplicationSlaEvaluationService.php.previous"
+  touch "$BACKUP_DIR/api/ApplicationSlaEvaluationService.php.existed"
 fi
 
 # v2.6.4 reset controller is obsolete. Preserve it in backup if present, then remove.
@@ -878,6 +888,8 @@ done
 
 cp -f "$PAYLOAD_DIR/api/app/Services/BenefitReminderService.php"   "$API_ROOT/app/Services/BenefitReminderService.php"
 "$PHP_BIN" -l "$API_ROOT/app/Services/BenefitReminderService.php"
+cp -f "$PAYLOAD_DIR/api/app/Services/ApplicationSlaEvaluationService.php" "$API_ROOT/app/Services/ApplicationSlaEvaluationService.php"
+"$PHP_BIN" -l "$API_ROOT/app/Services/ApplicationSlaEvaluationService.php"
 
 cp -f "$PAYLOAD_DIR/api/app/Http/Middleware/EnsureApprovedNurseLinkMember.php"   "$API_ROOT/app/Http/Middleware/EnsureApprovedNurseLinkMember.php"
 "$PHP_BIN" -l "$API_ROOT/app/Http/Middleware/EnsureApprovedNurseLinkMember.php"
@@ -1408,6 +1420,7 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::delete('/nurselink/admin/membership-administration/saved-views/{viewId}', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'deleteSavedView']);
     Route::get('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'slaPolicy']);
     Route::put('/nurselink/admin/membership-administration/sla-policy', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'updateSlaPolicy']);
+    Route::post('/nurselink/admin/membership-administration/sla-evaluate', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'evaluateSla']);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 '''.strip(),

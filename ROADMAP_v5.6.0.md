@@ -2,7 +2,7 @@
 
 ## Delivery progress
 
-Overall: **50%** — `[██████████░░░░░░░░░░]`
+Overall: **60%** — `[████████████░░░░░░░░]`
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -11,8 +11,8 @@ Overall: **50%** — `[██████████░░░░░░░░░
 | Server-backed private saved views | Complete | commit `da45cb4` |
 | Privacy-safe URL queue state | Complete | commit `3fa4856` |
 | Governed SLA policy | Complete | commit `a3362a4` |
-| Idempotent SLA evaluation and deduplicated alerts | In progress | Next implementation increment |
-| Administrator SLA controls and alert workflow | Planned | Follows alert service |
+| Idempotent SLA evaluation and deduplicated alerts | Complete | Alert ledger and evaluator service |
+| Administrator SLA controls and alert workflow | In progress | Next implementation increment |
 | Governed bulk triage | Planned | Phase 3 |
 | Controlled exports and readiness signals | Planned | Phase 4 |
 | Staging UAT and v5.6.0 release candidate | Planned | Final release gate |
@@ -49,7 +49,7 @@ Acceptance criteria:
 
 ## Phase 2 — SLA policy and alerts
 
-Status: **In progress. Policy storage and governed API are complete; alert evaluation and administrator controls remain.**
+Status: **In progress. Policy storage, governed API, idempotent evaluation, deduplicated notifications, and automatic resolution are complete; administrator controls remain.**
 
 1. Replace hard-coded presentation thresholds with an administrator-controlled SLA policy.
 2. Add warning and breach states with deduplicated in-app notifications.
@@ -98,4 +98,4 @@ Status: **Planned.**
 
 ## Current implementation increment
 
-Implement idempotent SLA evaluation and deduplicated warning/breach alerts. Evaluation must be safe to rerun, preserve historical alert facts, avoid duplicate notifications, respect the configured timezone and business days, and resolve open alerts when an application leaves the governed pending workflow.
+Add administrator SLA controls and an alert workflow for policy editing, manual evaluation, alert visibility, acknowledgement, and resolution review. Controls must preserve role boundaries and must not frame SLA data as staff performance scoring.

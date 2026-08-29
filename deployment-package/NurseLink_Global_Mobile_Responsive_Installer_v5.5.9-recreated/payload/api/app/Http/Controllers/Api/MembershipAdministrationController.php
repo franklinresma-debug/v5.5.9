@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\ApplicationSlaEvaluationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -1061,6 +1062,29 @@ class MembershipAdministrationController extends Controller
         return response()->json([
             'data' => $after,
             'message' => 'Application SLA policy updated.',
+        ]);
+    }
+
+    public function evaluateSla(
+        Request $request,
+        ApplicationSlaEvaluationService $service
+    ): JsonResponse {
+        $access = $this->requireElevatedSession($request);
+        abort_unless($access['is_admin'], 403, 'Administrator access is required to evaluate SLA alerts.');
+
+        $result = $service->evaluate();
+        $this->audit(
+            $request,
+            'application.sla_evaluated',
+            'application_sla_policy',
+            (string) ($result['policy_version'] ?? 'default'),
+            null,
+            $result
+        );
+
+        return response()->json([
+            'data' => $result,
+            'message' => 'Application SLA evaluation completed.',
         ]);
     }
 
