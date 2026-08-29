@@ -809,6 +809,9 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::get('/nurselink/admin/membership-administration/export', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'export'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::put('/nurselink/admin/membership-administration/{membershipId}/assignment', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'assignReview'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
     Route::get('/nurselink/admin/membership-administration/activity', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'activity'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
+    Route::get('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'savedViews'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
+    Route::post('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'storeSavedView'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
+    Route::delete('/nurselink/admin/membership-administration/saved-views/{viewId}', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'deleteSavedView'])->middleware(\App\Http\Middleware\EnsureNurseLinkAdminPermission::class);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 

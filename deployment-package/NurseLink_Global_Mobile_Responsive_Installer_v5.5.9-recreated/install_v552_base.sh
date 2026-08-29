@@ -53,6 +53,7 @@ ENTERPRISE_SUPPORT_MIGRATION="2026_08_14_036000_create_nurselink_enterprise_supp
 MEMBERSHIP_ADMIN_MIGRATION="2026_08_14_038000_add_membership_administration_fields.php"
 MEMBERSHIP_ONBOARDING_MIGRATION="2026_08_14_039000_create_nurselink_membership_onboarding.php"
 SUPPORT_CASES_MIGRATION="2026_08_14_040000_create_nurselink_support_cases_table.php"
+ADMIN_SAVED_VIEWS_MIGRATION="2026_08_29_045000_create_nurselink_admin_saved_views.php"
 
 say() { printf '\n[NurseLink v%s] %s\n' "$VERSION" "$*"; }
 fail() { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
@@ -162,7 +163,8 @@ for f in \
   "$PAYLOAD_DIR/api/database/migrations/$ENTERPRISE_SUPPORT_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$MEMBERSHIP_ADMIN_MIGRATION" \
   "$PAYLOAD_DIR/api/database/migrations/$MEMBERSHIP_ONBOARDING_MIGRATION" \
-  "$PAYLOAD_DIR/api/database/migrations/$SUPPORT_CASES_MIGRATION"
+  "$PAYLOAD_DIR/api/database/migrations/$SUPPORT_CASES_MIGRATION" \
+  "$PAYLOAD_DIR/api/database/migrations/$ADMIN_SAVED_VIEWS_MIGRATION"
 do
   [[ -f "$f" ]] || fail "Required payload missing: $f"
 done
@@ -729,6 +731,7 @@ MIGRATIONS=(
   "$MEMBERSHIP_ADMIN_MIGRATION"
   "$MEMBERSHIP_ONBOARDING_MIGRATION"
   "$SUPPORT_CASES_MIGRATION"
+  "$ADMIN_SAVED_VIEWS_MIGRATION"
 )
 
 for controller in "${CONTROLLERS[@]}"; do
@@ -1397,6 +1400,9 @@ Route::middleware(['auth:sanctum', 'verified', 'active.user'])->group(function (
     Route::get('/nurselink/admin/membership-administration/export', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'export']);
     Route::put('/nurselink/admin/membership-administration/{membershipId}/assignment', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'assignReview']);
     Route::get('/nurselink/admin/membership-administration/activity', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'activity']);
+    Route::get('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'savedViews']);
+    Route::post('/nurselink/admin/membership-administration/saved-views', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'storeSavedView']);
+    Route::delete('/nurselink/admin/membership-administration/saved-views/{viewId}', [\App\Http\Controllers\Api\MembershipAdministrationController::class, 'deleteSavedView']);
 });
 /* NURSELINK_MEMBERSHIP_ADMINISTRATION_V510_END */
 '''.strip(),

@@ -34,6 +34,8 @@
   let applicationCommandData = null;
   let applicationStaffRows = [];
   let applicationActiveQuickView = 'all';
+  let applicationServerSavedViews = null;
+  let applicationSavedViewsLoading = null;
 
   const subtitles = {
     dashboard: 'Operational workflows across membership, workforce, programs and platform health.',
@@ -1241,12 +1243,51 @@
     } catch (_) {}
   }
 
+  function activeApplicationSavedViews() {
+    return Array.isArray(applicationServerSavedViews)
+      ? applicationServerSavedViews
+      : readApplicationSavedViews();
+  }
+
+  async function syncApplicationSavedViews() {
+    if (applicationSavedViewsLoading) {
+      return applicationSavedViewsLoading;
+    }
+
+    applicationSavedViewsLoading = request(
+      '/api/nurselink/admin/membership-administration/saved-views'
+    )
+      .then(payload => {
+        applicationServerSavedViews = Array.isArray(payload?.data)
+          ? payload.data.slice(0, 12)
+          : [];
+        renderApplicationSavedViews(
+          $('applicationSavedView')?.value || ''
+        );
+        return applicationServerSavedViews;
+      })
+      .catch(error => {
+        if (![404, 503].includes(Number(error?.status || 0)) && error?.status) {
+          throw error;
+        }
+
+        applicationServerSavedViews = null;
+        renderApplicationSavedViews();
+        return readApplicationSavedViews();
+      })
+      .finally(() => {
+        applicationSavedViewsLoading = null;
+      });
+
+    return applicationSavedViewsLoading;
+  }
+
   function renderApplicationSavedViews(selected = '') {
     const select = $('applicationSavedView');
 
     if (!select) return;
 
-    const rows = readApplicationSavedViews();
+    const rows = activeApplicationSavedViews();
 
     select.innerHTML = [
       '<option value="">Select saved view</option>',
@@ -1347,7 +1388,7 @@
     applyApplicationFilterSnapshot(base);
   }
 
-  function saveApplicationView() {
+  async function saveApplicationView() {
     const name = String(
       window.prompt(
         'Name this application queue view:'
@@ -1359,22 +1400,35 @@
 
     if (!name) return;
 
-    const rows = readApplicationSavedViews();
-    const id =
-      `view-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const filters = applicationFilterSnapshot();
 
-    rows.unshift({
-      id,
-      name,
-      filters: applicationFilterSnapshot()
-    });
+    try {
+      const payload = await request(
+        '/api/nurselink/admin/membership-administration/saved-views',
+        {
+          method: 'POST',
+          body: JSON.stringify({name, filters})
+        }
+      );
 
-    writeApplicationSavedViews(rows);
-    renderApplicationSavedViews(id);
-    notice(
-      `Saved application view “${name}”.`,
-      'good'
-    );
+      const saved = payload?.data;
+      await syncApplicationSavedViews();
+      renderApplicationSavedViews(saved?.id || '');
+      notice(payload?.message || `Saved application view “${name}”.`, 'good');
+    } catch (error) {
+      if (![404, 503].includes(Number(error?.status || 0)) && error?.status) {
+        notice(error.message || 'Unable to save application view.', 'danger');
+        return;
+      }
+
+      const rows = readApplicationSavedViews();
+      const id = `view-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      rows.unshift({id, name, filters});
+      writeApplicationSavedViews(rows);
+      applicationServerSavedViews = null;
+      renderApplicationSavedViews(id);
+      notice(`Saved application view “${name}” in this browser.`, 'good');
+    }
   }
 
   function loadApplicationSavedView() {
@@ -1382,7 +1436,7 @@
 
     if (!id) return;
 
-    const row = readApplicationSavedViews()
+    const row = activeApplicationSavedViews()
       .find(
         item => String(item.id) === String(id)
       );
@@ -1395,30 +1449,39 @@
     );
   }
 
-  function deleteApplicationSavedView() {
+  async function deleteApplicationSavedView() {
     const select = $('applicationSavedView');
     const id = select?.value || '';
 
     if (!id) return;
 
-    const rows = readApplicationSavedViews();
+    const rows = activeApplicationSavedViews();
     const target = rows.find(
       row => String(row.id) === String(id)
     );
 
-    writeApplicationSavedViews(
-      rows.filter(
-        row => String(row.id) !== String(id)
-      )
-    );
+    if (Array.isArray(applicationServerSavedViews)) {
+      try {
+        await request(
+          `/api/nurselink/admin/membership-administration/saved-views/${encodeURIComponent(id)}`,
+          {method: 'DELETE'}
+        );
+        applicationServerSavedViews = applicationServerSavedViews.filter(
+          row => String(row.id) !== String(id)
+        );
+      } catch (error) {
+        notice(error.message || 'Unable to delete application view.', 'danger');
+        return;
+      }
+    } else {
+      writeApplicationSavedViews(
+        rows.filter(row => String(row.id) !== String(id))
+      );
+    }
 
     renderApplicationSavedViews();
 
-    if (target) {
-      notice(
-        `Deleted saved view “${target.name}”.`
-      );
-    }
+    if (target) notice(`Deleted saved view “${target.name}”.`);
   }
 
   function workloadTone(level) {
@@ -1703,6 +1766,11 @@
       renderApplicationSavedViews(
         $('applicationSavedView')?.value || ''
       );
+      if (applicationServerSavedViews === null) {
+        syncApplicationSavedViews().catch(error => {
+          notice(error.message || 'Unable to synchronize saved views.', 'danger');
+        });
+      }
 
       renderApplicationTable();
     } catch (error) {

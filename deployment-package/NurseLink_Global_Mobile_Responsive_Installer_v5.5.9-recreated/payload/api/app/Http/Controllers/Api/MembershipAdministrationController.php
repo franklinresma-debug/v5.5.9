@@ -870,6 +870,106 @@ class MembershipAdministrationController extends Controller
         ]);
     }
 
+    public function savedViews(Request $request): JsonResponse
+    {
+        $this->requireElevatedSession($request);
+        $this->requireSavedViewsTable();
+
+        $rows = DB::table('nurselink_admin_saved_views')
+            ->where('user_id', (string) $request->user()->getKey())
+            ->where('view_type', 'membership_applications')
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
+            ->limit(12)
+            ->get()
+            ->map(fn (object $row): array => $this->presentSavedView($row))
+            ->values();
+
+        return response()->json(['data' => $rows]);
+    }
+
+    public function storeSavedView(Request $request): JsonResponse
+    {
+        $this->requireElevatedSession($request);
+        $this->requireSavedViewsTable();
+
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:80'],
+            'filters' => ['required', 'array'],
+            'filters.search' => ['nullable', 'string', 'max:190'],
+            'filters.status' => ['nullable', Rule::in(array_merge(self::PENDING_STATUSES, ['approved', 'declined']))],
+            'filters.stage' => ['nullable', Rule::in(['initial_intake', 'document_review', 'applicant_follow_up', 'admin_review', 'completed', 'closed'])],
+            'filters.assignment' => ['nullable', Rule::in(['all', 'assigned', 'unassigned', 'mine'])],
+            'filters.priority' => ['nullable', Rule::in(['low', 'normal', 'high', 'urgent'])],
+            'filters.organization' => ['nullable', 'string', 'max:190'],
+            'filters.overdue' => ['nullable', 'boolean'],
+        ]);
+
+        $userId = (string) $request->user()->getKey();
+        $name = trim((string) $data['name']);
+        abort_if($name === '', 422, 'Saved view name is required.');
+
+        $existing = DB::table('nurselink_admin_saved_views')
+            ->where('user_id', $userId)
+            ->where('view_type', 'membership_applications')
+            ->where('name', $name)
+            ->first();
+
+        $values = [
+            'filters' => json_encode($data['filters'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'updated_at' => now(),
+        ];
+
+        if ($existing) {
+            DB::table('nurselink_admin_saved_views')
+                ->where('id', $existing->id)
+                ->where('user_id', $userId)
+                ->update($values);
+            $id = (int) $existing->id;
+        } else {
+            $count = DB::table('nurselink_admin_saved_views')
+                ->where('user_id', $userId)
+                ->where('view_type', 'membership_applications')
+                ->count();
+            abort_if($count >= 12, 422, 'Delete a saved view before adding another.');
+
+            $id = (int) DB::table('nurselink_admin_saved_views')->insertGetId([
+                'user_id' => $userId,
+                'view_type' => 'membership_applications',
+                'name' => $name,
+                'filters' => $values['filters'],
+                'created_at' => now(),
+                'updated_at' => $values['updated_at'],
+            ]);
+        }
+
+        $row = DB::table('nurselink_admin_saved_views')
+            ->where('id', $id)
+            ->where('user_id', $userId)
+            ->first();
+
+        return response()->json([
+            'data' => $this->presentSavedView($row),
+            'message' => 'Application view saved.',
+        ], $existing ? 200 : 201);
+    }
+
+    public function deleteSavedView(Request $request, int $viewId): JsonResponse
+    {
+        $this->requireElevatedSession($request);
+        $this->requireSavedViewsTable();
+
+        $deleted = DB::table('nurselink_admin_saved_views')
+            ->where('id', $viewId)
+            ->where('user_id', (string) $request->user()->getKey())
+            ->where('view_type', 'membership_applications')
+            ->delete();
+
+        abort_unless($deleted === 1, 404, 'Saved view not found.');
+
+        return response()->json(['message' => 'Application view deleted.']);
+    }
+
     public function assignReview(
         Request $request,
         int $membershipId
@@ -2000,6 +2100,28 @@ class MembershipAdministrationController extends Controller
             'updated_at' =>
                 now(),
         ]);
+    }
+
+    private function requireSavedViewsTable(): void
+    {
+        abort_unless(
+            Schema::hasTable('nurselink_admin_saved_views'),
+            503,
+            'Saved application views are not available until the v5.6 migration is complete.'
+        );
+    }
+
+    private function presentSavedView(object $row): array
+    {
+        $filters = json_decode((string) $row->filters, true);
+
+        return [
+            'id' => (int) $row->id,
+            'name' => (string) $row->name,
+            'filters' => is_array($filters) ? $filters : [],
+            'created_at' => $row->created_at,
+            'updated_at' => $row->updated_at,
+        ];
     }
 
     private function requireElevatedSession(
